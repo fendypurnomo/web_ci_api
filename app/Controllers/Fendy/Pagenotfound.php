@@ -6,13 +6,13 @@ use App\Libraries\MessagesTrait;
 
 class Pagenotfound extends \CodeIgniter\RESTful\ResourceController
 {
-	use MessagesTrait;
+  use MessagesTrait;
 
-	/**
-	 * Index page not found
-	 */
-	function index()
-	{
-		return $this->failNotFound($this->pageNotFound)->send();
-	}
+  /**
+   * Index page not found
+   */
+  function index()
+  {
+    return $this->failNotFound($this->pageNotFound)->send();
+  }
 }

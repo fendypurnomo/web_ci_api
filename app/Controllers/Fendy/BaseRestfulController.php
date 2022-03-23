@@ -6,14 +6,14 @@ use App\Libraries\MessagesTrait;
 
 class BaseRestfulController extends \CodeIgniter\RESTful\ResourceController
 {
-	use MessagesTrait;
+  use MessagesTrait;
 
-	protected $rules;
+  protected $rules;
 
-	public function __construct()
-	{
-		helper('request');
+  public function __construct()
+  {
+    helper('request');
 
-		$this->rules = new \App\Validation\News;
-	}
+    $this->rules = new \App\Validation\News;
+  }
 }
