@@ -6,9 +6,7 @@ use Exception;
 
 class Activation extends \App\Controllers\Fendy\BaseAccountController
 {
-  /**
-   * Index activate account user
-   */
+  // Index activate account user
   public function index()
   {
     $method = $this->request->getMethod(true);
@@ -22,9 +20,7 @@ class Activation extends \App\Controllers\Fendy\BaseAccountController
     }
   }
 
-  /**
-   * Activate account user
-   */
+  // Activate account user
   private function activateAccount()
   {
     try {
@@ -36,7 +32,7 @@ class Activation extends \App\Controllers\Fendy\BaseAccountController
 
           return $this->respond([
             'success' => true,
-            'status'  => 200,
+            'status' => 200,
             'message' => 'Akun Anda berhasil diaktivasi'
           ]);
         }
@@ -50,9 +46,7 @@ class Activation extends \App\Controllers\Fendy\BaseAccountController
     }
   }
 
-  /**
-   * Request activate account user
-   */
+  // Request activate account user
   private function requestActivationAccount()
   {
     if ($this->validate($this->rules->checkEmailAddress)) {
@@ -60,18 +54,18 @@ class Activation extends \App\Controllers\Fendy\BaseAccountController
       $user = $this->model->where('pengguna_email', $post->email)->first();
 
       $code = createToken([
-        'id'    => $user->pengguna_id,
+        'id' => $user->pengguna_id,
         'email' => $user->pengguna_email
       ], 300);
 
       // sendmail([
       // 	'email'    => $post->email,
-      // 	'messages' => 'Klik link di bawah ini untuk aktivasi akun Anda.\n https://api.local/auth/activationAccount?code=' . $code
+      // 	'messages' => 'Klik link di bawah ini untuk aktivasi akun Anda.\n https://api.ci4.local/auth/activation?code=' . $code
       // ]);
 
       return $this->respond([
         'success' => true,
-        'status'  => 200,
+        'status' => 200,
         'message' => 'Permintaan link aktivasi akun telah kami kirim ke email Anda. ' . $code
       ]);
     }

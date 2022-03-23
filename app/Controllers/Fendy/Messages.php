@@ -15,9 +15,7 @@ class Messages extends \App\Controllers\Fendy\BaseRestfulController
     $this->rules = new \App\Validation\Messages;
   }
 
-  /**
-   * Get all messages
-   */
+  // Get all messages
   function index()
   {
     if ($get = $this->model->getAllData(getQueryParamPagination())) {
@@ -26,9 +24,7 @@ class Messages extends \App\Controllers\Fendy\BaseRestfulController
     return $this->fail($this->tableRecordEmpty);
   }
 
-  /**
-   * Create single message
-   */
+  // Create single message
   function create()
   {
     if ($this->validate($this->rules->createMessage)) {
@@ -43,9 +39,7 @@ class Messages extends \App\Controllers\Fendy\BaseRestfulController
     ]);
   }
 
-  /**
-   * Get single message
-   */
+  // Get single message
   function show($id = null)
   {
     if ($get = $this->model->showData($id)) {
@@ -54,17 +48,13 @@ class Messages extends \App\Controllers\Fendy\BaseRestfulController
     return $this->failNotFound($this->tableRecordNotFound);
   }
 
-  /**
-   * Get single message
-   */
+  // Get single message
   function edit($id = null)
   {
     return $this->show($id);
   }
 
-  /**
-   * Update single message
-   */
+  // Update single message
   function update($id = null)
   {
     if ($this->validate($this->rules->createMessage)) {
@@ -79,9 +69,7 @@ class Messages extends \App\Controllers\Fendy\BaseRestfulController
     ]);
   }
 
-  /**
-   * Delete single message
-   */
+  // Delete single message
   function delete($id = null)
   {
     if ($del = $this->model->deleteData($id)) {

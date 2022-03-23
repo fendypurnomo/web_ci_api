@@ -4,17 +4,13 @@ namespace App\Controllers\Fendy\Akun\Auth;
 
 class Signin extends \App\Controllers\Fendy\BaseAccountController
 {
-  /**
-   * Index user signin
-   */
+  // Index user signin
   public function index()
   {
     return $this->signin();
   }
 
-  /**
-   * Authentication user signin
-   */
+  // Authentication user signin
   private function signin()
   {
     if ($this->validate($this->rules->signin)) {
@@ -29,20 +25,20 @@ class Signin extends \App\Controllers\Fendy\BaseAccountController
               $photo = $model->getCurrentPhotoProfile();
 
               $accessToken = createToken([
-                'id'    => $row->pengguna_id,
+                'id' => $row->pengguna_id,
                 'email' => $row->pengguna_email
               ]);
 
               return $this->respond([
-                'success'     => true,
-                'status'      => 200,
-                'isLoggedIn'  => true,
+                'success' => true,
+                'status' => 200,
+                'isLoggedIn' => true,
                 'accessToken' => $accessToken,
-                'response'    => [
+                'response' => [
                   'data' => [
-                    'firstname'    => $row->pengguna_nama_depan,
-                    'lastname'     => $row->pengguna_nama_belakang,
-                    'email'        => $row->pengguna_email,
+                    'firstname' => $row->pengguna_nama_depan,
+                    'lastname' => $row->pengguna_nama_belakang,
+                    'email' => $row->pengguna_email,
                     'photoProfile' => getenv('app.imgURL') . 'profiles/' . $photo
                   ]
                 ]

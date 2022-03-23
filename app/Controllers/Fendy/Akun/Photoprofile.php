@@ -12,7 +12,7 @@ class Photoprofile extends \CodeIgniter\Controller
 
   public function __construct($id = null)
   {
-    $this->id    = $id;
+    $this->id = $id;
     $this->model = new \App\Models\Fendy\Akun\PhotoProfile();
   }
 

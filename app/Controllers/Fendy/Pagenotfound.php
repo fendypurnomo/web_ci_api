@@ -8,9 +8,7 @@ class Pagenotfound extends \CodeIgniter\RESTful\ResourceController
 {
   use MessagesTrait;
 
-  /**
-   * Index page not found
-   */
+  // Index page not found
   function index()
   {
     return $this->failNotFound($this->pageNotFound)->send();

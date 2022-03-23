@@ -6,9 +6,7 @@ use Exception;
 
 class Recovery extends \App\Controllers\Fendy\BaseAccountController
 {
-  /**
-   * Index recovery account
-   */
+  // Index recovery account
   public function index()
   {
     try {
@@ -28,13 +26,11 @@ class Recovery extends \App\Controllers\Fendy\BaseAccountController
     }
   }
 
-  /**
-   * Check user email address
-   */
+  // Check user email address
   private function checkEmailAddress()
   {
     if ($this->validate($this->rules->checkEmailAddress)) {
-      $row     = $this->model->where('pengguna_email', getRequest()->email)->first();
+      $row = $this->model->where('pengguna_email', getRequest()->email)->first();
       $OTPCode = random_string('numeric', 6);
 
       $this->model->update($row->pengguna_id, ['pengguna_kode_otp' => $OTPCode]);
@@ -46,25 +42,23 @@ class Recovery extends \App\Controllers\Fendy\BaseAccountController
       // ]);
 
       $accessToken = createToken([
-        'id'              => $row->pengguna_id,
-        'email'           => $row->pengguna_email,
+        'id' => $row->pengguna_id,
+        'email' => $row->pengguna_email,
         'isEmailVerified' => true
       ], 300);
 
       return $this->respond([
-        'success'         => true,
-        'status'          => 200,
+        'success' => true,
+        'status' => 200,
         'isEmailVerified' => 'EMAIL_VERIFIED',
-        'accessToken'     => $accessToken,
-        'message'         => 'Permintaan setel ulang kata sandi berhasil. Buka pesan baru email Anda dan masukkan kode OTP yang telah Kami kirim'
+        'accessToken' => $accessToken,
+        'message' => 'Permintaan setel ulang kata sandi berhasil. Buka pesan baru email Anda dan masukkan kode OTP yang telah Kami kirim'
       ]);
     }
     return $this->fail($this->validator->getErrors());
   }
 
-  /**
-   * Check user OTP Code validation
-   */
+  // Check user OTP Code validation
   private function checkOTPCode()
   {
     try {
@@ -76,19 +70,19 @@ class Recovery extends \App\Controllers\Fendy\BaseAccountController
 
           if ($this->model->where(['pengguna_email' => $decode->data->email, 'pengguna_kode_otp' => $post->otp])->first()) {
             $accessToken = createToken([
-              'id'              => $decode->data->id,
-              'email'           => $decode->data->email,
-              'otp'             => $post->otp,
+              'id' => $decode->data->id,
+              'email' => $decode->data->email,
+              'otp' => $post->otp,
               'isEmailVerified' => true,
-              'isOTPVerified'   => true
+              'isOTPVerified' => true
             ], 300);
 
             return $this->respond([
-              'success'       => true,
-              'status'        => 200,
+              'success' => true,
+              'status' => 200,
               'isOTPVerified' => 'OTP_CODE_VERIFIED',
-              'accessToken'   => $accessToken,
-              'message'       => 'Verifikasi Kode OTP berhasil'
+              'accessToken' => $accessToken,
+              'message' => 'Verifikasi Kode OTP berhasil'
             ]);
           }
           return $this->fail($this->authOtpInvalid);
@@ -101,9 +95,7 @@ class Recovery extends \App\Controllers\Fendy\BaseAccountController
     }
   }
 
-  /**
-   * Reset password user
-   */
+  // Reset password user
   private function createNewPassword()
   {
     try {
@@ -117,7 +109,7 @@ class Recovery extends \App\Controllers\Fendy\BaseAccountController
 
             return $this->respondUpdated([
               'success' => true,
-              'status'  => 200,
+              'status' => 200,
               'message' => 'Kata sandi berhasil di setel ulang'
             ]);
           }

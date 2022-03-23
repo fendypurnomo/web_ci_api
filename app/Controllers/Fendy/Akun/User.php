@@ -15,9 +15,7 @@ class User extends \App\Controllers\Fendy\BaseAccountController
     $this->user = new \App\Libraries\Authorization();
   }
 
-  /**
-   * Index user account
-   */
+  // Index user account
   public function index()
   {
     try {
@@ -47,37 +45,33 @@ class User extends \App\Controllers\Fendy\BaseAccountController
     }
   }
 
-  /**
-   * Get personal information
-   */
+  // Get personal information
   private function personalInformation()
   {
     $user = $this->user->account;
 
     return $this->respond([
       'data' => [
-        'username'  => $user->pengguna_nama,
+        'username' => $user->pengguna_nama,
         'firstname' => $user->pengguna_nama_depan,
-        'lastname'  => $user->pengguna_nama_belakang,
-        'email'     => $user->pengguna_email,
-        'gender'    => $user->pengguna_jenis_kelamin,
+        'lastname' => $user->pengguna_nama_belakang,
+        'email' => $user->pengguna_email,
+        'gender' => $user->pengguna_jenis_kelamin,
         'createdAt' => $user->pengguna_tgl_dibuat,
         'updatedAt' => $user->pengguna_tgl_diperbaharui
       ]
     ]);
   }
 
-  /**
-   * Update personal information
-   */
+  // Update personal information
   private function updatePersonalInformation()
   {
     if ($this->validate($this->rules->updatePersonalInformation)) {
-      $put  = getRequest();
+      $put = getRequest();
       $user = $this->user->account;
 
       $data = [
-        'pengguna_nama_depan'    => $put->firstname,
+        'pengguna_nama_depan' => $put->firstname,
         'pengguna_nama_belakang' => $put->lastname,
         'pengguna_jenis_kelamin' => $put->gender
       ];
@@ -93,24 +87,22 @@ class User extends \App\Controllers\Fendy\BaseAccountController
 
       return $this->respondUpdated([
         'success' => true,
-        'status'  => 200,
+        'status' => 200,
         'message' => 'Informasi akun Anda berhasil diperbaharui.'
       ]);
     }
 
     return $this->fail([
       'errors' => 'badRequest',
-      'field'  => $this->validator->getErrors()
+      'field' => $this->validator->getErrors()
     ]);
   }
 
-  /**
-   * Change password
-   */
+  // Change password
   private function changePassword()
   {
     if ($this->validate($this->rules->changePassword)) {
-      $put  = getRequest();
+      $put = getRequest();
       $user = $this->user->account;
 
       if (password_verify($put->oldPassword, $user->pengguna_sandi)) {
@@ -119,7 +111,7 @@ class User extends \App\Controllers\Fendy\BaseAccountController
 
           return $this->respond([
             'success' => true,
-            'status'  => 200,
+            'status' => 200,
             'message' => 'Kata sandi berhasil diperbarui'
           ]);
         }
@@ -132,37 +124,33 @@ class User extends \App\Controllers\Fendy\BaseAccountController
 
     return $this->fail([
       'errors' => 'badRequest',
-      'field'  => $this->validator->getErrors()
+      'field' => $this->validator->getErrors()
     ]);
   }
 
-  /**
-   * Upload photo profile
-   */
+  // Upload photo profile
   private function uploadPhotoProfile()
   {
     if ($this->validate($this->rules->uploadPhotoProfile)) {
       $file = $this->request->getFile('imgFile');
 
       if ($file->isValid() && !$file->hasMoved()) {
-        $name  = $file->getRandomName();
-        $path  = '../../../../../../../Pictures/Assets/img/profiles/';
+        $name = $file->getRandomName();
+        $path = '../../../../../../../Pictures/Images/profiles/';
         $model = new \App\Models\Fendy\Akun\PhotoProfile();
 
         if ($file->move($path, $name)) {
           $model->insert([
             'pengguna_id' => $this->user->account->pengguna_id,
-            'foto_nama'   => $name,
-            'foto_aktif'  => 1
+            'foto_nama' => $name,
+            'foto_aktif' => 1
           ]);
 
-          $model->where('pengguna_id = ' . $this->user->account->pengguna_id . ' AND foto_id != ' . $model->getInsertID())
-            ->set(['foto_aktif' => 0])
-            ->update();
+          $model->where('pengguna_id = ' . $this->user->account->pengguna_id . ' AND foto_id != ' . $model->getInsertID())->set(['foto_aktif' => 0])->update();
 
           return $this->respond([
             'success' => true,
-            'status'  => 200,
+            'status' => 200,
             'message' => 'Unggah foto profil berhasil'
           ]);
         }
@@ -175,7 +163,7 @@ class User extends \App\Controllers\Fendy\BaseAccountController
 
     return $this->fail([
       'errors' => 'badRequest',
-      'field'  => $this->validator->getErrors()
+      'field' => $this->validator->getErrors()
     ]);
   }
 }
