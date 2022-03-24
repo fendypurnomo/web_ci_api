@@ -11,13 +11,13 @@ class User
   */
   public $signin = [
     'username' => [
-      'rules'  => 'trim|required',
+      'rules' => 'trim|required',
       'errors' => [
         'required' => 'Masukkan e-mail atau nama pengguna Anda!'
       ]
     ],
     'password' => [
-      'rules'  => 'required',
+      'rules' => 'required',
       'errors' => [
         'required' => 'Masukkan kata sandi Anda!'
       ]
@@ -89,10 +89,10 @@ class User
   */
   public $checkEmailAddress = [
     'email' => [
-      'rules'  => 'required|valid_email|is_not_unique[tabel_pengguna.pengguna_email]',
+      'rules' => 'required|valid_email|is_not_unique[tabel_pengguna.pengguna_email]',
       'errors' => [
-        'required'      => 'Masukkan e-mail Anda!',
-        'valid_email'   => 'E-mail yang Anda masukkan tidak valid!',
+        'required' => 'Masukkan e-mail Anda!',
+        'valid_email' => 'E-mail yang Anda masukkan tidak valid!',
         'is_not_unique' => 'E-mail Anda tidak dapat kami temukan!'
       ]
     ]
@@ -100,9 +100,9 @@ class User
 
   public $checkOTPCode = [
     'otp' => [
-      'rules'  => 'required|min_length[5]|max_length[6]|is_natural',
+      'rules' => 'required|min_length[5]|max_length[6]|is_natural',
       'errors' => [
-        'required'   => 'Masukkan Kode OTP!',
+        'required' => 'Masukkan Kode OTP!',
         'min_length' => 'Masukkan Kode OTP minimal 5 karakter!',
         'max_length' => 'Masukkan Kode OTP maksimal 6 karakter!',
         'is_natural' => 'Masukkan Kode OTP hanya karakter angka!'
@@ -112,18 +112,18 @@ class User
 
   public $createNewPassword = [
     'newPassword' => [
-      'rules'  => 'required|min_length[8]|checkPasswordStrength',
+      'rules' => 'required|min_length[8]|checkPasswordStrength',
       'errors' => [
-        'required'              => 'Masukkan kata sandi baru Anda!',
-        'min_length'            => 'Masukkan kata sandi baru Anda minimal 8 karakter!',
+        'required' => 'Masukkan kata sandi baru Anda!',
+        'min_length' => 'Masukkan kata sandi baru Anda minimal 8 karakter!',
         'checkPasswordStrength' => 'Kata sandi harus mengandung minimal 1 karakter huruf besar, kecil dan angka!'
       ]
     ],
     'confirmNewPassword' => [
-      'rules'  => 'required|matches[newPassword]',
+      'rules' => 'required|matches[newPassword]',
       'errors' => [
         'required' => 'Masukkan konfirmasi kata sandi baru Anda!',
-        'matches'  => 'Konfirmasi kata sandi baru Anda tidak cocok!'
+        'matches' => 'Konfirmasi kata sandi baru Anda tidak cocok!'
       ]
     ]
   ];
