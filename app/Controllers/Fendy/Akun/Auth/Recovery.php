@@ -55,7 +55,8 @@ class Recovery extends \App\Controllers\Fendy\BaseAccountController
         'message' => 'Permintaan setel ulang kata sandi berhasil. Buka pesan baru email Anda dan masukkan kode OTP yang telah Kami kirim'
       ]);
     }
-    return $this->fail($this->validator->getErrors());
+
+    return $this->respond($this->validator->getErrors());
   }
 
   // Check user OTP Code validation
@@ -85,11 +86,14 @@ class Recovery extends \App\Controllers\Fendy\BaseAccountController
               'message' => 'Verifikasi Kode OTP berhasil'
             ]);
           }
-          return $this->fail($this->authOtpInvalid);
+
+          return $this->respond($this->authOtpInvalid);
         }
-        return $this->fail($this->authOtpFailed);
+
+        return $this->respond($this->authOtpFailed);
       }
-      return $this->fail($this->validator->getErrors());
+
+      return $this->respond($this->validator->getErrors());
     } catch (Exception $e) {
       return $this->fail($e->getMessage());
     }
@@ -113,11 +117,14 @@ class Recovery extends \App\Controllers\Fendy\BaseAccountController
               'message' => 'Kata sandi berhasil di setel ulang'
             ]);
           }
-          return $this->fail($this->authOtpInvalid);
+
+          return $this->respond($this->createNewPasswordFailed);
         }
-        return $this->fail($this->tokenInvalid);
+
+        return $this->respond($this->createNewPasswordFailed);
       }
-      return $this->fail($this->validator->getErrors());
+
+      return $this->respond($this->validator->getErrors());
     } catch (Exception $e) {
       return $this->fail($e->getMessage());
     }

@@ -41,8 +41,21 @@ trait MessagesTrait
   ];
 
   // Recovery account messages
-  protected $authOtpInvalid	= 'Kode OTP yang Anda masukkan tidak valid!';
-  protected $authOtpFailed	= 'Terjadi kesalahan. Permintaan Anda tidak dapat diproses!';
+  protected $authOtpInvalid	= [
+    'success' => false,
+    'error' => 'invalidOTPCode',
+    'message' => 'Kode OTP yang Anda masukkan tidak valid!'
+  ];
+  protected $authOtpFailed = [
+    'success' => false,
+    'error' => 'failed',
+    'message' => 'Terjadi kesalahan. Permintaan Anda tidak dapat diproses!'
+  ];
+  protected $createNewPasswordFailed = [
+    'success' => false,
+    'error' => 'failed',
+    'message' => 'Terjadi kesalahan. Permintaan Anda tidak dapat diproses!'
+  ];
 
   // Activate account messages
   protected $authHasActivated = 'Anda telah melakukan aktivasi akun sebelumnya!';
