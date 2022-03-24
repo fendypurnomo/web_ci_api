@@ -1,6 +1,10 @@
-Account
--------
 
-  Username: fendypurnomo
-  Email: fendy.purnomo@email.com
-  Password: Fendy@Admin.123
++------------------------------------------------------------------------------------------------+
+| pengguna_id | pengguna_nama  | pengguna_email            | pengguna_kode_otp | pengguna_sandi  |
++-------------+----------------+---------------------------+-------------------+-----------------+
+|           1 | fendypurnomo   | fendy.purnomo@email.com   |            401623 | Fendy.123       |
+|           2 | admindashboard | admin.dashboard@email.com |              NULL | Admin.123       |
+|           3 | userdashboard  | user.dashboard@email.com  |              NULL | User.123        |
+|           4 | tigernixon     | tiger.nixon@email.com     |              NULL |                 |
+|           5 | johndoe        | john.doe@email.com        |              NULL |                 |
++-------------+----------------+---------------------------+-------------------+-----------------+
