@@ -4,40 +4,46 @@ namespace App\Libraries;
 
 trait MessagesTrait
 {
-  protected $pageNotFound		 = 'Permintaan Anda tidak dapat kami proses. Laman tidak dapat kami temukan!';
-  protected $tokenInvalid		 = 'Terjadi kesalahan. Token Anda tidak valid!';
+  protected $pageNotFound = 'Permintaan Anda tidak dapat kami proses. Laman tidak dapat kami temukan!';
+  protected $tokenInvalid = 'Terjadi kesalahan. Token Anda tidak valid!';
   protected $requestNotFound = 'Terjadi kesalahan. Permintaan Anda tidak dapat kami proses!';
   protected $requestCantProcessed = 'Teradi kesalahan. Permintaan Anda gagal kami proses!';
 
   /* Auth Messages */
   // Signin messages
   protected $authWrongPassword = [
+    'success' => false,
     'error' => 'wrongPassword',
-    'field' => [
+    'messages' => [
       'password' => 'Kata sandi yang Anda masukkan salah!'
     ]
   ];
   protected $authBlocked = [
+    'success' => false,
     'error' => 'accountBlocked',
-    'field' => [
+    'messages' => [
       'username' => 'Akun Anda telah diblokir untuk sementara!'
     ]
   ];
   protected $authNotActivated = [
+    'success' => false,
     'error' => 'accountHasNotBeenActivated',
-    'field' => [
+    'messages' => [
       'username' => 'Anda belum melakukan aktivasi akun!'
     ]
   ];
   protected $authNotFound = [
+    'success' => false,
     'error' => 'accountNotFound',
-    'field' => [
+    'messages' => [
       'username' => 'Akun Anda tidak dapat kami temukan!'
     ]
   ];
+
   // Recovery account messages
   protected $authOtpInvalid	= 'Kode OTP yang Anda masukkan tidak valid!';
   protected $authOtpFailed	= 'Terjadi kesalahan. Permintaan Anda tidak dapat diproses!';
+
   // Activate account messages
   protected $authHasActivated = 'Anda telah melakukan aktivasi akun sebelumnya!';
 

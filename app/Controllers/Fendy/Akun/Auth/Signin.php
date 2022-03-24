@@ -45,21 +45,22 @@ class Signin extends \App\Controllers\Fendy\BaseAccountController
               ]);
             }
 
-            return $this->fail($this->authWrongPassword);
+            return $this->respond($this->authWrongPassword);
           }
 
-          return $this->fail($this->authBlocked);
+          return $this->respond($this->authBlocked);
         }
 
-        return $this->fail($this->authNotActivated);
+        return $this->respond($this->authNotActivated);
       }
 
-      return $this->fail($this->authNotFound);
+      return $this->respond($this->authNotFound);
     }
 
-    return $this->fail([
+    return $this->respond([
+      'success' => false,
       'error' => 'inputFieldRequired',
-      'field' => $this->validator->getErrors()
+      'messages' => $this->validator->getErrors()
     ]);
   }
 }
