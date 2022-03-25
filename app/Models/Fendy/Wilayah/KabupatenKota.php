@@ -4,7 +4,7 @@ namespace App\Models\Fendy\Wilayah;
 
 class KabupatenKota extends \CodeIgniter\Model
 {
-  protected $table      = 'wilayah_kabupaten';
+  protected $table      = 'tabel_wilayah_kabupaten';
   protected $primaryKey = 'wilayah_kabupaten_id';
   protected $returnType = 'object';
 

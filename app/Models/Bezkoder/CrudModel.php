@@ -6,13 +6,8 @@ use CodeIgniter\Model;
 
 class CrudModel extends Model
 {
-	protected $table			= 'bezkoder_crud_web_api';
-	protected $primaryKey	= 'id';
-	protected $returnType = 'array';
-
-	protected $allowedFields = [
-		'title',
-		'description',
-		'published'
-	];
+  protected $table = 'table_bezkoder_crud_web_api';
+  protected $primaryKey = 'id';
+  protected $returnType = 'array';
+  protected $allowedFields = ['title', 'description', 'published'];
 }
