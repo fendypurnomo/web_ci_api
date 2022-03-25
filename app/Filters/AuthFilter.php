@@ -22,8 +22,8 @@ class AuthFilter implements \CodeIgniter\Filters\FilterInterface
       return $request;
     } catch (Exception $e) {
       return \Config\Services::response()->setJSON([
-        'status'  => 401,
-        'error'   => 'Unauthorized',
+        'status' => 401,
+        'error' => 'Unauthorized',
         'message' => $e->getMessage()
       ])->setStatusCode(401);
     }

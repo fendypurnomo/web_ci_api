@@ -21,17 +21,16 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
+*/
 use Kint\Kint;
 use Kint\Utils;
 
 if (\defined('KINT_DIR')) {
-    return;
+  return;
 }
 
 if (\version_compare(PHP_VERSION, '5.3') < 0) {
-    throw new Exception('Kint 3.0 requires PHP 5.3 or higher');
+  throw new Exception('Kint 3.0 requires PHP 5.3 or higher');
 }
 
 \define('KINT_DIR', __DIR__);
@@ -45,18 +44,18 @@ if (\version_compare(PHP_VERSION, '5.3') < 0) {
 // Dynamic default settings
 Kint::$file_link_format = \ini_get('xdebug.file_link_format');
 if (isset($_SERVER['DOCUMENT_ROOT'])) {
-    Kint::$app_root_dirs = array(
-        $_SERVER['DOCUMENT_ROOT'] => '<ROOT>',
-        \realpath($_SERVER['DOCUMENT_ROOT']) => '<ROOT>',
-    );
+  Kint::$app_root_dirs = array(
+    $_SERVER['DOCUMENT_ROOT'] => '<ROOT>',
+    \realpath($_SERVER['DOCUMENT_ROOT']) => '<ROOT>',
+  );
 }
 
 Utils::composerSkipFlags();
 
 if ((!\defined('KINT_SKIP_FACADE') || !KINT_SKIP_FACADE) && !\class_exists('Kint')) {
-    \class_alias('Kint\\Kint', 'Kint');
+  \class_alias('Kint\\Kint', 'Kint');
 }
 
 if (!\defined('KINT_SKIP_HELPERS') || !KINT_SKIP_HELPERS) {
-    require_once __DIR__.'/init_helpers.php';
+  require_once __DIR__.'/init_helpers.php';
 }

@@ -27,9 +27,7 @@ function init() {
 		tabLinks[id].onfocus = function () {
 			this.blur();
 		};
-		if (i == 0) {
-			tabLinks[id].className = "active";
-		}
+		if (i == 0) { tabLinks[id].className = "active"; }
 		i++;
 	}
 
@@ -70,9 +68,7 @@ function showTab() {
 
 function getFirstChildWithTagName(element, tagName) {
 	for (var i = 0; i < element.childNodes.length; i++) {
-		if (element.childNodes[i].nodeName == tagName) {
-			return element.childNodes[i];
-		}
+		if (element.childNodes[i].nodeName == tagName) { return element.childNodes[i]; }
 	}
 }
 
@@ -96,9 +92,7 @@ function toggle(elem) {
 		var disp = elem.currentStyle["display"];
 	} else if (window.getComputedStyle) {
 		// For most other browsers
-		var disp = document.defaultView
-			.getComputedStyle(elem, null)
-			.getPropertyValue("display");
+		var disp = document.defaultView.getComputedStyle(elem, null).getPropertyValue("display");
 	}
 
 	// Toggle the state of the "display" style

@@ -1622,13 +1622,9 @@ abstract class BaseModel
    */
   public function __get(string $name)
   {
-    if (property_exists($this, $name)) {
-      return $this->$name;
-    }
+    if (property_exists($this, $name)) { return $this->$name; }
 
-    if (isset($this->db->$name)) {
-      return $this->db->$name;
-    }
+    if (isset($this->db->$name)) { return $this->db->$name; }
 
     return null;
   }
@@ -1642,9 +1638,7 @@ abstract class BaseModel
    */
   public function __isset(string $name): bool
   {
-    if (property_exists($this, $name)) {
-      return true;
-    }
+    if (property_exists($this, $name)) { return true; }
     return isset($this->db->$name);
   }
 
@@ -1703,9 +1697,7 @@ abstract class BaseModel
           foreach ($rule as &$row) {
             // Should only be an `errors` array
             // which doesn't take placeholders.
-            if (is_array($row)) {
-              continue;
-            }
+            if (is_array($row)) { continue; }
 
             $row = strtr($row, $replacements);
           }

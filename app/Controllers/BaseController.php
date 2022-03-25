@@ -14,14 +14,14 @@ use CodeIgniter\HTTP\IncomingRequest;
  * 		class Home extends BaseController
  *
  * For security be sure to declare any new methods as protected or private.
- */
+*/
 class BaseController extends \CodeIgniter\Controller
 {
   /**
    * Instance of the main Request object.
    *
    * @var IncomingRequest|CLIRequest
-   */
+  */
   protected $request;
 
   /**
@@ -30,7 +30,7 @@ class BaseController extends \CodeIgniter\Controller
    * to all other controllers that extend BaseController.
    *
    * @var array
-   */
+  */
   protected $helpers = [];
 
   /**
@@ -39,7 +39,7 @@ class BaseController extends \CodeIgniter\Controller
    * @param RequestInterface  $request
    * @param ResponseInterface $response
    * @param LoggerInterface   $logger
-   */
+  */
   public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
   {
     // Do Not Edit This Line

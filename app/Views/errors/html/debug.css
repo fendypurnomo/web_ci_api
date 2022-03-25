@@ -7,7 +7,6 @@
 	--light-bg-color: #ededee;
 	--dark-bg-color: #404040;
 }
-
 body {
 	height: 100%;
 	background: var(--main-bg-color);
@@ -65,7 +64,6 @@ p.lead {
 .header:hover a {
 	display: inline;
 }
-
 .footer {
 	background: var(--dark-bg-color);
 	color: var(--light-text-color);
@@ -75,7 +73,6 @@ p.lead {
 	margin-top: 1rem;
 	text-align: center;
 }
-
 .source {
 	background: #343434;
 	color: var(--light-text-color);
@@ -100,7 +97,6 @@ p.lead {
 .source span.highlight .number {
 	color: #fff;
 }
-
 .tabs {
 	list-style: none;
 	list-style-position: inside;
@@ -111,8 +107,7 @@ p.lead {
 .tabs li {
 	display: inline;
 }
-.tabs a:link,
-.tabs a:visited {
+.tabs a:link, .tabs a:visited {
 	padding: 0rem 1rem;
 	line-height: 2.7;
 	text-decoration: none;
@@ -142,7 +137,6 @@ p.lead {
 .hide {
 	display: none;
 }
-
 .alert {
 	margin-top: 2rem;
 	display: block;
@@ -153,11 +147,9 @@ p.lead {
 	border-radius: 5px;
 	color: #31708f;
 }
-ul,
-ol {
+ul, ol {
 	line-height: 1.8;
 }
-
 table {
 	width: 100%;
 	overflow: hidden;
@@ -176,7 +168,6 @@ tr:hover td {
 td pre {
 	white-space: pre-wrap;
 }
-
 .trace a {
 	color: inherit;
 }

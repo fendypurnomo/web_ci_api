@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
 */
-
 use CodeIgniter\Config\DotEnv;
 use Config\Autoload;
 use Config\Modules;
@@ -28,7 +27,7 @@ use Config\Services;
 if (!defined('APPPATH')) {
   /**
    * @var Paths $paths
-   */
+  */
   define('APPPATH', realpath(rtrim($paths->appDirectory, '\\/ ')) . DIRECTORY_SEPARATOR);
 }
 
@@ -41,7 +40,7 @@ if (!defined('ROOTPATH')) {
 if (!defined('SYSTEMPATH')) {
   /**
    * @var Paths $paths
-   */
+  */
   define('SYSTEMPATH', realpath(rtrim($paths->systemDirectory, '\\/ ')) . DIRECTORY_SEPARATOR);
 }
 
@@ -49,7 +48,7 @@ if (!defined('SYSTEMPATH')) {
 if (!defined('WRITEPATH')) {
   /**
    * @var Paths $paths
-   */
+  */
   define('WRITEPATH', realpath(rtrim($paths->writableDirectory, '\\/ ')) . DIRECTORY_SEPARATOR);
 }
 
@@ -57,7 +56,7 @@ if (!defined('WRITEPATH')) {
 if (!defined('TESTPATH')) {
   /**
    * @var Paths $paths
-   */
+  */
   define('TESTPATH', realpath(rtrim($paths->testsDirectory, '\\/ ')) . DIRECTORY_SEPARATOR);
 }
 
@@ -66,14 +65,10 @@ if (!defined('TESTPATH')) {
  * GRAB OUR CONSTANTS & COMMON
  * ---------------------------------------------------------------
 */
-if (!defined('APP_NAMESPACE')) {
-  require_once APPPATH . 'Config/Constants.php';
-}
+if (!defined('APP_NAMESPACE')) { require_once APPPATH . 'Config/Constants.php'; }
 
 // Require app/Common.php file if exists.
-if (is_file(APPPATH . 'Common.php')) {
-  require_once APPPATH . 'Common.php';
-}
+if (is_file(APPPATH . 'Common.php')) { require_once APPPATH . 'Common.php'; }
 
 // Require system/Common.php
 require_once SYSTEMPATH . 'Common.php';
@@ -100,9 +95,7 @@ require_once SYSTEMPATH . 'Config/Services.php';
 require_once APPPATH . 'Config/Services.php';
 
 // Use Config\Services as CodeIgniter\Services
-if (!class_exists('CodeIgniter\Services', false)) {
-  class_alias('Config\Services', 'CodeIgniter\Services');
-}
+if (!class_exists('CodeIgniter\Services', false)) { class_alias('Config\Services', 'CodeIgniter\Services'); }
 
 // Initialize and register the loader with the SPL autoloader stack.
 Services::autoloader()->initialize(new Autoload(), new Modules())->register();
@@ -113,10 +106,8 @@ if (is_file(COMPOSER_PATH)) {
    * The path to the vendor directory.
    *
    * We do not want to enforce this, so set the constant if Composer was used.
-   */
-  if (!defined('VENDORPATH')) {
-    define('VENDORPATH', realpath(ROOTPATH . 'vendor') . DIRECTORY_SEPARATOR);
-  }
+  */
+  if (!defined('VENDORPATH')) { define('VENDORPATH', realpath(ROOTPATH . 'vendor') . DIRECTORY_SEPARATOR); }
 
   require_once COMPOSER_PATH;
 }

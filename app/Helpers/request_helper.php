@@ -10,9 +10,7 @@ function getRequest(): object
   if (empty($input)) {
     $input = $request->getPost();
 
-    if (empty($input)) {
-      $input = $request->getRawInput();
-    }
+    if (empty($input)) { $input = $request->getRawInput(); }
   }
 
   return (object) $input;
@@ -34,12 +32,8 @@ function getQueryParamPagination(): object
   $page    = Services::request()->getGet('page');
   $perPage = Services::request()->getGet('perPage');
 
-  if (!isset($page) || isset($page) && empty($page) || $page === null) {
-    $page = (int) 1;
-  }
-  if (!isset($perPage) || isset($perPage) && empty($perPage) || $perPage === null || $perPage > 100) {
-    $perPage = (int) 5;
-  }
+  if (!isset($page) || isset($page) && empty($page) || $page === null) { $page = (int) 1; }
+  if (!isset($perPage) || isset($perPage) && empty($perPage) || $perPage === null || $perPage > 100) { $perPage = (int) 5; }
 
   return (object) ['page' => (int) $page, 'perPage' => (int) $perPage];
 }

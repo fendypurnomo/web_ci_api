@@ -5,15 +5,15 @@ use Firebase\JWT\JWT;
 function createToken(array $data, int $ttl = 3600): string
 {
   $issuedAtTime = time();
-  $notBefore    = $issuedAtTime + 10;
-  $timeToLive   = $ttl;
-  $expiration   = $issuedAtTime + $timeToLive;
+  $notBefore = $issuedAtTime + 10;
+  $timeToLive = $ttl;
+  $expiration = $issuedAtTime + $timeToLive;
 
   return JWT::encode(
     [
-      'iat'  => $issuedAtTime,
-      'nbf'  => $notBefore,
-      'exp'  => $expiration,
+      'iat' => $issuedAtTime,
+      'nbf' => $notBefore,
+      'exp' => $expiration,
       'data' => $data
     ],
     getenv('jwt.secretKey')
@@ -24,9 +24,7 @@ function getAuthorization(): string
 {
   $authorization = \Config\Services::request()->getServer('REDIRECT_HTTP_AUTHORIZATION');
 
-  if (is_null($authorization)) {
-    throw new Exception('Permintaan Anda tidak dapat kami proses. Anda tidak memiliki akses token yang valid!');
-  }
+  if (is_null($authorization)) { throw new Exception('Permintaan Anda tidak dapat kami proses. Anda tidak memiliki akses token yang valid!'); }
 
   return explode(' ', $authorization)[1];
 }

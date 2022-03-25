@@ -64,18 +64,18 @@ trait MessagesTrait
   // Change password messages
   protected $accountNewEqualOldPassword = [
     'errors' => 'newPasswordSameOldPassword',
-    'field'  => [
+    'field' => [
       'newPassword' => 'Kata sandi baru tidak boleh sama dengan kata sandi lama Anda!'
     ]
   ];
   protected $accountOldPasswordInvalid = [
     'errors' => 'oldPasswordNotValid',
-    'field'  => [
+    'field' => [
       'oldPassword' => 'Kata sandi lama yang Anda masukkan tidak cocok dengan kata sandi Anda saat ini!'
     ]
   ];
 
   /* Table Messages */
-  protected $tableRecordEmpty    = 'Tidak ada data!';
+  protected $tableRecordEmpty = 'Tidak ada data!';
   protected $tableRecordNotFound = 'Data tidak dapat ditemukan!';
 }

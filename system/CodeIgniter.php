@@ -960,15 +960,11 @@ class CodeIgniter
   public function spoofRequestMethod()
   {
     // Only works with POSTED forms
-    if ($this->request->getMethod() !== 'post') {
-      return;
-    }
+    if ($this->request->getMethod() !== 'post') { return; }
 
     $method = $this->request->getPost('_method'); // @phpstan-ignore-line
 
-    if (empty($method)) {
-      return;
-    }
+    if (empty($method)) { return; }
 
     $this->request = $this->request->setMethod($method);
   }

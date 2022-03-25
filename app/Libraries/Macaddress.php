@@ -41,7 +41,7 @@ class Macaddress
 
   /*
    * The method of obtaining in linux system
-   */
+  */
   protected static function linuxOS()
   {
     @exec("ifconfig -a", self::$result);
@@ -50,7 +50,7 @@ class Macaddress
 
   /*
    * The method of obtaining in windows system
-   */
+  */
   protected static function windowsOS()
   {
     @exec("ipconfig /all", self::$result);

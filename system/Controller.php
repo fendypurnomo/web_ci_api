@@ -27,42 +27,42 @@ class Controller
    * Helpers that will be automatically loaded on class instantiation.
    *
    * @var array
-   */
+  */
   protected $helpers = [];
 
   /**
    * Instance of the main Request object.
    *
    * @var RequestInterface
-   */
+  */
   protected $request;
 
   /**
    * Instance of the main response object.
    *
    * @var ResponseInterface
-   */
+  */
   protected $response;
 
   /**
    * Instance of logger to use.
    *
    * @var LoggerInterface
-   */
+  */
   protected $logger;
 
   /**
    * Should enforce HTTPS access for all methods in this controller.
    *
    * @var integer Number of seconds to set HSTS header
-   */
+  */
   protected $forceHTTPS = 0;
 
   /**
    * Once validation has been run, will hold the Validation instance.
    *
    * @var Validation
-   */
+  */
   protected $validator;
 
   /**
@@ -73,7 +73,7 @@ class Controller
    * @param LoggerInterface   $logger
    *
    * @throws HTTPException
-   */
+  */
   public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
   {
     $this->request  = $request;
@@ -99,7 +99,7 @@ class Controller
    *                          Default value is 1 year.
    *
    * @throws HTTPException
-   */
+  */
   protected function forceHTTPS(int $duration = 31536000)
   {
     force_https($duration, $this->request, $this->response);
@@ -110,7 +110,7 @@ class Controller
    * tell it how long to cache the current page for.
    *
    * @param integer $time
-   */
+  */
   protected function cachePage(int $time)
   {
     CodeIgniter::cache($time);
@@ -122,12 +122,10 @@ class Controller
    * @deprecated Use `helper` function instead of using this method.
    *
    * @codeCoverageIgnore
-   */
+  */
   protected function loadHelpers()
   {
-    if (empty($this->helpers)) {
-      return;
-    }
+    if (empty($this->helpers)) { return; }
 
     helper($this->helpers);
   }
@@ -140,7 +138,7 @@ class Controller
    * @param array        $messages An array of custom error messages
    *
    * @return boolean
-   */
+  */
   protected function validate($rules, array $messages = []): bool
   {
     $this->validator = Services::validation();
