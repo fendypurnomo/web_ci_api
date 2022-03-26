@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Fendy;
 
-use App\Libraries\MessagesTrait;
+use App\Validation\MessagesTrait;
 
 class Pagenotfound extends \CodeIgniter\RESTful\ResourceController
 {

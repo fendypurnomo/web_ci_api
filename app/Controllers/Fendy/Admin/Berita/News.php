@@ -14,7 +14,7 @@ class News extends \App\Controllers\Fendy\BaseAdminController
     parent::__construct();
 
     $this->rules = new \App\Validation\Admin\News;
-    $this->user = new \App\Libraries\Authorization();
+    // $this->user = new \App\Libraries\Authorization();
   }
 
 	/**

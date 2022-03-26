@@ -9,7 +9,9 @@ class Categories extends \App\Controllers\Fendy\BaseAdminController
 
   public function __construct()
   {
-    $this->rules = new \App\Validation\Admin\Categories;
+		parent::__construct();
+
+		$this->rules = new \App\Validation\Admin\Categories;
   }
 
 	/**

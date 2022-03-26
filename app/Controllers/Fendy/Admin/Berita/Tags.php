@@ -9,6 +9,8 @@ class Tags extends \App\Controllers\Fendy\BaseAdminController
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->rules = new \App\Validation\Admin\Tags;
 	}
 

@@ -62,15 +62,22 @@ $routes->group('/', function ($routes) {
   });
 
   $routes->group('blog', function ($routes) {
-    $routes->get('categories', 'Fendy\Blog\Blog::categories');
-    $routes->get('tags', 'Fendy\Blog\Blog::tags');
-    $routes->get('news', 'Fendy\Blog\Blog::news');
+    $routes->get('categories', 'Fendy\Admin\Berita\Categories');
+    $routes->get('categories/(:num)', 'Fendy\Admin\Berita\Categories::show/$1');
+    $routes->get('tags', 'Fendy\Admin\Berita\Tags');
+    $routes->get('tags/(:num)', 'Fendy\Admin\Berita\Tags::show/$1');
+    $routes->get('news', 'Fendy\Admin\Berita\News');
+    $routes->get('news/(:num)', 'Fendy\Admin\Berita\News::show/$1');
 
     $routes->group('wilayah', function ($routes) {
-      $routes->get('provinsi', 'Fendy\Blog\Blog::provinsi');
-      $routes->get('kabupatenKota', 'Fendy\Blog\Blog::kabupatenKota');
-      $routes->get('kecamatan', 'Fendy\Blog\Blog::kecamatan');
-      $routes->get('kelurahanDesa', 'Fendy\Blog\Blog::kelurahanDesa');
+      $routes->get('provinsi', 'Fendy\Admin\Wilayah\Provinsi');
+      $routes->get('provinsi/(:num)', 'Fendy\Admin\Wilayah\Provinsi::show/$1');
+      $routes->get('kabupatenKota', 'Fendy\Admin\Wilayah\KabupatenKota');
+      $routes->get('kabupatenKota/(:num)', 'Fendy\Admin\Wilayah\KabupatenKota::show/$1');
+      $routes->get('kecamatan', 'Fendy\Admin\Wilayah\Kecamatan');
+      $routes->get('kecamatan/(:num)', 'Fendy\Admin\Wilayah\Kecamatan::show/$1');
+      $routes->get('kelurahanDesa', 'Fendy\Admin\Wilayah\KelurahanDesa');
+      $routes->get('kelurahanDesa/(:num)', 'Fendy\Admin\Wilayah\KelurahanDesa::show/$1');
     });
   });
 
