@@ -1,10 +1,16 @@
 <?php
 
-namespace App\Controllers\Fendy\Berita;
+namespace App\Controllers\Fendy\Admin\Berita;
 
-class Categories extends \App\Controllers\Fendy\BaseRestfulController
+class Categories extends \App\Controllers\Fendy\BaseAdminController
 {
 	protected $modelName = 'App\Models\Fendy\Berita\Categories';
+	protected $rules;
+
+  public function __construct()
+  {
+    $this->rules = new \App\Validation\Admin\Categories;
+  }
 
 	/**
 	 * Get all data categories
@@ -14,7 +20,7 @@ class Categories extends \App\Controllers\Fendy\BaseRestfulController
 		if ($get = $this->model->getAllData(getQueryParamPagination())) {
 			return $this->respond($get);
 		}
-		return $this->fail($this->TABLE_RECORD_EMPTY);
+		return $this->fail($this->tableRecordEmpty);
 	}
 
 	/**
@@ -27,9 +33,10 @@ class Categories extends \App\Controllers\Fendy\BaseRestfulController
 				return $this->respondCreated($add);
 			}
 		}
-		return $this->fail([
+		return $this->respond([
+			'success' => false,
 			'error' => 'badRequest',
-			'field' => $this->validator->getErrors()
+			'messages' => $this->validator->getErrors()
 		]);
 	}
 
@@ -41,7 +48,7 @@ class Categories extends \App\Controllers\Fendy\BaseRestfulController
 		if ($get = $this->model->showData($id)) {
 			return $this->respond($get);
 		}
-		return $this->failNotFound($this->TABLE_RECORD_NOT_FOUND);
+		return $this->failNotFound($this->tableRecordNotFound);
 	}
 
 	/**
@@ -62,9 +69,10 @@ class Categories extends \App\Controllers\Fendy\BaseRestfulController
 				return $this->respondUpdated($put);
 			}
 		}
-		return $this->fail([
+		return $this->respond([
+			'success' => false,
 			'error' => 'badRequest',
-			'field' => $this->validator->getErrors()
+			'messages' => $this->validator->getErrors()
 		]);
 	}
 
@@ -76,6 +84,6 @@ class Categories extends \App\Controllers\Fendy\BaseRestfulController
 		if ($del = $this->model->deleteData($id)) {
 			return $this->respondDeleted($del);
 		}
-		return $this->failNotFound($this->TABLE_RECORD_NOT_FOUND);
+		return $this->failNotFound($this->tableRecordNotFound);
 	}
 }

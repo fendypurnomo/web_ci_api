@@ -1,10 +1,16 @@
 <?php
 
-namespace App\Controllers\Fendy\Berita;
+namespace App\Controllers\Fendy\Admin\Berita;
 
-class Tags extends \App\Controllers\Fendy\BaseRestfulController
+class Tags extends \App\Controllers\Fendy\BaseAdminController
 {
 	protected $modelName = 'App\Models\Fendy\Berita\Tags';
+	protected $rules;
+
+	public function __construct()
+	{
+		$this->rules = new \App\Validation\Admin\Tags;
+	}
 
 	/**
 	 * Get all data tags
@@ -14,7 +20,7 @@ class Tags extends \App\Controllers\Fendy\BaseRestfulController
 		if ($get = $this->model->getAllData(getQueryParamPagination())) {
 			return $this->respond($get);
 		}
-		return $this->fail($this->TABLE_RECORD_EMPTY);
+		return $this->fail($this->tableRecordEmpty);
 	}
 
 	/**
@@ -27,9 +33,10 @@ class Tags extends \App\Controllers\Fendy\BaseRestfulController
 				return $this->respondCreated($add);
 			}
 		}
-		return $this->fail([
+		return $this->respond([
+			'success' => false,
 			'error' => 'badRequest',
-			'field' => $this->validator->getErrors()
+			'messages' => $this->validator->getErrors()
 		]);
 	}
 
@@ -41,7 +48,7 @@ class Tags extends \App\Controllers\Fendy\BaseRestfulController
 		if ($get = $this->model->showData($id)) {
 			return $this->respond($get);
 		}
-		return $this->failNotFound($this->TABLE_RECORD_NOT_FOUND);
+		return $this->failNotFound($this->tableRecordNotFound);
 	}
 
 	/**
@@ -63,9 +70,10 @@ class Tags extends \App\Controllers\Fendy\BaseRestfulController
 			}
 			return $this->fail($this->requestCantProcessed);
 		}
-		return $this->fail([
+		return $this->respond([
+			'success' => false,
 			'error' => 'badRequest',
-			'field' => $this->validator->getErrors()
+			'messages' => $this->validator->getErrors()
 		]);
 	}
 
@@ -77,6 +85,6 @@ class Tags extends \App\Controllers\Fendy\BaseRestfulController
 		if ($del = $this->model->deleteData($id)) {
 			return $this->respondDeleted($del);
 		}
-		return $this->failNotFound($this->TABLE_RECORD_NOT_FOUND);
+		return $this->failNotFound($this->tableRecordNotFound);
 	}
 }

@@ -1,45 +1,9 @@
 <?php
 
-namespace App\Validation;
+namespace App\Validation\Admin;
 
 class News
 {
-  public $createCategory = [
-    'name' => [
-      'rules' => 'required',
-      'errors' => [
-        'required' => 'Masukkan nama kategori!'
-      ]
-    ],
-    'seo' => [
-      'rules' => 'required',
-      'errors' => [
-        'required' => 'Masukkan seo kategori!'
-      ]
-    ],
-    'active' => [
-      'rules' => 'required',
-      'errors' => [
-        'required' => 'Pilih kategori aktif!'
-      ]
-    ]
-  ];
-
-  public $createTag = [
-    'name' => [
-      'rules' => 'required',
-      'errors' => [
-        'required' => 'Masukkan nama tag!'
-      ]
-    ],
-    'seo' => [
-      'rules' => 'required',
-      'errors' => [
-        'required' => 'Masukkan seo tag'
-      ]
-    ]
-  ];
-
   public $createNews = [
     'category' => [
       'rules' => 'required',
@@ -81,6 +45,4 @@ class News
       ]
     ]
   ];
-
-  public $createComment = [];
 }

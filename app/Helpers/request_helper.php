@@ -30,7 +30,7 @@ function getQueryParamPagination(): object
   $perPage = Services::request()->getGet('perPage');
 
   if (!isset($page) || isset($page) && empty($page) || $page === null) { $page = (int) 1; }
-  if (!isset($perPage) || isset($perPage) && empty($perPage) || $perPage === null || $perPage > 100) { $perPage = (int) 5; }
+  if (!isset($perPage) || isset($perPage) && empty($perPage) || $perPage === null || $perPage > 100) { $perPage = (int) 10; }
 
   return (object) ['page' => (int) $page, 'perPage' => (int) $perPage];
 }

@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Controllers\Fendy\Berita;
+namespace App\Controllers\Fendy\Admin\Berita;
 
-class News extends \App\Controllers\Fendy\BaseRestfulController
+class News extends \App\Controllers\Fendy\BaseAdminController
 {
-	protected $modelName = 'App\Models\Fendy\Berita\News';
+  protected $modelName = 'App\Models\Fendy\Berita\News';
+  protected $rules;
 
-	private $user;
+  private $user;
 
-	public function __construct()
-	{
-		parent::__construct();
+  public function __construct()
+  {
+    parent::__construct();
 
-		$this->user = new \App\Libraries\Authorization();
-	}
+    $this->rules = new \App\Validation\Admin\News;
+    $this->user = new \App\Libraries\Authorization();
+  }
 
 	/**
 	 * Get all data news
@@ -37,9 +39,10 @@ class News extends \App\Controllers\Fendy\BaseRestfulController
 			}
 			return $this->fail($this->requestNotFound);
 		}
-		return $this->fail([
+		return $this->respond([
+			'success' => false,
 			'error' => 'invalidInput',
-			'field' => $this->validator->getErrors()
+			'messages' => $this->validator->getErrors()
 		]);
 	}
 
@@ -73,9 +76,10 @@ class News extends \App\Controllers\Fendy\BaseRestfulController
 			}
 			return $this->fail($this->requestNotFound);
 		}
-		return $this->fail([
+		return $this->respond([
+			'success' => false,
 			'error' => 'badRequest',
-			'field' => $this->validator->getErrors()
+			'messages' => $this->validator->getErrors()
 		]);
 	}
 

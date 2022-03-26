@@ -4,8 +4,15 @@ namespace App\Controllers\Fendy\Auth;
 
 use Exception;
 
-class Activation extends \App\Controllers\Fendy\BaseAccountController
+class Activation extends \App\Controllers\Fendy\BaseAuthController
 {
+  protected $rules;
+
+  public function __construct()
+  {
+    $this->rules = new \App\Validation\Auth\Activation;
+  }
+
   // Index activate account user
   public function index()
   {
@@ -37,7 +44,7 @@ class Activation extends \App\Controllers\Fendy\BaseAccountController
           ]);
         }
 
-        return $this->respond($this->authHasActivated);
+        return $this->respond($this->rules->accountHasActivated);
       }
 
       return $this->respond($this->requestNotFound);

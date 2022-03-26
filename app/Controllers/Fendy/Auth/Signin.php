@@ -2,8 +2,15 @@
 
 namespace App\Controllers\Fendy\Auth;
 
-class Signin extends \App\Controllers\Fendy\BaseAccountController
+class Signin extends \App\Controllers\Fendy\BaseAuthController
 {
+  protected $rules;
+
+  public function __construct()
+  {
+    $this->rules = new \App\Validation\Auth\Signin;
+  }
+
   // Index user signin
   public function index()
   {
@@ -45,16 +52,16 @@ class Signin extends \App\Controllers\Fendy\BaseAccountController
               ]);
             }
 
-            return $this->respond($this->authWrongPassword);
+            return $this->respond($this->rules->authWrongPassword);
           }
 
-          return $this->respond($this->authBlocked);
+          return $this->respond($this->rules->authBlocked);
         }
 
-        return $this->respond($this->authNotActivated);
+        return $this->respond($this->rules->authNotActivated);
       }
 
-      return $this->respond($this->authNotFound);
+      return $this->respond($this->rules->authNotFound);
     }
 
     return $this->respond([

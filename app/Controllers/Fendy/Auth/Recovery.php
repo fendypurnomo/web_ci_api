@@ -4,8 +4,15 @@ namespace App\Controllers\Fendy\Auth;
 
 use Exception;
 
-class Recovery extends \App\Controllers\Fendy\BaseAccountController
+class Recovery extends \App\Controllers\Fendy\BaseAuthController
 {
+  protected $rules;
+
+  public function __construct()
+  {
+    $this->rules = new \App\Validation\Auth\Recovery;
+  }
+
   // Index recovery account
   public function index()
   {
@@ -52,7 +59,7 @@ class Recovery extends \App\Controllers\Fendy\BaseAccountController
         'status' => 200,
         'isEmailVerified' => 'EMAIL_VERIFIED',
         'accessToken' => $accessToken,
-        'message' => 'Permintaan setel ulang kata sandi berhasil. Buka pesan baru email Anda dan masukkan kode OTP yang telah Kami kirim'
+        'messages' => 'Permintaan setel ulang kata sandi berhasil. Buka pesan baru email Anda dan masukkan kode OTP yang telah Kami kirim'
       ]);
     }
 
@@ -83,14 +90,14 @@ class Recovery extends \App\Controllers\Fendy\BaseAccountController
               'status' => 200,
               'isOTPVerified' => 'OTP_CODE_VERIFIED',
               'accessToken' => $accessToken,
-              'message' => 'Verifikasi Kode OTP berhasil'
+              'messages' => 'Verifikasi Kode OTP berhasil'
             ]);
           }
 
-          return $this->respond($this->authOtpInvalid);
+          return $this->respond($this->rules->authOtpInvalid);
         }
 
-        return $this->respond($this->authOtpFailed);
+        return $this->respond($this->rules->authOtpFailed);
       }
 
       return $this->respond($this->validator->getErrors());
@@ -114,14 +121,14 @@ class Recovery extends \App\Controllers\Fendy\BaseAccountController
             return $this->respondUpdated([
               'success' => true,
               'status' => 200,
-              'message' => 'Kata sandi berhasil di setel ulang'
+              'messages' => 'Kata sandi berhasil di setel ulang'
             ]);
           }
 
-          return $this->respond($this->createNewPasswordFailed);
+          return $this->respond($this->rules->createNewPasswordFailed);
         }
 
-        return $this->respond($this->createNewPasswordFailed);
+        return $this->respond($this->rules->createNewPasswordFailed);
       }
 
       return $this->respond($this->validator->getErrors());

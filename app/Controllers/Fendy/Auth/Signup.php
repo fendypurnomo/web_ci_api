@@ -2,8 +2,15 @@
 
 namespace App\Controllers\Fendy\Auth;
 
-class Signup extends \App\Controllers\Fendy\BaseAccountController
+class Signup extends \App\Controllers\Fendy\BaseAuthController
 {
+  protected $rules;
+
+  public function __construct()
+  {
+    $this->rules = new \App\Validation\Auth\Signup;
+  }
+
   // Index user signup
   public function index()
   {
@@ -43,13 +50,14 @@ class Signup extends \App\Controllers\Fendy\BaseAccountController
         'success' => true,
         'status' => 200,
         'code' => $code,
-        'message' => 'Pendaftaran akun berhasil. Buka pesan baru email Anda untuk aktivasi akun.'
+        'messages' => 'Pendaftaran akun berhasil. Buka pesan baru email Anda untuk aktivasi akun.'
       ]);
     }
 
-    return $this->fail([
+    return $this->respond([
+      'success' => false,
       'error' => 'errorInputField',
-      'field' => $this->validator->getErrors()
+      'messages' => $this->validator->getErrors()
     ]);
   }
 }

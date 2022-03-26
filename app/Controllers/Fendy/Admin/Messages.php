@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers\Fendy;
+namespace App\Controllers\Fendy\Admin;
 
-class Messages extends \App\Controllers\Fendy\BaseRestfulController
+class Messages extends \App\Controllers\Fendy\BaseAdminController
 {
   protected $model;
   protected $rules;
@@ -12,7 +12,7 @@ class Messages extends \App\Controllers\Fendy\BaseRestfulController
     parent::__construct();
 
     $this->model = new \App\Models\Fendy\Messages;
-    $this->rules = new \App\Validation\Messages;
+    $this->rules = new \App\Validation\Admin\Messages;
   }
 
   // Get all messages

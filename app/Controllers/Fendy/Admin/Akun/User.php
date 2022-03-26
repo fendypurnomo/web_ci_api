@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Controllers\Fendy\Akun;
+namespace App\Controllers\Fendy\Admin\Akun;
 
 use Exception;
 
-class User extends \App\Controllers\Fendy\BaseAccountController
+class User extends \App\Controllers\Fendy\BaseAdminController
 {
+  protected $rules;
   protected $user;
 
   public function __construct()
   {
     parent::__construct();
 
+    $this->rules = new \App\Validation\Admin\User;
     $this->user = new \App\Libraries\Authorization();
   }
 
@@ -81,7 +83,7 @@ class User extends \App\Controllers\Fendy\BaseAccountController
           return $this->respond([
             'success' => false,
             'error' => 'usernameNotAvailable',
-            'message' => 'Nama pengguna tidak tersedia!'
+            'messages' => 'Nama pengguna tidak tersedia!'
           ]);
         }
         $data = array_merge($data, ['pengguna_nama' => $put->username]);
@@ -92,14 +94,14 @@ class User extends \App\Controllers\Fendy\BaseAccountController
       return $this->respondUpdated([
         'success' => true,
         'status' => 200,
-        'message' => 'Informasi akun Anda berhasil diperbaharui.'
+        'messages' => 'Informasi akun Anda berhasil diperbaharui.'
       ]);
     }
 
     return $this->respond([
       'success' => false,
       'error' => 'badRequest',
-      'message' => $this->validator->getErrors()
+      'messages' => $this->validator->getErrors()
     ]);
   }
 
@@ -117,20 +119,20 @@ class User extends \App\Controllers\Fendy\BaseAccountController
           return $this->respond([
             'success' => true,
             'status' => 200,
-            'message' => 'Kata sandi berhasil diperbarui'
+            'messages' => 'Kata sandi berhasil diperbarui'
           ]);
         }
 
-        return $this->respond($this->accountNewEqualOldPassword);
+        return $this->respond($this->rules->accountNewEqualOldPassword);
       }
 
-      return $this->respond($this->accountOldPasswordInvalid);
+      return $this->respond($this->rules->accountOldPasswordInvalid);
     }
 
     return $this->respond([
       'success' => false,
       'error' => 'badRequest',
-      'message' => $this->validator->getErrors()
+      'messages' => $this->validator->getErrors()
     ]);
   }
 
@@ -157,7 +159,7 @@ class User extends \App\Controllers\Fendy\BaseAccountController
           return $this->respond([
             'success' => true,
             'status' => 200,
-            'message' => 'Unggah foto profil berhasil'
+            'messages' => 'Unggah foto profil berhasil'
           ]);
         }
 
@@ -170,7 +172,7 @@ class User extends \App\Controllers\Fendy\BaseAccountController
     return $this->respond([
       'success' => false,
       'error' => 'badRequest',
-      'messsage' => $this->validator->getErrors()
+      'messsages' => $this->validator->getErrors()
     ]);
   }
 }

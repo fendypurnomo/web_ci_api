@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Fendy\Akun;
+namespace App\Controllers\Fendy\Admin\Akun;
 
 class Photoprofile extends \CodeIgniter\Controller
 {

@@ -1,29 +1,29 @@
 <?php
 
-namespace App\Controllers\Fendy\Wilayah;
+namespace App\Controllers\Fendy\Admin\Wilayah;
 
-class Provinsi extends \App\Controllers\Fendy\BaseRestfulController
+class Kelurahandesa extends \App\Controllers\Fendy\BaseAdminController
 {
-	protected $modelName = 'App\Models\Fendy\Wilayah\Provinsi';
+	protected $modelName = 'App\Models\Fendy\Wilayah\KelurahanDesa';
 
 	/**
-	 * Get all data provinsi
+	 * Get all data kelurahan desa
 	 */
 	public function index()
 	{
 		if ($get = $this->model->getAllData(getQueryParamPagination())) {
 			return $this->respond($get);
 		}
-		return $this->failNotFound('Tidak ada data Wilayah Provinsi!');
+		return $this->failNotFound('Tidak ada data Wilayah Kelurahan/Desa!');
 	}
 
 	/**
-	 * Create single data provinsi
+	 * Create single data kelurahan desa
 	 */
 	public function create()
 	{
-		if ($this->validate($this->rules->provinsi)) {
-			if ($add = $this->model->createData(getRequest())) {
+		if ($this->validate($this->rules->kelurahanDesa)) {
+			if ($add = $this->model->insert(getRequest())) {
 				return $this->respondCreated($add);
 			}
 			return $this->fail($this->requestCantProcessed);
@@ -34,18 +34,18 @@ class Provinsi extends \App\Controllers\Fendy\BaseRestfulController
 	}
 
 	/**
-	 * Get single data provinsi
+	 * Get single data kelurahan desa
 	 */
 	public function show($id = null)
 	{
 		if ($get = $this->model->showData($id)) {
 			return $this->respond($get);
 		}
-		return $this->failNotFound('Data Wilayah Provinsi tidak dapat ditemukan!');
+		return $this->failNotFound('Data Wilayah Kelurahan/Desa tidak dapat ditemukan!');
 	}
 
 	/**
-	 * Get single data provinsi
+	 * Get single data keluarahan desa
 	 */
 	public function edit($id = null)
 	{
@@ -53,11 +53,11 @@ class Provinsi extends \App\Controllers\Fendy\BaseRestfulController
 	}
 
 	/**
-	 * Update single data provinsi
+	 * Update single data kelurahan desa
 	 */
 	public function update($id = null)
 	{
-		if ($this->validate($this->rules->provinsi)) {
+		if ($this->validate($this->rules->kelurahanDesa)) {
 			if ($put = $this->model->updateData($id, getRequest())) {
 				return $this->respondUpdated($put);
 			}
@@ -69,13 +69,13 @@ class Provinsi extends \App\Controllers\Fendy\BaseRestfulController
 	}
 
 	/**
-	 * Delete single data provinsi
+	 * Delete single data kelurahan desa
 	 */
 	public function delete($id = null)
 	{
 		if ($del = $this->model->deleteData($id)) {
 			return $this->respondDeleted($del);
 		}
-		return $this->failNotFound('Data Wilayah Provinsi tidak dapat ditemukan!');
+		return $this->failNotFound('Data Wilayah Kelurahan/Desa tidak dapat ditemukan!');
 	}
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers\Fendy\Berita;
+namespace App\Controllers\Fendy\Admin\Berita;
 
-class Comments extends \App\Controllers\Fendy\BaseRestfulController
+class Comments extends \App\Controllers\Fendy\BaseAdminController
 {
 	protected $modelName = 'App\Models\Fendy\Berita\Comments';
 

@@ -43,28 +43,35 @@ $routes->group('/', function ($routes) {
   /* Fendy Web API Routes */
   $routes->group('fendy', function ($routes) {
     // Akun Routes
-    $routes->add('accounts', 'Fendy\Akun\User');
+    $routes->add('accounts', 'Fendy\Admin\Akun\User');
 
     // Berita Routes
-    $routes->resource('categories', ['controller' => 'Fendy\Berita\Categories']);
-    $routes->resource('tags', ['controller' => 'Fendy\Berita\Tags']);
-    $routes->resource('news', ['controller' => 'Fendy\Berita\News']);
-    $routes->resource('comments', ['controller' => 'Fendy\Berita\Comments']);
-    $routes->resource('messages', ['controller' => 'Fendy\Messages']);
+    $routes->resource('categories', ['controller' => 'Fendy\Admin\Berita\Categories']);
+    $routes->resource('tags', ['controller' => 'Fendy\Admin\Berita\Tags']);
+    $routes->resource('news', ['controller' => 'Fendy\Admin\Berita\News']);
+    $routes->resource('comments', ['controller' => 'Fendy\Admin\Berita\Comments']);
+    $routes->resource('messages', ['controller' => 'Fendy\Admin\Messages']);
 
     // Wilayah Routes
     $routes->group('wilayah', function ($routes) {
-      $routes->resource('provinsi', ['controller' => 'Fendy\Wilayah\Provinsi']);
-      $routes->resource('kabupatenKota', ['controller' => 'Fendy\Wilayah\Kabupatenkota']);
-      $routes->resource('kecamatan', ['controller' => 'Fendy\Wilayah\Kecamatan']);
-      $routes->resource('kelurahanDesa', ['controller' => 'Fendy\Wilayah\Kelurahandesa']);
+      $routes->resource('provinsi', ['controller' => 'Fendy\Admin\Wilayah\Provinsi']);
+      $routes->resource('kabupatenKota', ['controller' => 'Fendy\Admin\Wilayah\Kabupatenkota']);
+      $routes->resource('kecamatan', ['controller' => 'Fendy\Admin\Wilayah\Kecamatan']);
+      $routes->resource('kelurahanDesa', ['controller' => 'Fendy\Admin\Wilayah\Kelurahandesa']);
     });
   });
 
   $routes->group('blog', function ($routes) {
-    $routes->get('categories', 'Blog::categories');
-    $routes->get('tags', 'Blog::tags');
-    $routes->get('news', 'Blog::news');
+    $routes->get('categories', 'Fendy\Blog\Blog::categories');
+    $routes->get('tags', 'Fendy\Blog\Blog::tags');
+    $routes->get('news', 'Fendy\Blog\Blog::news');
+
+    $routes->group('wilayah', function ($routes) {
+      $routes->get('provinsi', 'Fendy\Blog\Blog::provinsi');
+      $routes->get('kabupatenKota', 'Fendy\Blog\Blog::kabupatenKota');
+      $routes->get('kecamatan', 'Fendy\Blog\Blog::kecamatan');
+      $routes->get('kelurahanDesa', 'Fendy\Blog\Blog::kelurahanDesa');
+    });
   });
 
   /* Bezkoder Web API Routes */
