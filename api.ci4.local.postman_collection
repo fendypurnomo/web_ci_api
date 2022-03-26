@@ -295,7 +295,7 @@
 							"response": []
 						},
 						{
-							"name": "Change Password",
+							"name": "Update Password",
 							"request": {
 								"auth": {
 									"type": "bearer"
@@ -439,6 +439,73 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "Categories - Create",
+									"request": {
+										"auth": {
+											"type": "bearer"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "\r\n{\r\n  \"name\": \"\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://api.ci4.local/fendy/categories",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"fendy",
+												"categories"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Categories - Update",
+									"request": {
+										"auth": {
+											"type": "bearer"
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "\r\n{\r\n  \"name\": \"\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://api.ci4.local/fendy/categories/1",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"fendy",
+												"categories",
+												"1"
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						},
@@ -487,6 +554,73 @@
 										},
 										"method": "GET",
 										"header": [],
+										"url": {
+											"raw": "https://api.ci4.local/fendy/tags/1",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"fendy",
+												"tags",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Tags - Create",
+									"request": {
+										"auth": {
+											"type": "bearer"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "\r\n{\r\n  \"name\": \"\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://api.ci4.local/fendy/tags",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"fendy",
+												"tags"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Tags - Update",
+									"request": {
+										"auth": {
+											"type": "bearer"
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "\r\n{\r\n  \"name\": \"\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
 											"raw": "https://api.ci4.local/fendy/tags/1",
 											"protocol": "https",
@@ -567,6 +701,73 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "News - Create",
+									"request": {
+										"auth": {
+											"type": "bearer"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "\r\n{\r\n  \"\": \"\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://api.ci4.local/fendy/news",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"fendy",
+												"news"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "News - Update",
+									"request": {
+										"auth": {
+											"type": "bearer"
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "\r\n{\r\n  \"\": \"\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://api.ci4.local/fendy/news/1",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"fendy",
+												"news",
+												"1"
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						},
@@ -631,6 +832,39 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "Messages - Get Single Copy",
+									"request": {
+										"auth": {
+											"type": "bearer"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "\r\n{\r\n  \"\": \"\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://api.ci4.local/fendy/messages",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"fendy",
+												"messages"
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						},
@@ -691,6 +925,39 @@
 												"fendy",
 												"comments",
 												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Comments - Create",
+									"request": {
+										"auth": {
+											"type": "bearer"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "\r\n{\r\n  \"\": \"\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://api.ci4.local/fendy/comments",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"fendy",
+												"comments"
 											]
 										}
 									},
