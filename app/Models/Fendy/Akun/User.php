@@ -43,4 +43,12 @@ class User extends \CodeIgniter\Model
 
     return $array;
   }
+
+  public function checkUsernameAvailability($username)
+  {
+    if ($this->where('pengguna_nama', $username)->first()) {
+      return false;
+    }
+    return true;
+  }
 }

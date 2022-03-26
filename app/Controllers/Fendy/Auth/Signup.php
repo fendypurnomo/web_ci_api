@@ -24,10 +24,19 @@ class Signup extends \App\Controllers\Fendy\BaseAuthController
   {
     if ($this->validate($this->rules->signup)) {
       $post = getRequest();
-      $numb = random_string('numeric', 7);
+      $username = username($post->firstname . $post->lastname);
+
+      if ($this->model->checkUsernameAvailability($username)) {
+        $username = $username;
+      }
+      else
+      {
+        $numb = random_string('numeric', 7);
+        $username = $username . '.' . $numb;
+      }
 
       $data = [
-        'pengguna_nama' => username($post->firstname . $post->lastname) . '.' . $numb,
+        'pengguna_nama' => $username,
         'pengguna_nama_depan' => htmlspecialchars($post->firstname, ENT_QUOTES),
         'pengguna_nama_belakang' => htmlspecialchars($post->lastname, ENT_QUOTES),
         'pengguna_email' => $post->email,
@@ -50,7 +59,6 @@ class Signup extends \App\Controllers\Fendy\BaseAuthController
 
       return $this->respondCreated([
         'success' => true,
-        'code' => $code,
         'messages' => 'Pendaftaran akun berhasil. Buka pesan baru email Anda untuk aktivasi akun.'
       ]);
     }
