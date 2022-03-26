@@ -8,7 +8,6 @@ namespace Config;
  * for the site. If needed, they can be overridden on a page-by-page basis.
  *
  * Suggested reference for explanations:
- *
  * @see https://www.html5rocks.com/en/tutorials/security/content-security-policy/
 */
 class ContentSecurityPolicy extends \CodeIgniter\Config\BaseConfig

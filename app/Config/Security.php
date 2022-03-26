@@ -5,9 +5,9 @@ namespace Config;
 class Security extends \CodeIgniter\Config\BaseConfig
 {
   /**
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * CSRF Token Name
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * Token name for Cross Site Request Forgery protection cookie.
    *
    * @var string
@@ -15,9 +15,9 @@ class Security extends \CodeIgniter\Config\BaseConfig
   public $tokenName = 'csrf_test_name';
 
   /**
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * CSRF Header Name
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * Token name for Cross Site Request Forgery protection cookie.
    *
    * @var string
@@ -25,9 +25,9 @@ class Security extends \CodeIgniter\Config\BaseConfig
   public $headerName = 'X-CSRF-TOKEN';
 
   /**
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * CSRF Cookie Name
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * Cookie name for Cross Site Request Forgery protection cookie.
    *
    * @var string
@@ -35,9 +35,9 @@ class Security extends \CodeIgniter\Config\BaseConfig
   public $cookieName = 'csrf_cookie_name';
 
   /**
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * CSRF Expires
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * Expiration time for Cross Site Request Forgery protection cookie.
    *
    * Defaults to two hours (in seconds).
@@ -47,9 +47,9 @@ class Security extends \CodeIgniter\Config\BaseConfig
   public $expires = 7200;
 
   /**
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * CSRF Regenerate
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * Regenerate CSRF Token on every request.
    *
    * @var boolean
@@ -57,9 +57,9 @@ class Security extends \CodeIgniter\Config\BaseConfig
   public $regenerate = true;
 
   /**
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * CSRF Redirect
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * Redirect to previous page with error on failure.
    *
    * @var boolean
@@ -67,9 +67,9 @@ class Security extends \CodeIgniter\Config\BaseConfig
   public $redirect = true;
 
   /**
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * CSRF SameSite
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    * Setting for CSRF SameSite cookie token.
    *
    * Allowed values are: None - Lax - Strict - ''.

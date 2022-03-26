@@ -28,7 +28,7 @@ class Signin extends \App\Controllers\Fendy\BaseAuthController
           if ($row->pengguna_blokir == 0) {
             if (password_verify($post->password, $row->pengguna_sandi)) {
 
-              $model = new \App\Controllers\Fendy\Akun\Photoprofile($row->pengguna_id);
+              $model = new \App\Controllers\Fendy\Admin\Akun\Photoprofile($row->pengguna_id);
               $photo = $model->getCurrentPhotoProfile();
 
               $accessToken = createToken([

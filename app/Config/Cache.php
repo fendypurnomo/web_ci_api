@@ -42,7 +42,6 @@ class Cache extends \CodeIgniter\Config\BaseConfig
    * system.
    *
    * @var string
-   *
    * @deprecated Use the driver-specific variant under $file
   */
   public $storePath = WRITEPATH . 'cache/';
@@ -54,12 +53,12 @@ class Cache extends \CodeIgniter\Config\BaseConfig
    * Whether to take the URL query string into consideration when generating
    * output cache files. Valid options are:
    *
-   * 	false				= Disabled
-   * 	true				= Enabled, take all query parameters into account.
-   * 								Please be aware that this may result in numerous cache
-   * 								files generated for the same page over and over again.
-   * 	array('q')	= Enabled, but only take into account the specified list
-   * 								of query parameters.
+   * 	false      = Disabled
+   * 	true       = Enabled, take all query parameters into account.
+   *               Please be aware that this may result in numerous cache
+   *               files generated for the same page over and over again.
+   * 	array('q') = Enabled, but only take into account the specified list
+   *               of query parameters.
    *
    * @var boolean|string[]
   */
@@ -100,8 +99,8 @@ class Cache extends \CodeIgniter\Config\BaseConfig
    * @var array<string, string|int|null>
   */
   public $file = [
-    'storePath'	=> WRITEPATH . 'cache/',
-    'mode'			=> 0640
+    'storePath' => WRITEPATH . 'cache/',
+    'mode' => 0640
   ];
 
   /**
@@ -116,10 +115,10 @@ class Cache extends \CodeIgniter\Config\BaseConfig
    * @var array<string, string|int|boolean>
   */
   public $memcached = [
-    'host'   => '127.0.0.1',
-    'port'   => 11211,
+    'host' => '127.0.0.1',
+    'port' => 11211,
     'weight' => 1,
-    'raw'    => false
+    'raw' => false
   ];
 
   /**
@@ -132,10 +131,10 @@ class Cache extends \CodeIgniter\Config\BaseConfig
    * @var array<string, string|int|null>
   */
   public $redis = [
-    'host'     => '127.0.0.1',
+    'host' => '127.0.0.1',
     'password' => null,
-    'port'     => 6379,
-    'timeout'  => 0,
+    'port' => 6379,
+    'timeout' => 0,
     'database' => 0
   ];
 
@@ -149,11 +148,11 @@ class Cache extends \CodeIgniter\Config\BaseConfig
    * @var array<string, string>
   */
   public $validHandlers = [
-    'dummy'     => DummyHandler::class,
-    'file'      => FileHandler::class,
+    'dummy' => DummyHandler::class,
+    'file' => FileHandler::class,
     'memcached' => MemcachedHandler::class,
-    'predis'    => PredisHandler::class,
-    'redis'     => RedisHandler::class,
-    'wincache'  => WincacheHandler::class
+    'predis' => PredisHandler::class,
+    'redis' => RedisHandler::class,
+    'wincache' => WincacheHandler::class
   ];
 }

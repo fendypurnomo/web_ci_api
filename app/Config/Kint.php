@@ -8,7 +8,6 @@ use Kint\Renderer\Renderer;
  * --------------------------------------------------------------------------
  * Kint
  * --------------------------------------------------------------------------
- *
  * We use Kint's `RichRenderer` and `CLIRenderer`. This area contains options
  * that you can set to customize how Kint works for you.
  *
@@ -21,29 +20,29 @@ class Kint extends \CodeIgniter\Config\BaseConfig
   | Global Settings
   |--------------------------------------------------------------------------
   */
-  public $plugins           = null;
-  public $maxDepth          = 6;
+  public $plugins = null;
+  public $maxDepth = 6;
   public $displayCalledFrom = true;
-  public $expanded          = false;
+  public $expanded = false;
 
   /*
   |--------------------------------------------------------------------------
   | RichRenderer Settings
   |--------------------------------------------------------------------------
   */
-  public $richTheme         = 'aante-light.css';
-  public $richFolder        = false;
-  public $richSort          = Renderer::SORT_FULL;
+  public $richTheme = 'aante-light.css';
+  public $richFolder = false;
+  public $richSort = Renderer::SORT_FULL;
   public $richObjectPlugins = null;
-  public $richTabPlugins    = null;
+  public $richTabPlugins = null;
 
   /*
   |--------------------------------------------------------------------------
   | CLI Settings
   |--------------------------------------------------------------------------
   */
-  public $cliColors      = true;
-  public $cliForceUTF8   = false;
+  public $cliColors = true;
+  public $cliForceUTF8 = false;
   public $cliDetectWidth = true;
-  public $cliMinWidth    = 40;
+  public $cliMinWidth = 40;
 }

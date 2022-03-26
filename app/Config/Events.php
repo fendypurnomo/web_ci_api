@@ -9,7 +9,6 @@ use CodeIgniter\Exceptions\FrameworkException;
  * --------------------------------------------------------------------
  * Application Events
  * --------------------------------------------------------------------
- *
  * Events allow you to tap into the execution of the program without
  * modifying or extending core files. This file provides a central
  * location to define your events, though they can always be added
@@ -20,7 +19,7 @@ use CodeIgniter\Exceptions\FrameworkException;
  * Closures, that will be executed when the event is triggered.
  *
  * Example:
- * 	Events::on('create', [$myInstance, 'myMethod']);
+ *   Events::on('create', [$myInstance, 'myMethod']);
 */
 Events::on('pre_system', function () {
   if (ENVIRONMENT !== 'testing') {

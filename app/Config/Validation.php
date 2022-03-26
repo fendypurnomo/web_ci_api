@@ -23,7 +23,8 @@ class Validation
     Rules::class,
     FormatRules::class,
     FileRules::class,
-    CreditCardRules::class
+    CreditCardRules::class,
+    \App\Validation\CustomValidation::class
   ];
 
   /**
@@ -33,7 +34,7 @@ class Validation
    * @var array<string, string>
   */
   public $templates = [
-    'list'   => 'CodeIgniter\Validation\Views\list',
+    'list' => 'CodeIgniter\Validation\Views\list',
     'single' => 'CodeIgniter\Validation\Views\single'
   ];
 

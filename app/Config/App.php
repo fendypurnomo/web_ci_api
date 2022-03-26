@@ -8,10 +8,8 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Base Site URL
    * --------------------------------------------------------------------------
-   *
    * URL to your CodeIgniter root. Typically this will be your base URL,
    * WITH a trailing slash:
-   *
    * 		http://example.com/
    *
    * If this is not set then CodeIgniter will try guess the protocol, domain
@@ -27,7 +25,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Index File
    * --------------------------------------------------------------------------
-   *
    * Typically this will be your index.php file, unless you've renamed it to
    * something else. If you are using mod_rewrite to remove the page set this
    * variable so that it is blank.
@@ -40,7 +37,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * URI PROTOCOL
    * --------------------------------------------------------------------------
-   *
    * This item determines which getServer global should be used to retrieve the
    * URI string.  The default setting of 'REQUEST_URI' works for most servers.
    * If your links do not seem to work, try one of the other delicious flavors:
@@ -59,7 +55,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Default Locale
    * --------------------------------------------------------------------------
-   *
    * The Locale roughly represents the language and location that your visitor
    * is viewing the site from. It affects the language strings and other
    * strings (like currency markers, numbers, etc), that your program
@@ -73,7 +68,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Negotiate Locale
    * --------------------------------------------------------------------------
-   *
    * If true, the current Request object will automatically determine the
    * language to use based on the value of the Accept-Language header.
    *
@@ -87,7 +81,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Supported Locales
    * --------------------------------------------------------------------------
-   *
    * If $negotiateLocale is true, this array lists the locales supported
    * by the application in descending order of priority. If no match is
    * found, the first locale will be used.
@@ -100,7 +93,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Application Timezone
    * --------------------------------------------------------------------------
-   *
    * The default timezone that will be used in your application to display
    * dates with the date helper, and can be retrieved through app_timezone()
    *
@@ -112,7 +104,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Default Character Set
    * --------------------------------------------------------------------------
-   *
    * This determines which character set is used by default in various methods
    * that require a character set to be provided.
    *
@@ -126,7 +117,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * URI PROTOCOL
    * --------------------------------------------------------------------------
-   *
    * If true, this will force every request made to this application to be
    * made via a secure connection (HTTPS). If the incoming request is not
    * secure, the user will be redirected to a secure version of the page
@@ -140,7 +130,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Session Driver
    * --------------------------------------------------------------------------
-   *
    * The session storage driver to use:
    * - `CodeIgniter\Session\Handlers\FileHandler`
    * - `CodeIgniter\Session\Handlers\DatabaseHandler`
@@ -155,7 +144,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Session Cookie Name
    * --------------------------------------------------------------------------
-   *
    * The session cookie name, must contain only [0-9a-z_-] characters
    *
    * @var string
@@ -166,7 +154,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Session Expiration
    * --------------------------------------------------------------------------
-   *
    * The number of SECONDS you want the session to last.
    * Setting to 0 (zero) means expire when the browser is closed.
    *
@@ -178,7 +165,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Session Save Path
    * --------------------------------------------------------------------------
-   *
    * The location to save sessions to and is driver dependent.
    *
    * For the 'files' driver, it's a path to a writable directory.
@@ -197,7 +183,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Session Match IP
    * --------------------------------------------------------------------------
-   *
    * Whether to match the user's IP address when reading the session data.
    *
    * WARNING: If you're using the database driver, don't forget to update
@@ -211,7 +196,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Session Time to Update
    * --------------------------------------------------------------------------
-   *
    * How many seconds between CI regenerating the session ID.
    *
    * @var integer
@@ -222,7 +206,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Session Regenerate Destroy
    * --------------------------------------------------------------------------
-   *
    * Whether to destroy session data associated with the old session ID
    * when auto-regenerating the session ID. When set to FALSE, the data
    * will be later deleted by the garbage collector.
@@ -235,7 +218,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Cookie Prefix
    * --------------------------------------------------------------------------
-   *
    * Set a cookie name prefix if you need to avoid collisions.
    *
    * @var string
@@ -248,7 +230,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Cookie Domain
    * --------------------------------------------------------------------------
-   *
    * Set to `.your-domain.com` for site-wide cookies.
    *
    * @var string
@@ -261,7 +242,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Cookie Path
    * --------------------------------------------------------------------------
-   *
    * Typically will be a forward slash.
    *
    * @var string
@@ -274,7 +254,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Cookie Secure
    * --------------------------------------------------------------------------
-   *
    * Cookie will only be set if a secure HTTPS connection exists.
    *
    * @var boolean
@@ -287,7 +266,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Cookie HttpOnly
    * --------------------------------------------------------------------------
-   *
    * Cookie will only be accessible via HTTP(S) (no JavaScript).
    *
    * @var boolean
@@ -300,7 +278,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Cookie SameSite
    * --------------------------------------------------------------------------
-   *
    * Configure cookie SameSite setting. Allowed values are:
    * - None
    * - Lax
@@ -317,7 +294,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * will be set on cookies. If set to `None`, `$cookieSecure` must also be set.
    *
    * @var string
-   *
    * @deprecated use Config\Cookie::$samesite property instead.
   */
   public $cookieSameSite = 'Lax';
@@ -326,7 +302,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Reverse Proxy IPs
    * --------------------------------------------------------------------------
-   *
    * If your server is behind a reverse proxy, you must whitelist the proxy
    * IP addresses from which CodeIgniter should trust headers such as
    * HTTP_X_FORWARDED_FOR and HTTP_CLIENT_IP in order to properly identify
@@ -346,11 +321,9 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * CSRF Token Name
    * --------------------------------------------------------------------------
-   *
    * The token name.
    *
    * @deprecated Use `Config\Security` $tokenName property instead of using this property.
-   *
    * @var string
   */
   public $CSRFTokenName = 'csrf_test_name';
@@ -359,11 +332,9 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * CSRF Header Name
    * --------------------------------------------------------------------------
-   *
    * The header name.
    *
    * @deprecated Use `Config\Security` $headerName property instead of using this property.
-   *
    * @var string
   */
   public $CSRFHeaderName = 'X-CSRF-TOKEN';
@@ -372,11 +343,9 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * CSRF Cookie Name
    * --------------------------------------------------------------------------
-   *
    * The cookie name.
    *
    * @deprecated Use `Config\Security` $cookieName property instead of using this property.
-   *
    * @var string
   */
   public $CSRFCookieName = 'csrf_cookie_name';
@@ -385,11 +354,9 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * CSRF Expire
    * --------------------------------------------------------------------------
-   *
    * The number in seconds the token should expire.
    *
    * @deprecated Use `Config\Security` $expire property instead of using this property.
-   *
    * @var integer
   */
   public $CSRFExpire = 7200;
@@ -398,11 +365,9 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * CSRF Regenerate
    * --------------------------------------------------------------------------
-   *
    * Regenerate token on every submission?
    *
    * @deprecated Use `Config\Security` $regenerate property instead of using this property.
-   *
    * @var boolean
   */
   public $CSRFRegenerate = true;
@@ -411,11 +376,9 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * CSRF Redirect
    * --------------------------------------------------------------------------
-   *
    * Redirect to previous page with error on failure?
    *
    * @deprecated Use `Config\Security` $redirect property instead of using this property.
-   *
    * @var boolean
   */
   public $CSRFRedirect = true;
@@ -424,7 +387,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * CSRF SameSite
    * --------------------------------------------------------------------------
-   *
    * Setting for CSRF SameSite cookie token. Allowed values are:
    * - None
    * - Lax
@@ -436,7 +398,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * @see https://portswigger.net/web-security/csrf/samesite-cookies
    *
    * @deprecated Use `Config\Security` $samesite property instead of using this property.
-   *
    * @var string
   */
   public $CSRFSameSite = 'Lax';
@@ -445,7 +406,6 @@ class App extends \CodeIgniter\Config\BaseConfig
    * --------------------------------------------------------------------------
    * Content Security Policy
    * --------------------------------------------------------------------------
-   *
    * Enables the Response's Content Secure Policy to restrict the sources that
    * can be used for images, scripts, CSS files, audio, video, etc. If enabled,
    * the Response object will populate default values for the policy from the

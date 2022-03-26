@@ -8,6 +8,8 @@ class Signup extends \App\Controllers\Fendy\BaseAuthController
 
   public function __construct()
   {
+    parent::__construct();
+
     $this->rules = new \App\Validation\Auth\Signup;
   }
 
@@ -25,9 +27,9 @@ class Signup extends \App\Controllers\Fendy\BaseAuthController
       $numb = random_string('numeric', 7);
 
       $data = [
-        'pengguna_nama' => strtolower($post->firstname . $post->lastname) . '.' . $numb,
-        'pengguna_nama_depan' => $post->firstname,
-        'pengguna_nama_belakang' => $post->lastname,
+        'pengguna_nama' => username($post->firstname . $post->lastname) . '.' . $numb,
+        'pengguna_nama_depan' => htmlspecialchars($post->firstname, ENT_QUOTES),
+        'pengguna_nama_belakang' => htmlspecialchars($post->lastname, ENT_QUOTES),
         'pengguna_email' => $post->email,
         'pengguna_sandi' => $post->password,
         'pengguna_jenis_kelamin' => $post->gender
@@ -48,7 +50,6 @@ class Signup extends \App\Controllers\Fendy\BaseAuthController
 
       return $this->respondCreated([
         'success' => true,
-        'status' => 200,
         'code' => $code,
         'messages' => 'Pendaftaran akun berhasil. Buka pesan baru email Anda untuk aktivasi akun.'
       ]);

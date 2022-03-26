@@ -38,8 +38,8 @@ class Format extends \CodeIgniter\Config\BaseConfig
   */
   public $formatters = [
     'application/json' => 'CodeIgniter\Format\JSONFormatter',
-    'application/xml'  => 'CodeIgniter\Format\XMLFormatter',
-    'text/xml'         => 'CodeIgniter\Format\XMLFormatter'
+    'application/xml' => 'CodeIgniter\Format\XMLFormatter',
+    'text/xml' => 'CodeIgniter\Format\XMLFormatter'
   ];
 
   /**
@@ -53,8 +53,8 @@ class Format extends \CodeIgniter\Config\BaseConfig
   */
   public $formatterOptions = [
     'application/json' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
-    'application/xml'  => 0,
-    'text/xml'         => 0
+    'application/xml' => 0,
+    'text/xml' => 0
   ];
 
   /**

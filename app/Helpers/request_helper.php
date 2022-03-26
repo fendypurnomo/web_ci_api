@@ -9,7 +9,10 @@ function getRequest(): object
 
   if (empty($input)) {
     $input = $request->getPost();
-    if (empty($input)) { $input = $request->getRawInput(); }
+
+    if (empty($input)) {
+      $input = $request->getRawInput();
+    }
   }
   return (object) $input;
 }
