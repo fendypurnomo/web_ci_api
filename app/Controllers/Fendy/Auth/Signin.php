@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Fendy\Akun\Auth;
+namespace App\Controllers\Fendy\Auth;
 
 class Signin extends \App\Controllers\Fendy\BaseAccountController
 {

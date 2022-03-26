@@ -25,7 +25,6 @@ function getAuthorization(): string
   $authorization = \Config\Services::request()->getServer('REDIRECT_HTTP_AUTHORIZATION');
 
   if (is_null($authorization)) { throw new Exception('Permintaan Anda tidak dapat kami proses. Anda tidak memiliki akses token yang valid!'); }
-
   return explode(' ', $authorization)[1];
 }
 
@@ -40,6 +39,5 @@ function checkUserToken(int $id)
   $query = $model->find($id);
 
   if (!$query) throw new Exception('Maaf, kami tidak dapat menemukan akun Anda!');
-
   return $query;
 }

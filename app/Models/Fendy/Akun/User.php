@@ -4,7 +4,7 @@ namespace App\Models\Fendy\Akun;
 
 class User extends \CodeIgniter\Model
 {
-  protected $table      = 'tabel_pengguna';
+  protected $table = 'tabel_pengguna';
   protected $primaryKey = 'pengguna_id';
   protected $returnType = 'object';
 
@@ -22,10 +22,10 @@ class User extends \CodeIgniter\Model
   ];
 
   protected $useTimestamps = true;
-  protected $createdField  = 'pengguna_tgl_dibuat';
-  protected $updatedField  = 'pengguna_tgl_diperbaharui';
-  protected $beforeInsert  = ['beforeInsertUpdate'];
-  protected $beforeUpdate  = ['beforeInsertUpdate'];
+  protected $createdField = 'pengguna_tgl_dibuat';
+  protected $updatedField = 'pengguna_tgl_diperbaharui';
+  protected $beforeInsert = ['beforeInsertUpdate'];
+  protected $beforeUpdate = ['beforeInsertUpdate'];
 
   protected function beforeInsertUpdate(array $array): array
   {

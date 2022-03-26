@@ -4,39 +4,29 @@ namespace App\Models\Fendy\Berita;
 
 class Comments extends \CodeIgniter\Model
 {
-  protected $DBGroup    = 'blog';
-  protected $table      = 'komentar';
+  protected $DBGroup = 'blog';
+  protected $table = 'komentar';
   protected $primaryKey = 'id_komentar';
   protected $returnType = 'object';
-
-  protected $allowedFields = [
-    'nama_komentar',
-    'url',
-    'isi_komentar',
-    'tgl',
-    'jam_komentar'
-  ];
-
+  protected $allowedFields = ['nama_komentar', 'url', 'isi_komentar', 'tgl', 'jam_komentar'];
   protected $useTimestamps = false;
-  protected $createdField  = 'tgl';
+  protected $createdField = 'tgl';
 
   public function getAllData($paging = null)
   {
     if ($query = $this->sql()->paginate($paging->perPage, '', $paging->page)) {
-      foreach ($query as $row) {
-        $data[] = $this->data($row);
-      }
+      foreach ($query as $row) { $data[] = $this->data($row); }
 
-      $page         = $paging->page;
-      $perPage      = $paging->perPage;
+      $page = $paging->page;
+      $perPage = $paging->perPage;
       $totalRecords = $this->countAll();
-      $totalPages   = ceil($totalRecords / $perPage);
+      $totalPages = ceil($totalRecords / $perPage);
 
       return [
-        'data'         => $data,
-        'page'         => $page,
-        'perPage'      => $perPage,
-        'totalPages'   => $totalPages,
+        'data' => $data,
+        'page' => $page,
+        'perPage' => $perPage,
+        'totalPages' => $totalPages,
         'totalRecords' => $totalRecords
       ];
     }
@@ -47,14 +37,14 @@ class Comments extends \CodeIgniter\Model
   {
     $data = [
       'nama_komentar' => $post->name,
-      'url'           => $post->url,
-      'isi_komentar'  => $post->content
+      'url' => $post->url,
+      'isi_komentar' => $post->content
     ];
 
     if ($this->insert($data)) {
       return [
         'success' => true,
-        'status'  => 201,
+        'status' => 201,
         'message' => 'Data komentar berhasil disimpan'
       ];
     }
@@ -64,9 +54,7 @@ class Comments extends \CodeIgniter\Model
   public function showData($id)
   {
     if ($row = $this->sql()->find($id)) {
-      return [
-        'data' => $this->data($row)
-      ];
+      return ['data' => $this->data($row)];
     }
     return false;
   }
@@ -75,14 +63,14 @@ class Comments extends \CodeIgniter\Model
   {
     $data = [
       'nama_komentar' => $put->name,
-      'url'           => $put->url,
-      'isi_komentar'  => $put->content
+      'url' => $put->url,
+      'isi_komentar' => $put->content
     ];
 
     if ($this->update($id, $data)) {
       return [
         'success' => true,
-        'status'  => 200,
+        'status' => 200,
         'message' => 'Data komentar berhasil diperbarui'
       ];
     }
@@ -95,7 +83,7 @@ class Comments extends \CodeIgniter\Model
       $this->delete($id);
       return [
         'success' => true,
-        'status'  => 200,
+        'status' => 200,
         'message' => 'Data komentar berhasil dihapus'
       ];
     }
@@ -105,12 +93,12 @@ class Comments extends \CodeIgniter\Model
   private function data($row)
   {
     return [
-      'id'      => $row->id_komentar,
-      'name'    => $row->nama_komentar,
-      'url'     => $row->url,
+      'id' => $row->id_komentar,
+      'name' => $row->nama_komentar,
+      'url' => $row->url,
       'content' => $row->isi_komentar,
-      'date'    => $row->tgl,
-      'news'    => $this->baseURL() . $row->judul_seo
+      'date' => $row->tgl,
+      'news' => $this->baseURL() . $row->judul_seo
     ];
   }
 

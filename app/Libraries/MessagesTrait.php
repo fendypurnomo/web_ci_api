@@ -58,19 +58,25 @@ trait MessagesTrait
   ];
 
   // Activate account messages
-  protected $authHasActivated = 'Anda telah melakukan aktivasi akun sebelumnya!';
+  protected $authHasActivated = [
+    'success' => false,
+    'error' => 'accountHasActivated',
+    'message' => 'Anda telah melakukan aktivasi akun sebelumnya!'
+  ];
 
   /* Account Messages */
   // Change password messages
   protected $accountNewEqualOldPassword = [
-    'errors' => 'newPasswordSameOldPassword',
-    'field' => [
+    'success' => false,
+    'error' => 'newPasswordSameOldPassword',
+    'message' => [
       'newPassword' => 'Kata sandi baru tidak boleh sama dengan kata sandi lama Anda!'
     ]
   ];
   protected $accountOldPasswordInvalid = [
-    'errors' => 'oldPasswordNotValid',
-    'field' => [
+    'success' => false,
+    'error' => 'oldPasswordNotValid',
+    'message' => [
       'oldPassword' => 'Kata sandi lama yang Anda masukkan tidak cocok dengan kata sandi Anda saat ini!'
     ]
   ];

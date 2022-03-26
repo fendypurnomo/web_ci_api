@@ -10,14 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') die();
 define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR);
 
 /*
- *---------------------------------------------------------------
- * BOOTSTRAP THE APPLICATION
- *---------------------------------------------------------------
- *
- * This process sets up the path constants, loads and registers
- * our autoloader, along with Composer's, loads our constants
- * and fires up an environment-specific bootstrapping.
- *
+|---------------------------------------------------------------
+| BOOTSTRAP THE APPLICATION
+|---------------------------------------------------------------
+| This process sets up the path constants, loads and registers
+| our autoloader, along with Composer's, loads our constants
+| and fires up an environment-specific bootstrapping.
 */
 // Ensure the current directory is pointing to the front controller's directory
 chdir(__DIR__);
@@ -36,12 +34,10 @@ $bootstrap = rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'boo
 $app = require realpath($bootstrap) ?: $bootstrap;
 
 /*
- *---------------------------------------------------------------
- * LAUNCH THE APPLICATION
- *---------------------------------------------------------------
- *
- * Now that everything is setup, it's time to actually fire
- * up the engines and make this app do its thang.
- *
+|---------------------------------------------------------------
+| LAUNCH THE APPLICATION
+|---------------------------------------------------------------
+| Now that everything is setup, it's time to actually fire
+| up the engines and make this app do its thang.
 */
 $app->run();

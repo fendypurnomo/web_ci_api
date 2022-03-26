@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Fendy\Akun\Auth;
+namespace App\Controllers\Fendy\Auth;
 
 use Exception;
 
@@ -11,9 +11,9 @@ class Activation extends \App\Controllers\Fendy\BaseAccountController
   {
     $method = $this->request->getMethod(true);
 
-    if ($method == 'GET') {
+    if ($method === 'GET') {
       return $this->activateAccount();
-    } elseif ($method == 'POST') {
+    } elseif ($method === 'POST') {
       return $this->requestActivationAccount();
     } else {
       return $this->failNotFound($this->requestNotFound);
@@ -37,10 +37,10 @@ class Activation extends \App\Controllers\Fendy\BaseAccountController
           ]);
         }
 
-        return $this->fail($this->authHasActivated);
+        return $this->respond($this->authHasActivated);
       }
 
-      return $this->fail($this->requestNotFound);
+      return $this->respond($this->requestNotFound);
     } catch (Exception $e) {
       return $this->fail($e->getMessage());
     }
@@ -70,9 +70,10 @@ class Activation extends \App\Controllers\Fendy\BaseAccountController
       ]);
     }
 
-    return $this->fail([
+    return $this->respond([
+      'success' => false,
       'error' => 'inputInvalid',
-      'field' => $this->validator->getErrors()
+      'messages' => $this->validator->getErrors()
     ]);
   }
 }

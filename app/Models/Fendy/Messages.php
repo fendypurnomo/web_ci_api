@@ -4,37 +4,28 @@ namespace App\Models\Fendy;
 
 class Messages extends \CodeIgniter\Model
 {
-  protected $table      = 'tabel_pesan';
+  protected $table = 'tabel_pesan';
   protected $primaryKey = 'pesan_id';
   protected $returnType = 'object';
-
-  protected $allowedFields = [
-    'pesan_nama',
-    'pesan_email',
-    'pesan_subjek',
-    'pesan_isi'
-  ];
-
+  protected $allowedFields = ['pesan_nama', 'pesan_email', 'pesan_subjek', 'pesan_isi'];
   protected $useTimestamps = true;
-  protected $createdField  = 'pesan_tanggal';
+  protected $createdField = 'pesan_tanggal';
 
   public function getAllData($paging = null)
   {
     if ($query = $this->paginate($paging->perPage, '', $paging->page)) {
-      foreach ($query as $row) {
-        $data[] = $this->data($row);
-      }
+      foreach ($query as $row) { $data[] = $this->data($row); }
 
-      $page         = $paging->page;
-      $perPage      = $paging->perPage;
+      $page = $paging->page;
+      $perPage = $paging->perPage;
       $totalRecords = $this->countAll();
-      $totalPages   = ceil($totalRecords / $perPage);
+      $totalPages = ceil($totalRecords / $perPage);
 
       return [
-        'data'         => $data,
-        'page'         => $page,
-        'perPage'      => $perPage,
-        'totalPages'   => $totalPages,
+        'data' => $data,
+        'page' => $page,
+        'perPage' => $perPage,
+        'totalPages' => $totalPages,
         'totalRecords' => $totalRecords
       ];
     }
@@ -44,16 +35,16 @@ class Messages extends \CodeIgniter\Model
   public function createData($post)
   {
     $data = [
-      'pesan_nama'   => $post->name,
-      'pesan_email'  => $post->email,
+      'pesan_nama' => $post->name,
+      'pesan_email' => $post->email,
       'pesan_subjek' => $post->subject,
-      'pesan_isi'    => $post->content
+      'pesan_isi' => $post->content
     ];
 
     if ($this->insert($data)) {
       return [
         'success' => true,
-        'status'  => 200,
+        'status' => 200,
         'message' => 'Message created successfully'
       ];
     }
@@ -63,9 +54,7 @@ class Messages extends \CodeIgniter\Model
   public function showData($id)
   {
     if ($row = $this->find($id)) {
-      return [
-        'data' => $this->data($row)
-      ];
+      return ['data' => $this->data($row)];
     }
     return false;
   }
@@ -73,16 +62,16 @@ class Messages extends \CodeIgniter\Model
   public function updateData($id, $put)
   {
     $data = [
-      'pesan_nama'   => $put->name,
-      'pesan_email'  => $put->email,
+      'pesan_nama' => $put->name,
+      'pesan_email' => $put->email,
       'pesan_subjek' => $put->subject,
-      'pesan_isi'    => $put->content
+      'pesan_isi' => $put->content
     ];
 
     if ($this->update($id, $data)) {
       return [
         'success' => true,
-        'status'  => 200,
+        'status' => 200,
         'message' => 'Data pesan berhasil diperbarui'
       ];
     }
@@ -95,7 +84,7 @@ class Messages extends \CodeIgniter\Model
       $this->delete($id);
       return [
         'success' => true,
-        'status'  => 200,
+        'status' => 200,
         'message' => 'Data pesan berhasil dihapus'
       ];
     }
@@ -105,12 +94,12 @@ class Messages extends \CodeIgniter\Model
   private function data($row)
   {
     return [
-      'id'      => $row->pesan_id,
-      'name'    => $row->pesan_nama,
-      'email'   => $row->pesan_email,
+      'id' => $row->pesan_id,
+      'name' => $row->pesan_nama,
+      'email' => $row->pesan_email,
       'subject' => $row->pesan_subjek,
       'message' => $row->pesan_isi,
-      'date'    => $row->pesan_tanggal
+      'date' => $row->pesan_tanggal
     ];
   }
 }

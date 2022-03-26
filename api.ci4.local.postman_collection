@@ -1,696 +1,696 @@
 {
-	"info": {
-		"_postman_id": "9e3f7807-8d32-41c8-8071-8c7ff6fc95e6",
-		"name": "API CI4 Local",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Auth",
-			"item": [
-				{
-					"name": "Signin",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n  \"username\": \"\",\r\n  \"password\": \"\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://api.ci4.local/auth/signin",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"auth",
-								"signin"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Signup",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n  \"firstname\": \"\",\r\n  \"lastname\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\",\r\n  \"gender\": \"\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://api.ci4.local/auth/signup",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"auth",
-								"signup"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Recovery - Check Email Address",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n  \"email\": \"\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://api.ci4.local/auth/recovery?step=1&req=checkEmailAddress",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"auth",
-								"recovery"
-							],
-							"query": [
-								{
-									"key": "step",
-									"value": "1"
-								},
-								{
-									"key": "req",
-									"value": "checkEmailAddress"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Recovery - Check OTP Code",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n  \"otp\": \"\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://api.ci4.local/auth/recovery?step=2&req=checkOTPCode&token=",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"auth",
-								"recovery"
-							],
-							"query": [
-								{
-									"key": "step",
-									"value": "2"
-								},
-								{
-									"key": "req",
-									"value": "checkOTPCode"
-								},
-								{
-									"key": "token",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Recovery - Create New Password",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n  \"newPassword\": \"\",\r\n  \"confirmNewPassword\": \"\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://api.ci4.local/auth/recovery?step=3&req=createNewPassword&token=",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"auth",
-								"recovery"
-							],
-							"query": [
-								{
-									"key": "step",
-									"value": "3"
-								},
-								{
-									"key": "req",
-									"value": "createNewPassword"
-								},
-								{
-									"key": "token",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Activate",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://api.ci4.local/auth/activation?code=",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"auth",
-								"activation"
-							],
-							"query": [
-								{
-									"key": "code",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Accounts",
-			"item": [
-				{
-					"name": "Accounts",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://api.ci4.local/fendy/accounts",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"fendy",
-								"accounts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Personal Information",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n  \"firstname\": \"\",\r\n  \"lastname\": \"\",\r\n  \"gender\": \"\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://api.ci4.local/fendy/accounts?req=updatePersonalInformation",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"fendy",
-								"accounts"
-							],
-							"query": [
-								{
-									"key": "req",
-									"value": "updatePersonalInformation"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Change Password",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n  \"oldPassword\": \"\",\r\n  \"newPassword\": \"\",\r\n  \"confirmNewPassword\": \"\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://api.ci4.local/fendy/accounts?req=changePassword",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"fendy",
-								"accounts"
-							],
-							"query": [
-								{
-									"key": "req",
-									"value": "changePassword"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Upload Photo Profile",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "imgFile",
-									"type": "file",
-									"src": []
-								}
-							]
-						},
-						"url": {
-							"raw": "https://api.ci4.local/fendy/accounts?req=uploadPhotoProfile",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"fendy",
-								"accounts"
-							],
-							"query": [
-								{
-									"key": "req",
-									"value": "uploadPhotoProfile"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Wilayah",
-			"item": [
-				{
-					"name": "Provinsi",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://api.ci4.local/fendy/wilayah/provinsi?page=1&perPage=10",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"fendy",
-								"wilayah",
-								"provinsi"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "perPage",
-									"value": "10"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Kabupaten Kota",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://api.ci4.local/fendy/wilayah/kabupatenKota?page=1&perPage=10",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"fendy",
-								"wilayah",
-								"kabupatenKota"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "perPage",
-									"value": "10"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Kecamatan",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://api.ci4.local/fendy/wilayah/kecamatan?page=1&perPage=10",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"fendy",
-								"wilayah",
-								"kecamatan"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "perPage",
-									"value": "10"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Kelurahan Desa",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://api.ci4.local/fendy/wilayah/kelurahanDesa?page=1&perPage=10",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"fendy",
-								"wilayah",
-								"kelurahanDesa"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "perPage",
-									"value": "10"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Blog",
-			"item": [
-				{
-					"name": "Categories",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://api.ci4.local/fendy/categories?page=1&perPage=10",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"fendy",
-								"categories"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "perPage",
-									"value": "10"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Tags",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://api.ci4.local/fendy/tags?page=1&perPage=10",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"fendy",
-								"tags"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "perPage",
-									"value": "10"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "News",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://api.ci4.local/fendy/news?page=1&perPage=10",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"fendy",
-								"news"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "perPage",
-									"value": "10"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Messages",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://api.ci4.local/fendy/messages?page=1&perPage=10",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"fendy",
-								"messages"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "perPage",
-									"value": "10"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Comments",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://api.ci4.local/fendy/comments?page=1&perPage=10",
-							"protocol": "https",
-							"host": [
-								"api",
-								"ci4",
-								"local"
-							],
-							"path": [
-								"fendy",
-								"comments"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "perPage",
-									"value": "10"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "9e3f7807-8d32-41c8-8071-8c7ff6fc95e6",
+    "name": "API CI4 Local",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"username\": \"\",\r\n  \"password\": \"\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.ci4.local/auth/signin",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "auth",
+                "signin"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Signup",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"firstname\": \"\",\r\n  \"lastname\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\",\r\n  \"gender\": \"\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.ci4.local/auth/signup",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "auth",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Recovery - Check Email Address",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"email\": \"\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.ci4.local/auth/recovery?step=1&req=checkEmailAddress",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "auth",
+                "recovery"
+              ],
+              "query": [
+                {
+                  "key": "step",
+                  "value": "1"
+                },
+                {
+                  "key": "req",
+                  "value": "checkEmailAddress"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Recovery - Check OTP Code",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"otp\": \"\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.ci4.local/auth/recovery?step=2&req=checkOTPCode&token=",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "auth",
+                "recovery"
+              ],
+              "query": [
+                {
+                  "key": "step",
+                  "value": "2"
+                },
+                {
+                  "key": "req",
+                  "value": "checkOTPCode"
+                },
+                {
+                  "key": "token",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Recovery - Create New Password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"newPassword\": \"\",\r\n  \"confirmNewPassword\": \"\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.ci4.local/auth/recovery?step=3&req=createNewPassword&token=",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "auth",
+                "recovery"
+              ],
+              "query": [
+                {
+                  "key": "step",
+                  "value": "3"
+                },
+                {
+                  "key": "req",
+                  "value": "createNewPassword"
+                },
+                {
+                  "key": "token",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Activate",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.ci4.local/auth/activation?code=",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "auth",
+                "activation"
+              ],
+              "query": [
+                {
+                  "key": "code",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Accounts",
+      "item": [
+        {
+          "name": "Accounts",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.ci4.local/fendy/accounts",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "fendy",
+                "accounts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Personal Information",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"firstname\": \"\",\r\n  \"lastname\": \"\",\r\n  \"gender\": \"\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.ci4.local/fendy/accounts?req=updatePersonalInformation",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "fendy",
+                "accounts"
+              ],
+              "query": [
+                {
+                  "key": "req",
+                  "value": "updatePersonalInformation"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"oldPassword\": \"\",\r\n  \"newPassword\": \"\",\r\n  \"confirmNewPassword\": \"\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.ci4.local/fendy/accounts?req=changePassword",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "fendy",
+                "accounts"
+              ],
+              "query": [
+                {
+                  "key": "req",
+                  "value": "changePassword"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Photo Profile",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "imgFile",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://api.ci4.local/fendy/accounts?req=uploadPhotoProfile",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "fendy",
+                "accounts"
+              ],
+              "query": [
+                {
+                  "key": "req",
+                  "value": "uploadPhotoProfile"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Wilayah",
+      "item": [
+        {
+          "name": "Provinsi",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.ci4.local/fendy/wilayah/provinsi?page=1&perPage=10",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "fendy",
+                "wilayah",
+                "provinsi"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Kabupaten Kota",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.ci4.local/fendy/wilayah/kabupatenKota?page=1&perPage=10",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "fendy",
+                "wilayah",
+                "kabupatenKota"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Kecamatan",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.ci4.local/fendy/wilayah/kecamatan?page=1&perPage=10",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "fendy",
+                "wilayah",
+                "kecamatan"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Kelurahan Desa",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.ci4.local/fendy/wilayah/kelurahanDesa?page=1&perPage=10",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "fendy",
+                "wilayah",
+                "kelurahanDesa"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Blog",
+      "item": [
+        {
+          "name": "Categories",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.ci4.local/fendy/categories?page=1&perPage=10",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "fendy",
+                "categories"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Tags",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.ci4.local/fendy/tags?page=1&perPage=10",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "fendy",
+                "tags"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "News",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.ci4.local/fendy/news?page=1&perPage=10",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "fendy",
+                "news"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Messages",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.ci4.local/fendy/messages?page=1&perPage=10",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "fendy",
+                "messages"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Comments",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.ci4.local/fendy/comments?page=1&perPage=10",
+              "protocol": "https",
+              "host": [
+                "api",
+                "ci4",
+                "local"
+              ],
+              "path": [
+                "fendy",
+                "comments"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
 }

@@ -16,10 +16,10 @@ class Filters extends \CodeIgniter\Config\BaseConfig
    * @var array
   */
   public $aliases = [
-    'csrf'     => CSRF::class,
-    'toolbar'  => DebugToolbar::class,
+    'csrf' => CSRF::class,
+    'toolbar' => DebugToolbar::class,
     'honeypot' => Honeypot::class,
-    'auth'     => AuthFilter::class
+    'auth' => AuthFilter::class
   ];
 
   /**
@@ -30,9 +30,7 @@ class Filters extends \CodeIgniter\Config\BaseConfig
   */
   public $globals = [
     'before' => [],
-    'after'  => [
-      'toolbar'
-    ]
+    'after' => ['toolbar']
   ];
 
   /**
@@ -65,9 +63,7 @@ class Filters extends \CodeIgniter\Config\BaseConfig
   */
   public $filters = [
     'auth' => [
-      'before' => [
-        'fendy/*'
-      ]
+      'before' => ['fendy/*']
     ]
   ];
 }

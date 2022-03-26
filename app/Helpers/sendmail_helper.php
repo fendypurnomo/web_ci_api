@@ -17,7 +17,7 @@ function sendmail(array $data)
     'mailPath'    => '/usr/sbin/sendmail',
     'SMTPHost'    => 'smtp.googlemail.com',				// or smtp.gmail.com
     'SMTPUser'    => 'masfendypurnomo@gmail.com',
-    'SMTPPass'    => 'fendy@gmail.com',
+    'SMTPPass'    => 'Fendy@Google.234',
     'SMTPCrypto'  => 'ssl',												// or tls
     'SMTPPort'    => 456,													// or 587
     'SMTPTimeout' => 60,

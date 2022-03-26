@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Fendy\Akun\Auth;
+namespace App\Controllers\Fendy\Auth;
 
 use Exception;
 
@@ -10,13 +10,13 @@ class Recovery extends \App\Controllers\Fendy\BaseAccountController
   public function index()
   {
     try {
-      $request = getQueryParamRequest('req');
+      $req = getQueryParamRequest('req');
 
-      if ($request === 'checkEmailAddress') {
+      if ($req === 'checkEmailAddress') {
         return $this->checkEmailAddress();
-      } elseif ($request === 'checkOTPCode') {
+      } elseif ($req === 'checkOTPCode') {
         return $this->checkOTPCode();
-      } elseif ($request === 'createNewPassword') {
+      } elseif ($req === 'createNewPassword') {
         return $this->createNewPassword();
       } else {
         return $this->failNotFound($this->requestNotFound);

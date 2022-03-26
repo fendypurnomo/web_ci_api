@@ -78,7 +78,11 @@ class User extends \App\Controllers\Fendy\BaseAccountController
 
       if ($user->pengguna_nama != $put->username) {
         if ($this->model->where('pengguna_nama', $put->username)->first()) {
-          return $this->fail('Nama pengguna tidak tersedia!');
+          return $this->respond([
+            'success' => false,
+            'error' => 'usernameNotAvailable',
+            'message' => 'Nama pengguna tidak tersedia!'
+          ]);
         }
         $data = array_merge($data, ['pengguna_nama' => $put->username]);
       }
@@ -92,9 +96,10 @@ class User extends \App\Controllers\Fendy\BaseAccountController
       ]);
     }
 
-    return $this->fail([
-      'errors' => 'badRequest',
-      'field' => $this->validator->getErrors()
+    return $this->respond([
+      'success' => false,
+      'error' => 'badRequest',
+      'message' => $this->validator->getErrors()
     ]);
   }
 
@@ -116,15 +121,16 @@ class User extends \App\Controllers\Fendy\BaseAccountController
           ]);
         }
 
-        return $this->fail($this->accountNewEqualOldPassword);
+        return $this->respond($this->accountNewEqualOldPassword);
       }
 
-      return $this->fail($this->accountOldPasswordInvalid);
+      return $this->respond($this->accountOldPasswordInvalid);
     }
 
-    return $this->fail([
-      'errors' => 'badRequest',
-      'field' => $this->validator->getErrors()
+    return $this->respond([
+      'success' => false,
+      'error' => 'badRequest',
+      'message' => $this->validator->getErrors()
     ]);
   }
 
@@ -161,9 +167,10 @@ class User extends \App\Controllers\Fendy\BaseAccountController
       throw new \RuntimeException($file->getErrorString() . '(' . $file->getError() . ')');
     }
 
-    return $this->fail([
-      'errors' => 'badRequest',
-      'field' => $this->validator->getErrors()
+    return $this->respond([
+      'success' => false,
+      'error' => 'badRequest',
+      'messsage' => $this->validator->getErrors()
     ]);
   }
 }
