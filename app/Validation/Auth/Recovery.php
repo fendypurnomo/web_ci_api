@@ -45,21 +45,21 @@ class Recovery
     ]
   ];
 
-  public $authOtpInvalid	= [
+  public $checkOTPCodeInvalid	= [
     'success' => false,
-    'error' => 'invalidOTPCode',
+    'error' => 'checkOTPCodeInvalid',
     'messages' => 'Kode OTP yang Anda masukkan tidak valid!'
   ];
 
-  public $authOtpFailed = [
+  public $checkOTPCodeFailed = [
     'success' => false,
-    'error' => 'failed',
+    'error' => 'checkOTPCodeFailed',
     'messages' => 'Terjadi kesalahan. Permintaan Anda tidak dapat diproses!'
   ];
 
   public $createNewPasswordFailed = [
     'success' => false,
-    'error' => 'failed',
+    'error' => 'createNewPasswordFailed',
     'messages' => 'Terjadi kesalahan. Permintaan Anda tidak dapat diproses!'
   ];
 }

@@ -25,7 +25,7 @@ class News extends \App\Controllers\Fendy\BaseAdminController
 		if ($get = $this->model->getAllData(getQueryParamPagination())) {
 			return $this->respond($get);
 		}
-		return $this->fail($this->tableRecordEmpty);
+		return $this->respond($this->tableRecordEmpty);
 	}
 
 	/**
@@ -54,7 +54,7 @@ class News extends \App\Controllers\Fendy\BaseAdminController
 		if ($get = $this->model->showData($id)) {
 			return $this->respond($get);
 		}
-		return $this->failNotFound($this->tableRecordNotFound);
+		return $this->respond($this->tableRecordNotFound);
 	}
 
 	/**
@@ -91,6 +91,6 @@ class News extends \App\Controllers\Fendy\BaseAdminController
 		if ($del = $this->model->deleteData($id)) {
 			return $this->respondDeleted($del);
 		}
-		return $this->failNotFound($this->tableRecordNotFound);
+		return $this->respond($this->tableRecordNotFound);
 	}
 }

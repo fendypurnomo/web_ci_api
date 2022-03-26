@@ -4,29 +4,26 @@ namespace App\Models\Fendy\Wilayah;
 
 class Provinsi extends \CodeIgniter\Model
 {
-  protected $table      = 'tabel_wilayah_provinsi';
+  protected $table = 'tabel_wilayah_provinsi';
   protected $primaryKey = 'wilayah_provinsi_id';
   protected $returnType = 'object';
-
   protected $allowedFields = ['wilayah_provinsi_nama'];
 
   public function getAllData($paging = null)
   {
     if ($query = $this->paginate($paging->perPage, '', $paging->page)) {
-      foreach ($query as $row) {
-        $data[] = $this->data($row);
-      }
+      foreach ($query as $row) { $data[] = $this->data($row); }
 
-      $page         = $paging->page;
-      $perPage      = $paging->perPage;
+      $page = $paging->page;
+      $perPage = $paging->perPage;
       $totalRecords = $this->countAll();
-      $totalPages   = ceil($totalRecords / $perPage);
+      $totalPages = ceil($totalRecords / $perPage);
 
       return [
-        'data'         => $data,
-        'page'         => $page,
-        'perPage'      => $perPage,
-        'totalPages'   => $totalPages,
+        'data' => $data,
+        'page' => $page,
+        'perPage' => $perPage,
+        'totalPages' => $totalPages,
         'totalRecords' => $totalRecords
       ];
     }
@@ -36,15 +33,15 @@ class Provinsi extends \CodeIgniter\Model
   public function createData($post)
   {
     $data = [
-      'wilayah_provinsi_id'   => $post->kode_provinsi,
+      'wilayah_provinsi_id' => $post->kode_provinsi,
       'wilayah_provinsi_nama' => $post->nama_provinsi
     ];
 
     if ($this->insert($data)) {
       return [
         'success' => true,
-        'status'  => 200,
-        'message' => 'Data Wilayah Provinsi berhasil disimpan'
+        'status' => 200,
+        'messages' => 'Data Wilayah Provinsi berhasil disimpan'
       ];
     }
     return false;
@@ -53,24 +50,20 @@ class Provinsi extends \CodeIgniter\Model
   public function showData($id)
   {
     if ($row = $this->find($id)) {
-      return [
-        'data' => $this->data($row)
-      ];
+      return ['data' => $this->data($row)];
     }
     return false;
   }
 
   public function updateData($id, $put)
   {
-    $data = [
-      'wilayah_provinsi_nama' => $put->nama_provinsi
-    ];
+    $data = ['wilayah_provinsi_nama' => $put->nama_provinsi];
 
     if ($this->update($id, $data)) {
       return [
         'success' => true,
-        'status'  => 200,
-        'message' => 'Data Wilayah Provinsi berhasil diperbarui'
+        'status' => 200,
+        'messages' => 'Data Wilayah Provinsi berhasil diperbarui'
       ];
     }
     return false;
@@ -82,8 +75,8 @@ class Provinsi extends \CodeIgniter\Model
       $this->delete($id);
       return [
         'success' => true,
-        'status'  => 200,
-        'message' => 'Data Wilayah Provinsi berhasil dihapus'
+        'status' => 200,
+        'messages' => 'Data Wilayah Provinsi berhasil dihapus'
       ];
     }
     return false;

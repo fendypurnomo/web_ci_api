@@ -19,15 +19,15 @@ class Signin
     ]
   ];
 
-  public $authWrongPassword = [
+  public $accountWrongPassword = [
     'success' => false,
-    'error' => 'wrongPassword',
+    'error' => 'accountWrongPassword',
     'messages' => [
       'password' => 'Kata sandi yang Anda masukkan salah!'
     ]
   ];
 
-  public $authBlocked = [
+  public $accountBlocked = [
     'success' => false,
     'error' => 'accountBlocked',
     'messages' => [
@@ -35,7 +35,7 @@ class Signin
     ]
   ];
 
-  public $authNotActivated = [
+  public $accountHasNotBeenActivated = [
     'success' => false,
     'error' => 'accountHasNotBeenActivated',
     'messages' => [
@@ -43,7 +43,7 @@ class Signin
     ]
   ];
 
-  public $authNotFound = [
+  public $accountNotFound = [
     'success' => false,
     'error' => 'accountNotFound',
     'messages' => [

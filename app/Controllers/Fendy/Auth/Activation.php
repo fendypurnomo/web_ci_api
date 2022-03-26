@@ -23,7 +23,7 @@ class Activation extends \App\Controllers\Fendy\BaseAuthController
     } elseif ($method === 'POST') {
       return $this->requestActivationAccount();
     } else {
-      return $this->failNotFound($this->requestNotFound);
+      return $this->respond($this->requestNotFound);
     }
   }
 

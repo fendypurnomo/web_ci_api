@@ -4,78 +4,86 @@ namespace App\Controllers\Fendy\Admin\Wilayah;
 
 class Kelurahandesa extends \App\Controllers\Fendy\BaseAdminController
 {
-	protected $modelName = 'App\Models\Fendy\Wilayah\KelurahanDesa';
+  protected $modelName = 'App\Models\Fendy\Wilayah\KelurahanDesa';
+  protected $rules;
 
-	/**
-	 * Get all data kelurahan desa
-	 */
-	public function index()
-	{
-		if ($get = $this->model->getAllData(getQueryParamPagination())) {
-			return $this->respond($get);
-		}
-		return $this->failNotFound('Tidak ada data Wilayah Kelurahan/Desa!');
-	}
+  public function __construct()
+  {
+    $this->rules = new \App\Validation\Admin\Wilayah;
+  }
 
-	/**
-	 * Create single data kelurahan desa
-	 */
-	public function create()
-	{
-		if ($this->validate($this->rules->kelurahanDesa)) {
-			if ($add = $this->model->insert(getRequest())) {
-				return $this->respondCreated($add);
-			}
-			return $this->fail($this->requestCantProcessed);
-		}
-		return $this->fail([
-			'message' => $this->validator->getErrors()
-		]);
-	}
+  /**
+   * Get all data kelurahan desa
+   */
+  public function index()
+  {
+    if ($get = $this->model->getAllData(getQueryParamPagination())) {
+      return $this->respond($get);
+    }
+    return $this->failNotFound('Tidak ada data Wilayah Kelurahan/Desa!');
+  }
 
-	/**
-	 * Get single data kelurahan desa
-	 */
-	public function show($id = null)
-	{
-		if ($get = $this->model->showData($id)) {
-			return $this->respond($get);
-		}
-		return $this->failNotFound('Data Wilayah Kelurahan/Desa tidak dapat ditemukan!');
-	}
+  /**
+   * Create single data kelurahan desa
+   */
+  public function create()
+  {
+    if ($this->validate($this->rules->kelurahanDesa)) {
+      if ($add = $this->model->insert(getRequest())) {
+        return $this->respondCreated($add);
+      }
+      return $this->fail($this->requestCantProcessed);
+    }
+    return $this->respond([
+      'success' => false,
+      'messages' => $this->validator->getErrors()
+    ]);
+  }
 
-	/**
-	 * Get single data keluarahan desa
-	 */
-	public function edit($id = null)
-	{
-		return $this->show($id);
-	}
+  /**
+   * Get single data kelurahan desa
+   */
+  public function show($id = null)
+  {
+    if ($get = $this->model->showData($id)) {
+      return $this->respond($get);
+    }
+    return $this->failNotFound('Data Wilayah Kelurahan/Desa tidak dapat ditemukan!');
+  }
 
-	/**
-	 * Update single data kelurahan desa
-	 */
-	public function update($id = null)
-	{
-		if ($this->validate($this->rules->kelurahanDesa)) {
-			if ($put = $this->model->updateData($id, getRequest())) {
-				return $this->respondUpdated($put);
-			}
-			return $this->fail($this->requestCantProcessed);
-		}
-		return $this->fail([
-			'message' => $this->validator->getErrors()
-		]);
-	}
+  /**
+   * Get single data keluarahan desa
+   */
+  public function edit($id = null)
+  {
+    return $this->show($id);
+  }
 
-	/**
-	 * Delete single data kelurahan desa
-	 */
-	public function delete($id = null)
-	{
-		if ($del = $this->model->deleteData($id)) {
-			return $this->respondDeleted($del);
-		}
-		return $this->failNotFound('Data Wilayah Kelurahan/Desa tidak dapat ditemukan!');
-	}
+  /**
+   * Update single data kelurahan desa
+   */
+  public function update($id = null)
+  {
+    if ($this->validate($this->rules->kelurahanDesa)) {
+      if ($put = $this->model->updateData($id, getRequest())) {
+        return $this->respondUpdated($put);
+      }
+      return $this->fail($this->requestCantProcessed);
+    }
+    return $this->respond([
+      'success' => false,
+      'messages' => $this->validator->getErrors()
+    ]);
+  }
+
+  /**
+   * Delete single data kelurahan desa
+   */
+  public function delete($id = null)
+  {
+    if ($del = $this->model->deleteData($id)) {
+      return $this->respondDeleted($del);
+    }
+    return $this->failNotFound('Data Wilayah Kelurahan/Desa tidak dapat ditemukan!');
+  }
 }

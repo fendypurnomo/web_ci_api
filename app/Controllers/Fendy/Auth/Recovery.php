@@ -26,7 +26,7 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
       } elseif ($req === 'createNewPassword') {
         return $this->createNewPassword();
       } else {
-        return $this->failNotFound($this->requestNotFound);
+        return $this->respond($this->requestNotFound);
       }
     } catch (Exception $e) {
       return $this->fail($e->getMessage());
@@ -63,7 +63,10 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
       ]);
     }
 
-    return $this->respond($this->validator->getErrors());
+    return $this->respond([
+      'success' => false,
+      'messages' => $this->validator->getErrors()
+    ]);
   }
 
   // Check user OTP Code validation
@@ -94,13 +97,16 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
             ]);
           }
 
-          return $this->respond($this->rules->authOtpInvalid);
+          return $this->respond($this->rules->checkOTPCodeInvalid);
         }
 
-        return $this->respond($this->rules->authOtpFailed);
+        return $this->respond($this->rules->checkOTPCodeFailed);
       }
 
-      return $this->respond($this->validator->getErrors());
+      return $this->respond([
+        'success' => false,
+        'messages' => $this->validator->getErrors()
+      ]);
     } catch (Exception $e) {
       return $this->fail($e->getMessage());
     }
@@ -131,7 +137,10 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
         return $this->respond($this->rules->createNewPasswordFailed);
       }
 
-      return $this->respond($this->validator->getErrors());
+      return $this->respond([
+        'success' => false,
+        'messages' => $this->validator->getErrors()
+      ]);
     } catch (Exception $e) {
       return $this->fail($e->getMessage());
     }

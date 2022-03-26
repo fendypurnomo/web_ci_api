@@ -84,7 +84,7 @@ class Comments extends \CodeIgniter\Model
       return [
         'success' => true,
         'status' => 200,
-        'message' => 'Data komentar berhasil dihapus'
+        'messages' => 'Data komentar berhasil dihapus'
       ];
     }
     return false;

@@ -68,7 +68,7 @@ class Categories extends \CodeIgniter\Model
       return [
         'success' => true,
         'status' => 200,
-        'message' => 'Data kategori berhasil diperbarui'
+        'messages' => 'Data kategori berhasil diperbarui'
       ];
     }
     return false;
@@ -81,7 +81,7 @@ class Categories extends \CodeIgniter\Model
       return [
         'success' => true,
         'status' => 200,
-        'message' => 'Data kategori berhasil dihapus'
+        'messages' => 'Data kategori berhasil dihapus'
       ];
     }
     return false;

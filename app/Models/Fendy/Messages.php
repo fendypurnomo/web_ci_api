@@ -85,7 +85,7 @@ class Messages extends \CodeIgniter\Model
       return [
         'success' => true,
         'status' => 200,
-        'message' => 'Data pesan berhasil dihapus'
+        'messages' => 'Data pesan berhasil dihapus'
       ];
     }
     return false;

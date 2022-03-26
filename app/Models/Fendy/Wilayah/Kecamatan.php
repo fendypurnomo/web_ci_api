@@ -4,29 +4,26 @@ namespace App\Models\Fendy\Wilayah;
 
 class Kecamatan extends \CodeIgniter\Model
 {
-  protected $table      = 'tabel_wilayah_kecamatan';
+  protected $table = 'tabel_wilayah_kecamatan';
   protected $primaryKey = 'wilayah_kecamatan_id';
   protected $returnType = 'object';
-
   protected $allowedFields = ['wilayah_kecamatan_nama'];
 
   public function getAllData($paging = null)
   {
     if ($query = $this->paginate($paging->perPage, '', $paging->page)) {
-      foreach ($query as $row) {
-        $data[] = $this->data($row);
-      }
+      foreach ($query as $row) { $data[] = $this->data($row); }
 
-      $page         = $paging->page;
-      $perPage      = $paging->perPage;
+      $page = $paging->page;
+      $perPage = $paging->perPage;
       $totalRecords = $this->countAll();
-      $totalPages   = ceil($totalRecords / $perPage);
+      $totalPages = ceil($totalRecords / $perPage);
 
       return [
-        'data'         => $data,
-        'page'         => $page,
-        'perPage'      => $perPage,
-        'totalPages'   => $totalPages,
+        'data' => $data,
+        'page' => $page,
+        'perPage' => $perPage,
+        'totalPages' => $totalPages,
         'totalRecords' => $totalRecords
       ];
     }
@@ -36,16 +33,16 @@ class Kecamatan extends \CodeIgniter\Model
   public function createData($post)
   {
     $data = [
-      'wilayah_kabupaten_id'   => $post->kode_kab_kota,
-      'wilayah_kecamatan_id'   => $post->kode_kecamatan,
-      'wilayah_kecamatan_nama' => $post->nama_kecamatan,
+      'wilayah_kabupaten_id' => $post->kode_kab_kota,
+      'wilayah_kecamatan_id' => $post->kode_kecamatan,
+      'wilayah_kecamatan_nama' => $post->nama_kecamatan
     ];
 
     if ($this->insert($data)) {
       return [
         'success' => true,
-        'status'  => 200,
-        'message' => 'Data Wilayah Kecamatan berhasil disimpan'
+        'status' => 200,
+        'messages' => 'Data Wilayah Kecamatan berhasil disimpan'
       ];
     }
     return false;
@@ -54,24 +51,20 @@ class Kecamatan extends \CodeIgniter\Model
   public function showData($id)
   {
     if ($row = $this->find($id)) {
-      return [
-        'data' => $this->data($row)
-      ];
+      return ['data' => $this->data($row)];
     }
     return false;
   }
 
   public function updateData($id, $put)
   {
-    $data = [
-      'wilayah_kecamatan_nama' => $put->nama_kecamatan,
-    ];
+    $data = ['wilayah_kecamatan_nama' => $put->nama_kecamatan];
 
     if ($this->update($id, $data)) {
       return [
         'success' => true,
-        'status'  => 200,
-        'message' => 'Data Wilayah Kecamatan berhasil diperbarui'
+        'status' => 200,
+        'messages' => 'Data Wilayah Kecamatan berhasil diperbarui'
       ];
     }
     return false;
@@ -83,8 +76,8 @@ class Kecamatan extends \CodeIgniter\Model
       $this->delete($id);
       return [
         'success' => true,
-        'status'  => 200,
-        'message' => 'Data kecamatan berhasil dihapus'
+        'status' => 200,
+        'messages' => 'Data kecamatan berhasil dihapus'
       ];
     }
     return false;
@@ -93,7 +86,7 @@ class Kecamatan extends \CodeIgniter\Model
   private function data($row)
   {
     return [
-      'kode_kab_kota'  => $row->wilayah_kabupaten_id,
+      'kode_kab_kota' => $row->wilayah_kabupaten_id,
       'kode_kecamatan' => $row->wilayah_kecamatan_id,
       'nama_kecamatan' => $row->wilayah_kecamatan_nama
     ];

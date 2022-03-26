@@ -41,7 +41,7 @@ class Tags extends \CodeIgniter\Model
       return [
         'success' => true,
         'status' => 201,
-        'message' => 'Data tag berhasil disimpan'
+        'messages' => 'Data tag berhasil disimpan'
       ];
     }
     return false;
@@ -66,7 +66,7 @@ class Tags extends \CodeIgniter\Model
       return [
         'success' => true,
         'status' => 200,
-        'message' => 'Data pesan berhasil diperbarui'
+        'messages' => 'Data pesan berhasil diperbarui'
       ];
     }
     return false;
@@ -79,7 +79,7 @@ class Tags extends \CodeIgniter\Model
       return [
         'success' => true,
         'status' => 200,
-        'message' => 'Data tag berhasil dihapus'
+        'messages' => 'Data tag berhasil dihapus'
       ];
     }
     return false;

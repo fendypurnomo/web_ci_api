@@ -52,16 +52,16 @@ class Signin extends \App\Controllers\Fendy\BaseAuthController
               ]);
             }
 
-            return $this->respond($this->rules->authWrongPassword);
+            return $this->respond($this->rules->accountWrongPassword);
           }
 
-          return $this->respond($this->rules->authBlocked);
+          return $this->respond($this->rules->accountBlocked);
         }
 
-        return $this->respond($this->rules->authNotActivated);
+        return $this->respond($this->rules->accountHasNotBeenActivated);
       }
 
-      return $this->respond($this->rules->authNotFound);
+      return $this->respond($this->rules->accountNotFound);
     }
 
     return $this->respond([

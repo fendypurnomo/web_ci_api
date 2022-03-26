@@ -114,7 +114,7 @@ class News extends \CodeIgniter\Model
       return [
         'success' => true,
         'status' => 200,
-        'message' => 'Data berita berhasil dihapus'
+        'messages' => 'Data berita berhasil dihapus'
       ];
     }
     return false;

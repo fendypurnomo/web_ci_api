@@ -14,7 +14,7 @@ class Comments extends \App\Controllers\Fendy\BaseAdminController
 		if ($get = $this->model->getAllData(getQueryParamPagination())) {
 			return $this->respond($get);
 		}
-		return $this->fail($this->TABLE_RECORD_EMPTY);
+		return $this->respond($this->tableRecordEmpty);
 	}
 
 	/**
@@ -27,9 +27,10 @@ class Comments extends \App\Controllers\Fendy\BaseAdminController
 				return $this->respondCreated($add);
 			}
 		}
-		return $this->fail([
+		return $this->respond([
+			'sucess' => false,
 			'error' => 'badRequest',
-			'field' => $this->validator->getErrors()
+			'messages' => $this->validator->getErrors()
 		]);
 	}
 
@@ -41,7 +42,7 @@ class Comments extends \App\Controllers\Fendy\BaseAdminController
 		if ($get = $this->model->showData($id)) {
 			return $this->respond($get);
 		}
-		return $this->failNotFound($this->TABLE_RECORD_NOT_FOUND);
+		return $this->respond($this->tableRecordNotFound);
 	}
 
 	/**
@@ -62,9 +63,10 @@ class Comments extends \App\Controllers\Fendy\BaseAdminController
 				return $this->respondUpdated($put);
 			}
 		}
-		return $this->fail([
+		return $this->respond([
+			'success' => false,
 			'error' => 'badRequest',
-			'field' => $this->validator->getErrors()
+			'messages' => $this->validator->getErrors()
 		]);
 	}
 
@@ -76,6 +78,6 @@ class Comments extends \App\Controllers\Fendy\BaseAdminController
 		if ($del = $this->model->deleteData($id)) {
 			return $this->respondDeleted($del);
 		}
-		return $this->failNotFound($this->TABLE_RECORD_NOT_FOUND);
+		return $this->respond($this->tableRecordNotFound);
 	}
 }

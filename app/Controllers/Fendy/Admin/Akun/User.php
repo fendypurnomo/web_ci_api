@@ -34,12 +34,12 @@ class User extends \App\Controllers\Fendy\BaseAdminController
           } elseif ($request === 'changePassword') {
             return $this->changePassword();
           } else {
-            return $this->failNotFound($this->requestNotFound);
+            return $this->respond($this->requestNotFound);
           }
         } elseif ($method === 'POST' && $request === 'uploadPhotoProfile') {
           return $this->uploadPhotoProfile();
         } else {
-          return $this->failNotFound($this->requestNotFound);
+          return $this->respond($this->requestNotFound);
         }
       }
     } catch (Exception $e) {

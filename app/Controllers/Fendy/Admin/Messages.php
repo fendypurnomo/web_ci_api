@@ -45,7 +45,7 @@ class Messages extends \App\Controllers\Fendy\BaseAdminController
     if ($get = $this->model->showData($id)) {
       return $this->respond($get);
     }
-    return $this->failNotFound($this->tableRecordNotFound);
+    return $this->respond($this->tableRecordNotFound);
   }
 
   // Get single message
@@ -75,6 +75,6 @@ class Messages extends \App\Controllers\Fendy\BaseAdminController
     if ($del = $this->model->deleteData($id)) {
       return $this->respondDeleted($del);
     }
-    return $this->fail($this->tableRecordNotFound);
+    return $this->respond($this->tableRecordNotFound);
   }
 }
