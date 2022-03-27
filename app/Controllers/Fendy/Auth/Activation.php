@@ -10,6 +10,8 @@ class Activation extends \App\Controllers\Fendy\BaseAuthController
 
   public function __construct()
   {
+    parent::__construct();
+
     $this->rules = new \App\Validation\Auth\Activation;
   }
 
@@ -19,16 +21,16 @@ class Activation extends \App\Controllers\Fendy\BaseAuthController
     $method = $this->request->getMethod(true);
 
     if ($method === 'GET') {
-      return $this->activateAccount();
+      return $this->confirmActivation();
     } elseif ($method === 'POST') {
-      return $this->requestActivationAccount();
+      return $this->requestActivation();
     } else {
       return $this->respond($this->requestNotFound);
     }
   }
 
   // Activate account user
-  private function activateAccount()
+  private function confirmActivation()
   {
     try {
       $decode = decodeToken(getRequestQueryParam('code'));
@@ -54,9 +56,9 @@ class Activation extends \App\Controllers\Fendy\BaseAuthController
   }
 
   // Request activate account user
-  private function requestActivationAccount()
+  private function requestActivation()
   {
-    if ($this->validate($this->rules->checkEmailAddress)) {
+    if ($this->validate($this->rules->activation)) {
       $post = getRequest();
       $user = $this->model->where('pengguna_email', $post->email)->first();
 
@@ -79,7 +81,7 @@ class Activation extends \App\Controllers\Fendy\BaseAuthController
 
     return $this->respond([
       'success' => false,
-      'error' => 'inputInvalid',
+      'error' => 'badRequest',
       'messages' => $this->validator->getErrors()
     ]);
   }

@@ -8,6 +8,8 @@ class Signin extends \App\Controllers\Fendy\BaseAuthController
 
   public function __construct()
   {
+    parent::__construct();
+
     $this->rules = new \App\Validation\Auth\Signin;
   }
 
@@ -66,7 +68,7 @@ class Signin extends \App\Controllers\Fendy\BaseAuthController
 
     return $this->respond([
       'success' => false,
-      'error' => 'inputFieldRequired',
+      'error' => 'badRequest',
       'messages' => $this->validator->getErrors()
     ]);
   }

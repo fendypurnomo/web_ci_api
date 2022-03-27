@@ -2,6 +2,8 @@
 
 namespace App\Models\Fendy\Wilayah;
 
+use Exception;
+
 class Kecamatan extends \CodeIgniter\Model
 {
   protected $table = 'tabel_wilayah_kecamatan';
@@ -12,17 +14,21 @@ class Kecamatan extends \CodeIgniter\Model
   public function getAllData($paging = null)
   {
     if ($query = $this->paginate($paging->perPage, '', $paging->page)) {
-      foreach ($query as $row) { $data[] = $this->data($row); }
-
-      $page = $paging->page;
-      $perPage = $paging->perPage;
       $totalRecords = $this->countAll();
-      $totalPages = ceil($totalRecords / $perPage);
+      $totalPages = ceil($totalRecords / $paging->perPage);
+
+      if ($paging->page > $totalPages) {
+        throw new Exception('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
+      }
+
+      foreach ($query as $row) {
+        $data[] = $this->data($row);
+      }
 
       return [
         'data' => $data,
-        'page' => $page,
-        'perPage' => $perPage,
+        'page' => (int) $paging->page,
+        'perPage' => (int) $paging->perPage,
         'totalPages' => $totalPages,
         'totalRecords' => $totalRecords
       ];

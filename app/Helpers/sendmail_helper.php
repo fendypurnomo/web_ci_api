@@ -26,7 +26,7 @@ function sendmail(array $data)
     'charset'     => 'UTF-8'
   ]);
 
-  if ($email->send()) { return true; }
+  if ($email->send()) return true;
 
   return $email->printDebugger(['headers']);
 }

@@ -10,6 +10,8 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
 
   public function __construct()
   {
+    parent::__construct();
+
     $this->rules = new \App\Validation\Auth\Recovery;
   }
 
@@ -65,6 +67,7 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
 
     return $this->respond([
       'success' => false,
+      'error' => 'badRequest',
       'messages' => $this->validator->getErrors()
     ]);
   }
@@ -105,6 +108,7 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
 
       return $this->respond([
         'success' => false,
+        'error' => 'badRequest',
         'messages' => $this->validator->getErrors()
       ]);
     } catch (Exception $e) {
@@ -139,6 +143,7 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
 
       return $this->respond([
         'success' => false,
+        'error' => 'badRequest',
         'messages' => $this->validator->getErrors()
       ]);
     } catch (Exception $e) {

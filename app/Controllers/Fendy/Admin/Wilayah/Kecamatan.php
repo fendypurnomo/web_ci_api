@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Fendy\Admin\Wilayah;
 
+use Exception;
+
 class Kecamatan extends \App\Controllers\Fendy\BaseAdminController
 {
   protected $modelName = 'App\Models\Fendy\Wilayah\Kecamatan';
@@ -18,10 +20,15 @@ class Kecamatan extends \App\Controllers\Fendy\BaseAdminController
    */
   public function index()
   {
-    if ($get = $this->model->getAllData(getRequestQueryParamPagination())) {
+    try {
+      if ($get = $this->model->getAllData(getRequestQueryParamPagination()))
       return $this->respond($get);
+    } catch (Exception $e) {
+      return $this->respond([
+        'success' => false,
+        'messages' => $e->getMessage()
+      ]);
     }
-    return $this->failNotFound('Tidak ada data Wilayah Kecamatan!');
   }
 
   /**

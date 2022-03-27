@@ -65,7 +65,7 @@ class Signup extends \App\Controllers\Fendy\BaseAuthController
 
     return $this->respond([
       'success' => false,
-      'error' => 'errorInputField',
+      'error' => 'badRequest',
       'messages' => $this->validator->getErrors()
     ]);
   }
