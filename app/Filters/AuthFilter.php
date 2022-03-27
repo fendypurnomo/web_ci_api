@@ -15,7 +15,7 @@ class AuthFilter implements \CodeIgniter\Filters\FilterInterface
     helper('token');
 
     try {
-      $decode = decodeToken(getAuthorization());
+      $decode = decodeToken(getToken());
 
       checkUserToken($decode->data->id);
 

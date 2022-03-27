@@ -36,6 +36,6 @@ class Photoprofile extends \CodeIgniter\Controller
       return $this->collectPhotoProfile = $data;
     }
 
-    return \Config\Services::response()->setJSON(['message' => 'Tidak ada foto profil']);
+    return \Config\Services::response()->setJSON(['message' => 'Tidak ada foto profil!']);
   }
 }

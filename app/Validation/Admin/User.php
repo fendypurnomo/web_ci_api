@@ -53,8 +53,8 @@ class User
       'rules' => 'required|min_length[8]|checkPasswordStrength',
       'errors' => [
         'required' => 'Masukkan kata sandi baru Anda!',
-        'min_length' => 'Masukkan kata sandi baru minimal 8 karakter!',
-        'checkPasswordStrength' => 'Kata sandi baru harus mengandung minimal 1 karakter huruf besar, kecil dan angka!'
+        'min_length' => 'Masukkan kata sandi baru Anda minimal 8 karakter!',
+        'checkPasswordStrength' => 'Kata sandi baru Anda harus mengandung minimal 1 karakter huruf besar, kecil dan angka!'
       ]
     ],
     'confirmNewPassword' => [

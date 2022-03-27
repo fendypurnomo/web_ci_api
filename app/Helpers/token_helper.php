@@ -20,7 +20,7 @@ function createToken(array $data, int $ttl = 3600): string
   );
 }
 
-function getAuthorization(): string
+function getToken(): string
 {
   $authorization = \Config\Services::request()->getServer('REDIRECT_HTTP_AUTHORIZATION');
 
@@ -33,11 +33,19 @@ function decodeToken(string $token): object
   return (object) JWT::decode($token, getenv('jwt.secretKey'), ['HS256']);
 }
 
-function checkUserToken(int $id)
+function checkIDUserToken(int $id)
 {
   $model = new App\Models\Fendy\Akun\User();
   $query = $model->find($id);
 
   if (!$query) throw new Exception('Maaf, kami tidak dapat menemukan akun Anda!');
   return $query;
+}
+
+function checkUserToken(): object
+{
+  $token = getToken();
+  $decodeToken = decodeToken($token);
+  $user = checkIDUserToken($decodeToken->data->id);
+  return $user;
 }

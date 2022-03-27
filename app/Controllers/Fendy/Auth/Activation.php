@@ -31,7 +31,7 @@ class Activation extends \App\Controllers\Fendy\BaseAuthController
   private function activateAccount()
   {
     try {
-      $decode = decodeToken(getQueryParamRequest('code'));
+      $decode = decodeToken(getRequestQueryParam('code'));
 
       if ($row = $this->model->find($decode->data->id)) {
         if ($row->pengguna_aktivasi != 1) {

@@ -17,7 +17,7 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
   public function index()
   {
     try {
-      $req = getQueryParamRequest('req');
+      $req = getRequestQueryParam('req');
 
       if ($req === 'checkEmailAddress') {
         return $this->checkEmailAddress();
@@ -74,7 +74,7 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
   {
     try {
       if ($this->validate($this->rules->checkOTPCode)) {
-        $decode = decodeToken(getQueryParamRequest('token'));
+        $decode = decodeToken(getRequestQueryParam('token'));
 
         if ($decode->data->isEmailVerified) {
           $post = getRequest();
@@ -117,7 +117,7 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
   {
     try {
       if ($this->validate($this->rules->createNewPassword)) {
-        $decode = decodeToken(getQueryParamRequest('token'));
+        $decode = decodeToken(getRequestQueryParam('token'));
         $data = $decode->data;
 
         if ($data->isEmailVerified && $data->isOTPVerified) {

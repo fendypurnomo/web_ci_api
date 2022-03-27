@@ -19,7 +19,7 @@ class Categories extends \App\Controllers\Fendy\BaseAdminController
 	 */
 	function index()
 	{
-		if ($get = $this->model->getAllData(getQueryParamPagination())) {
+		if ($get = $this->model->getAllData(getRequestQueryParamPagination())) {
 			return $this->respond($get);
 		}
 		return $this->respond($this->tableRecordEmpty);

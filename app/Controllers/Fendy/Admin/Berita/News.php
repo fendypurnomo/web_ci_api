@@ -7,8 +7,6 @@ class News extends \App\Controllers\Fendy\BaseAdminController
   protected $modelName = 'App\Models\Fendy\Berita\News';
   protected $rules;
 
-  private $user;
-
   public function __construct()
   {
     parent::__construct();
@@ -21,7 +19,7 @@ class News extends \App\Controllers\Fendy\BaseAdminController
 	 */
 	function index()
 	{
-		if ($get = $this->model->getAllData(getQueryParamPagination())) {
+		if ($get = $this->model->getAllData(getRequestQueryParamPagination())) {
 			return $this->respond($get);
 		}
 		return $this->respond($this->tableRecordEmpty);

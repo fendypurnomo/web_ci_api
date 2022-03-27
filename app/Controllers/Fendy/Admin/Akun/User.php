@@ -7,14 +7,12 @@ use Exception;
 class User extends \App\Controllers\Fendy\BaseAdminController
 {
   protected $rules;
-  protected $user;
 
   public function __construct()
   {
     parent::__construct();
 
     $this->rules = new \App\Validation\Admin\User;
-    $this->user = new \App\Libraries\Authorization();
   }
 
   // Index user account
@@ -26,7 +24,7 @@ class User extends \App\Controllers\Fendy\BaseAdminController
       if ($method === 'GET') {
         return $this->personalInformation();
       } else {
-        $request = getQueryParamRequest('req');
+        $request = getRequestQueryParam('req');
 
         if ($method === 'PUT') {
           if ($request === 'updatePersonalInformation') {
@@ -50,7 +48,7 @@ class User extends \App\Controllers\Fendy\BaseAdminController
   // Get personal information
   private function personalInformation()
   {
-    $user = $this->user->account;
+    $user = checkUserToken();
 
     return $this->respond([
       'data' => [
@@ -70,7 +68,7 @@ class User extends \App\Controllers\Fendy\BaseAdminController
   {
     if ($this->validate($this->rules->updatePersonalInformation)) {
       $put = getRequest();
-      $user = $this->user->account;
+      $user = checkUserToken();
 
       $data = [
         'pengguna_nama_depan' => $put->firstname,
@@ -110,7 +108,7 @@ class User extends \App\Controllers\Fendy\BaseAdminController
   {
     if ($this->validate($this->rules->changePassword)) {
       $put = getRequest();
-      $user = $this->user->account;
+      $user = checkUserToken();
 
       if (password_verify($put->oldPassword, $user->pengguna_sandi)) {
         if ($put->oldPassword !== $put->newPassword) {
@@ -149,12 +147,12 @@ class User extends \App\Controllers\Fendy\BaseAdminController
 
         if ($file->move($path, $name)) {
           $model->insert([
-            'pengguna_id' => $this->user->account->pengguna_id,
+            'pengguna_id' => checkUserToken()->pengguna_id,
             'foto_nama' => $name,
             'foto_aktif' => 1
           ]);
 
-          $model->where('pengguna_id = ' . $this->user->account->pengguna_id . ' AND foto_id != ' . $model->getInsertID())->set(['foto_aktif' => 0])->update();
+          $model->where('pengguna_id = ' . checkUserToken()->pengguna_id . ' AND foto_id != ' . $model->getInsertID())->set(['foto_aktif' => 0])->update();
 
           return $this->respond([
             'success' => true,

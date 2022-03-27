@@ -18,7 +18,7 @@ class Kabupatenkota extends \App\Controllers\Fendy\BaseAdminController
    */
   public function index()
   {
-    if ($get = $this->model->getAllData(getQueryParamPagination())) {
+    if ($get = $this->model->getAllData(getRequestQueryParamPagination())) {
       return $this->respond($get);
     }
     return $this->failNotFound('Tidak ada data Wilayah Kabupaten/Kota!');

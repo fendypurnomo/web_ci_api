@@ -17,7 +17,7 @@ function getRequest(): object
   return (object) $input;
 }
 
-function getQueryParamRequest(string $parameter): string
+function getRequestQueryParam(string $parameter): string
 {
   $request = Services::request()->getGet($parameter);
 
@@ -27,7 +27,7 @@ function getQueryParamRequest(string $parameter): string
   return (string) $request;
 }
 
-function getQueryParamPagination(): object
+function getRequestQueryParamPagination(): object
 {
   $page = Services::request()->getGet('page');
   $perPage = Services::request()->getGet('perPage');

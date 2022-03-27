@@ -8,10 +8,8 @@ class BaseAdminController extends \CodeIgniter\RESTful\ResourceController
 {
   use MessagesTrait;
 
-  protected $rules;
-
   public function __construct()
   {
-    helper('request');
+    helper(['request', 'token']);
   }
 }

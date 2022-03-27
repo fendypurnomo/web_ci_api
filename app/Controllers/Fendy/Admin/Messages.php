@@ -4,28 +4,27 @@ namespace App\Controllers\Fendy\Admin;
 
 class Messages extends \App\Controllers\Fendy\BaseAdminController
 {
-  protected $model;
+  protected $modelName = 'App\Models\Fendy\Messages';
   protected $rules;
 
-  function __construct()
+  public function __construct()
   {
     parent::__construct();
 
-    $this->model = new \App\Models\Fendy\Messages;
     $this->rules = new \App\Validation\Admin\Messages;
   }
 
   // Get all messages
-  function index()
+  public function index()
   {
-    if ($get = $this->model->getAllData(getQueryParamPagination())) {
+    if ($get = $this->model->getAllData(getRequestQueryParamPagination())) {
       return $this->respond($get);
     }
     return $this->fail($this->tableRecordEmpty);
   }
 
   // Create single message
-  function create()
+  public function create()
   {
     if ($this->validate($this->rules->createMessage)) {
       if ($add = $this->model->createData(getRequest())) {
@@ -40,7 +39,7 @@ class Messages extends \App\Controllers\Fendy\BaseAdminController
   }
 
   // Get single message
-  function show($id = null)
+  public function show($id = null)
   {
     if ($get = $this->model->showData($id)) {
       return $this->respond($get);
@@ -49,13 +48,13 @@ class Messages extends \App\Controllers\Fendy\BaseAdminController
   }
 
   // Get single message
-  function edit($id = null)
+  public function edit($id = null)
   {
     return $this->show($id);
   }
 
   // Update single message
-  function update($id = null)
+  public function update($id = null)
   {
     if ($this->validate($this->rules->createMessage)) {
       if ($put = $this->model->updateData($id, getRequest())) {
@@ -70,7 +69,7 @@ class Messages extends \App\Controllers\Fendy\BaseAdminController
   }
 
   // Delete single message
-  function delete($id = null)
+  public function delete($id = null)
   {
     if ($del = $this->model->deleteData($id)) {
       return $this->respondDeleted($del);
