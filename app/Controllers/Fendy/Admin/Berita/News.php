@@ -38,14 +38,16 @@ class News extends \App\Controllers\Fendy\BaseAdminController
 	function create()
 	{
 		if ($this->validate($this->rules->createNews)) {
-			if ($add = $this->model->createData(getRequest())) {
+			$img = $this->request->getFile('img');
+
+			if ($add = $this->model->createData(getRequest(), $img)) {
 				return $this->respondCreated($add);
 			}
-			return $this->fail($this->requestNotFound);
+			return $this->respond([$this->requestNotFound]);
 		}
 		return $this->respond([
 			'success' => false,
-			'error' => 'invalidInput',
+			'error' => 'badRequest',
 			'messages' => $this->validator->getErrors()
 		]);
 	}

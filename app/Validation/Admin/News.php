@@ -33,9 +33,12 @@ class News
       ]
     ],
     'img' => [
-      'rules' => 'required',
+      'rules' => 'uploaded[img]|is_image[img]|mime_in[img,image/jpg,image/jpeg,image/gif,image/png,image/webp]|max_size[img,1024]|max_dims[img,1024,768]',
       'errors' => [
-        'required' => 'Masukkan gambar thumbnail berita!'
+        'uploaded' => 'Masukkan ilustrasi gambar berita!',
+        'mime_in' => 'Format gambar yang Anda masukkan tidak valid!',
+        'max_size' => 'Ukuran maksimal gambar adalah 1MB!',
+        'max_dims' => 'Dimensi gambar maksimal 1024 x 768 pixel!'
       ]
     ],
     'headline' => [

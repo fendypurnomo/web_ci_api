@@ -13,7 +13,7 @@ function getRequest(): object
       $input = request()->getRawInput();
     }
   }
-  return $input;
+  return (object) $input;
 }
 
 function getRequestQueryParam(string $parameter): string

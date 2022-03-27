@@ -54,32 +54,39 @@ class News extends \CodeIgniter\Model
     return false;
   }
 
-  public function createData($post)
+  public function createData($post, $img)
   {
-    helper('seo');
+    if ($img->isValid() && ! $img->hasMoved()) {
+      $newName = $img->getRandomName();
+      $filepath = '../../../../../../../Pictures/Images/news/';
+      $img->move($filepath, $newName);
 
-    $tag = implode(',', $post->tag);
+      helper('stringreplace');
 
-    $data = [
-      'kategori_id' => $post->category,
-      'pengguna_id' => $post->user,
-      'berita_judul' => $post->title,
-      'berita_seo' => seoTitle($post->title),
-      'berita_isi' => $post->content,
-      'berita_tanggal' => date('Y-m-d H:i:s'),
-      'berita_gambar' => $post->img,
-      'berita_headline' => $post->headline,
-      'berita_tag' => $tag
-    ];
+      $tag = implode(',', (array) [$post->tag]);
 
-    if ($this->insert($data)) {
-      return [
-        'success' => true,
-        'status' => 201,
-        'message' => 'Data berita berhasil disimpan'
+      $data = [
+        'kategori_id' => $post->category,
+        'pengguna_id' => $post->user,
+        'berita_judul' => $post->title,
+        'berita_seo' => seoTitle($post->title),
+        'berita_isi' => $post->content,
+        'berita_tanggal' => date('Y-m-d H:i:s'),
+        'berita_gambar' => $newName,
+        'berita_headline' => $post->headline,
+        'berita_tag' => $tag
       ];
+
+      if ($this->insert($data)) {
+        return [
+          'success' => true,
+          'status' => 201,
+          'message' => 'Data berita berhasil disimpan'
+        ];
+      }
+      return false;
     }
-    return false;
+    throw new \RuntimeException($img->getErrorString() . '(' . $img->getError() . ')');
   }
 
   public function showData($id)

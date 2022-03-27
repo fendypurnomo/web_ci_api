@@ -11,7 +11,6 @@ class User extends \App\Controllers\Fendy\BaseAdminController
   public function __construct()
   {
     parent::__construct();
-
     $this->rules = new \App\Validation\Admin\User;
   }
 
@@ -138,21 +137,22 @@ class User extends \App\Controllers\Fendy\BaseAdminController
   private function uploadPhotoProfile()
   {
     if ($this->validate($this->rules->uploadPhotoProfile)) {
-      $file = $this->request->getFile('imgFile');
+      $img = $this->request->getFile('imgFile');
 
-      if ($file->isValid() && !$file->hasMoved()) {
-        $name = $file->getRandomName();
-        $path = '../../../../../../../Pictures/Images/profiles/';
+      if ($img->isValid() && !$img->hasMoved()) {
+        $newName = $img->getRandomName();
+        $filepath = '../../../../../../../Pictures/Images/profiles/';
         $model = new \App\Models\Fendy\Akun\PhotoProfile();
+        $userID = checkUserToken()->pengguna_id;
 
-        if ($file->move($path, $name)) {
+        if ($img->move($filepath, $newName)) {
           $model->insert([
-            'pengguna_id' => checkUserToken()->pengguna_id,
-            'foto_nama' => $name,
+            'pengguna_id' => $userID,
+            'foto_nama' => $newName,
             'foto_aktif' => 1
           ]);
 
-          $model->where('pengguna_id = ' . checkUserToken()->pengguna_id . ' AND foto_id != ' . $model->getInsertID())->set(['foto_aktif' => 0])->update();
+          $model->where('pengguna_id = ' . $userID . ' AND foto_id != ' . $model->getInsertID())->set(['foto_aktif' => 0])->update();
 
           return $this->respond([
             'success' => true,
@@ -161,10 +161,10 @@ class User extends \App\Controllers\Fendy\BaseAdminController
           ]);
         }
 
-        throw new \RuntimeException($file->getErrorString() . '(' . $file->getError() . ')');
+        throw new \RuntimeException($img->getErrorString() . '(' . $img->getError() . ')');
       }
 
-      throw new \RuntimeException($file->getErrorString() . '(' . $file->getError() . ')');
+      throw new \RuntimeException($img->getErrorString() . '(' . $img->getError() . ')');
     }
 
     return $this->respond([
