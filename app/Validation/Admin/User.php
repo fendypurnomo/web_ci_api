@@ -14,19 +14,21 @@ class User
       ]
     ],
     'firstname' => [
-      'rules' => 'required|alpha|min_length[2]',
+      'rules' => 'required|alpha|min_length[2]|max_length[20]',
       'errors' => [
         'alpha' => 'Masukkan nama depan Anda hanya karakter huruf!',
         'required' => 'Maaf, masukkan nama depan Anda!',
-        'min_length' => 'Maaf, masukkan minimal nama depan Anda 2 karakter!'
+        'min_length' => 'Maaf, masukkan nama depan Anda minimal 2 karakter!',
+        'max_length' => 'Maaf, masukkan nama depan Anda maksimal 20 karakter!'
       ]
     ],
     'lastname' => [
-      'rules' => 'required|alpha|min_length[2]',
+      'rules' => 'required|alpha|min_length[2]|max_length[20]',
       'errors' => [
         'alpha' => 'Masukkan nama belakang Anda hanya karakter huruf!',
         'required' => 'Maaf, masukkan nama belakang Anda!',
-        'min_length' => 'Maaf, masukkan minimal nama belakang Anda 2 karakter!'
+        'min_length' => 'Maaf, masukkan nama belakang Anda minimal 2 karakter!',
+        'max_length' => 'Maaf, masukkan nama belakang Anda maksimal 20 karakter!'
       ]
     ],
     'gender' => [

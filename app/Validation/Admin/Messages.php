@@ -6,9 +6,10 @@ class Messages
 {
   public $createMessage = [
     'name' => [
-      'rules' => 'required',
+      'rules' => 'required|max_length[50]',
       'errors' => [
-        'required' => 'Masukkan nama Anda!'
+        'required' => 'Masukkan nama Anda!',
+        'max_length' => 'Masukkan nama Anda maksimal 50 karakter!'
       ]
     ],
     'email' => [
@@ -19,9 +20,10 @@ class Messages
       ]
     ],
     'subject' => [
-      'rules' => 'required',
+      'rules' => 'required|max_length[100]',
       'errors' => [
-        'required' => 'Masukkan subjek pesan!'
+        'required' => 'Masukkan subjek pesan Anda!',
+        'max_length' => 'Masukkan subjek pesan Anda maksimal 100 karakter!'
       ]
     ],
     'content' => [

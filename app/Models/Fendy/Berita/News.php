@@ -45,7 +45,7 @@ class News extends \CodeIgniter\Model
     return false;
   }
 
-  public function createData($post, $user)
+  public function createData($post)
   {
     helper('seo');
 
@@ -53,7 +53,7 @@ class News extends \CodeIgniter\Model
 
     $data = [
       'kategori_id' => $post->category,
-      'pengguna_id' => $user,
+      'pengguna_id' => $post->user,
       'berita_judul' => $post->title,
       'berita_seo' => seoTitle($post->title),
       'berita_isi' => $post->content,

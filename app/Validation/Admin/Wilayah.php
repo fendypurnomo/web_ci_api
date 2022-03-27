@@ -12,16 +12,17 @@ class Wilayah
       ]
     ],
     'nama_provinsi' => [
-      'rules' => 'required',
+      'rules' => 'required|min_length[3]',
       'errors' => [
-        'required' => 'Masukkan Nama Provinsi!'
+        'required' => 'Masukkan Nama Provinsi!',
+        'min_length' => 'Masukkan Nama Provinsi minimal 3 karakter!'
       ]
     ]
   ];
 
   public $kabupatenKota = [
     'kode_provinsi' => [
-      'rules' => 'required',
+      'rules' => 'required|min_length[3]',
       'errors' => [
         'required' => 'Masukkan Kode Provinsi!'
       ]
@@ -35,7 +36,8 @@ class Wilayah
     'nama_kab_kota' => [
       'rules' => 'required',
       'errors' => [
-        'required' => 'Masukkan Nama Kabupaten/Kota!'
+        'required' => 'Masukkan Nama Kabupaten/Kota!',
+        'min_length' => 'Masukkan Nama Kabupaten/Kota minimal 3 karakter!'
       ]
     ],
     'kode_jenis' => [
@@ -60,9 +62,10 @@ class Wilayah
       ]
     ],
     'nama_kecamatan' => [
-      'rules' => 'required',
+      'rules' => 'required|min_length[3]',
       'errors' => [
-        'required' => 'Masukkan Nama Kecamatan!'
+        'required' => 'Masukkan Nama Kecamatan!',
+        'min_length' => 'Masukkan Nama Kecamatan minimal 3 karakter!'
       ]
     ]
   ];
@@ -81,9 +84,10 @@ class Wilayah
       ]
     ],
     'nama_kel_desa' => [
-      'rules' => 'required',
+      'rules' => 'required|min_length[3]',
       'errors' => [
-        'required' => 'Masukkan Nama Kelurahan/Desa!'
+        'required' => 'Masukkan Nama Kelurahan/Desa!',
+        'min_length' => 'Masukkan Nama Kelurahan/Desa minimal 3 karakter!'
       ]
     ],
     'kode_jenis' => [

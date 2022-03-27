@@ -6,15 +6,10 @@ class Tags
 {	
   public $createTag = [
     'name' => [
-      'rules' => 'required',
+      'rules' => 'required|min_length[5]',
       'errors' => [
-        'required' => 'Masukkan nama tag!'
-      ]
-    ],
-    'seo' => [
-      'rules' => 'required',
-      'errors' => [
-        'required' => 'Masukkan seo tag'
+        'required' => 'Masukkan nama tag!',
+        'min_length' => 'Masukkan nama tag minimal 5 karakter!'
       ]
     ]
   ];

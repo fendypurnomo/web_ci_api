@@ -6,10 +6,13 @@ trait MessagesTrait
 {
   protected $pageNotFound = 'Permintaan Anda tidak dapat kami proses. Laman tidak dapat kami temukan!';
   protected $tokenInvalid = 'Terjadi kesalahan. Token Anda tidak valid!';
+
+  /* Request */
   protected $requestNotFound = [
     'success' => false,
     'messages' => 'Terjadi kesalahan. Permintaan Anda tidak dapat kami proses!'
   ];
+
   protected $requestCantProcessed = 'Teradi kesalahan. Permintaan Anda gagal kami proses!';
 
   /* Table Messages */

@@ -107,6 +107,7 @@ class Comments extends \CodeIgniter\Model
     $this->join('berita', 'komentar.id_berita = berita.id_berita', 'left');
     return $this;
   }
+
   private function baseURL()
   {
     return getenv('app.baseURL') . 'fendy/news/';

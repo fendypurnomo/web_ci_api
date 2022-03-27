@@ -40,7 +40,6 @@ class User extends \CodeIgniter\Model
     if (isset($array['data']['pengguna_sandi'])) {
       $array['data']['pengguna_sandi'] = password_hash($array['data']['pengguna_sandi'], PASSWORD_DEFAULT);
     }
-
     return $array;
   }
 

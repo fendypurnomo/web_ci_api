@@ -14,7 +14,6 @@ class News extends \App\Controllers\Fendy\BaseAdminController
     parent::__construct();
 
     $this->rules = new \App\Validation\Admin\News;
-    // $this->user = new \App\Libraries\Authorization();
   }
 
 	/**
@@ -34,7 +33,7 @@ class News extends \App\Controllers\Fendy\BaseAdminController
 	function create()
 	{
 		if ($this->validate($this->rules->createNews)) {
-			if ($add = $this->model->createData(getRequest(), $this->user->account->pengguna_id)) {
+			if ($add = $this->model->createData(getRequest())) {
 				return $this->respondCreated($add);
 			}
 			return $this->fail($this->requestNotFound);

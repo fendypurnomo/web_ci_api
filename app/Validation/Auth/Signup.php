@@ -6,21 +6,21 @@ class Signup
 {
   public $signup = [
     'firstname' => [
-      'rules' => 'required|alpha|min_length[2]|max_length[12]',
+      'rules' => 'required|alpha|min_length[2]|max_length[20]',
       'errors' => [
         'required' => 'Masukkan nama depan Anda!',
         'alpha' => 'Masukkan hanya karakter huruf!',
         'min_length' => 'Masukkan nama depan minimal 2 karakter!',
-        'max_length' => ''
+        'max_length' => 'Masukkan nama depan maksimal 20 karakter!'
       ]
     ],
     'lastname' => [
-      'rules' => 'required|alpha|min_length[2]|max_length[12]',
+      'rules' => 'required|alpha|min_length[2]|max_length[20]',
       'errors' => [
         'required' => 'Masukkan nama belakang Anda!',
         'alpha' => 'Masukkan hanya karakter huruf!',
         'min_length' => 'Masukkan nama belakang minimal 2 karakter!',
-        'max_length' => ''
+        'max_length' => 'Masukkan nama belakang maksimal 20 karakter!'
       ]
     ],
     'email' => [
