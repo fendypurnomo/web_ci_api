@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Fendy\Admin\Berita;
 
+use Exception;
+
 class News extends \App\Controllers\Fendy\BaseAdminController
 {
   protected $modelName = 'App\Models\Fendy\Berita\News';
@@ -10,7 +12,6 @@ class News extends \App\Controllers\Fendy\BaseAdminController
   public function __construct()
   {
     parent::__construct();
-
     $this->rules = new \App\Validation\Admin\News;
   }
 
@@ -19,10 +20,16 @@ class News extends \App\Controllers\Fendy\BaseAdminController
 	 */
 	function index()
 	{
-		if ($get = $this->model->getAllData(getRequestQueryParamPagination())) {
+		try {
+			if ($get = $this->model->getAllData(getRequestQueryParamPagination()))
 			return $this->respond($get);
 		}
-		return $this->respond($this->tableRecordEmpty);
+		catch (Exception $e) {
+			return $this->respond([
+				'success' => false,
+				'messages' => $e->getMessage()
+			]);
+		}
 	}
 
 	/**

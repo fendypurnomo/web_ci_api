@@ -2,6 +2,8 @@
 
 namespace App\Models\Fendy\Berita;
 
+use Exception;
+
 class Comments extends \CodeIgniter\Model
 {
   protected $DBGroup = 'blog';
@@ -12,22 +14,29 @@ class Comments extends \CodeIgniter\Model
   protected $useTimestamps = false;
   protected $createdField = 'tgl';
 
-  public function getAllData($paging = null)
+  public function getAllData(object $paging = null)
   {
     if ($query = $this->sql()->paginate($paging->perPage, '', $paging->page)) {
-      foreach ($query as $row) { $data[] = $this->data($row); }
+      $totalRecords = (int) $this->countAll();
+      $totalPages = (int) ceil($totalRecords / $paging->perPage);
 
-      $page = $paging->page;
-      $perPage = $paging->perPage;
-      $totalRecords = $this->countAll();
-      $totalPages = ceil($totalRecords / $perPage);
+      if ($paging->page > $totalPages) {
+        throw new Exception('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
+      }
+
+      foreach ($query as $row) {
+        $data[] = $this->data($row);
+      }
 
       return [
-        'data' => $data,
-        'page' => $page,
-        'perPage' => $perPage,
-        'totalPages' => $totalPages,
-        'totalRecords' => $totalRecords
+        'success' => true,
+        'response' => [
+          'data' => $data,
+          'page' => (int) $paging->page,
+          'perPage' => (int) $paging->perPage,
+          'totalPages' => $totalPages,
+          'totalRecords' => $totalRecords
+        ]
       ];
     }
     return false;
