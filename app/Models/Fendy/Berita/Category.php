@@ -2,8 +2,6 @@
 
 namespace App\Models\Fendy\Berita;
 
-use Exception;
-
 class Category extends \CodeIgniter\Model
 {
   protected $table = 'ref_kategori';
@@ -14,12 +12,12 @@ class Category extends \CodeIgniter\Model
   public function getAllData(object $paging = null)
   {
     if ($query = $this->paginate($paging->perPage, '', $paging->page)) {
+      $page = $paging->page;
+      $perPage = $paging->perPage;
       $totalRecords = (int) $this->countAll();
-      $totalPages = (int) ceil($totalRecords / $paging->perPage);
+      $totalPages = (int) ceil($totalRecords / $perPage);
 
-      if ($paging->page > $totalPages) {
-        throw new Exception('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
-      }
+      if ($paging->page > $totalPages) throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
 
       foreach ($query as $row) {
         $data[] = $this->data($row);
@@ -29,8 +27,8 @@ class Category extends \CodeIgniter\Model
         'success' => true,
         'response' => [
           'data' => $data,
-          'page' => (int) $paging->page,
-          'perPage' => (int) $paging->perPage,
+          'page' => $page,
+          'perPage' => $perPage,
           'totalPages' => $totalPages,
           'totalRecords' => $totalRecords
         ]
@@ -99,10 +97,9 @@ class Category extends \CodeIgniter\Model
   private function data($row)
   {
     return [
-      'id' => $row->kategori_id,
-      'name' => $row->kategori_nama,
-      'seo' => $row->kategori_seo,
-      'active' => $row->kategori_aktif
+      'category_id' => $row->kategori_id,
+      'category_name' => $row->kategori_nama,
+      'category_seo' => $row->kategori_seo
     ];
   }
 }

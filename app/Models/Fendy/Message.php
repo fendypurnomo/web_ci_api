@@ -7,9 +7,10 @@ class Message extends \CodeIgniter\Model
   protected $table = 'tabel_pesan';
   protected $primaryKey = 'pesan_id';
   protected $returnType = 'object';
-  protected $allowedFields = ['pesan_nama', 'pesan_email', 'pesan_subjek', 'pesan_isi'];
+  protected $allowedFields = ['pesan_nama', 'pesan_subjek', 'pesan_email', 'pesan_isi', 'pesan_tanggal'];
   protected $useTimestamps = true;
   protected $createdField = 'pesan_tanggal';
+  protected $updatedField = 'pesan_tanggal';
 
   public function getAllData(object $paging = null)
   {
@@ -43,8 +44,8 @@ class Message extends \CodeIgniter\Model
   {
     $data = [
       'pesan_nama' => $post->name,
-      'pesan_email' => $post->email,
       'pesan_subjek' => $post->subject,
+      'pesan_email' => $post->email,
       'pesan_isi' => $post->content
     ];
 

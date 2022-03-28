@@ -2,8 +2,6 @@
 
 namespace App\Models\Fendy\Berita;
 
-use Exception;
-
 class Comment extends \CodeIgniter\Model
 {
   protected $DBGroup = 'blog';
@@ -17,12 +15,12 @@ class Comment extends \CodeIgniter\Model
   public function getAllData(object $paging = null)
   {
     if ($query = $this->sql()->paginate($paging->perPage, '', $paging->page)) {
+      $page = $paging->page;
+      $perPage = $paging->perPage;
       $totalRecords = (int) $this->countAll();
-      $totalPages = (int) ceil($totalRecords / $paging->perPage);
+      $totalPages = (int) ceil($totalRecords / $perPage);
 
-      if ($paging->page > $totalPages) {
-        throw new Exception('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
-      }
+      if ($paging->page > $totalPages) throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
 
       foreach ($query as $row) {
         $data[] = $this->data($row);
@@ -32,8 +30,8 @@ class Comment extends \CodeIgniter\Model
         'success' => true,
         'response' => [
           'data' => $data,
-          'page' => (int) $paging->page,
-          'perPage' => (int) $paging->perPage,
+          'page' => $page,
+          'perPage' => $perPage,
           'totalPages' => $totalPages,
           'totalRecords' => $totalRecords
         ]
@@ -102,12 +100,13 @@ class Comment extends \CodeIgniter\Model
   private function data($row)
   {
     return [
-      'id' => $row->id_komentar,
-      'name' => $row->nama_komentar,
-      'url' => $row->url,
-      'content' => $row->isi_komentar,
-      'date' => $row->tgl,
-      'news' => $this->baseURL() . $row->judul_seo
+      'comment_id' => $row->id_komentar,
+      'comment_name' => $row->nama_komentar,
+      'comment_site' => $row->url,
+      'comment_content' => $row->isi_komentar,
+      'comment_date' => $row->tgl,
+      'news_id' => $row->id_berita,
+      'news_url' => $this->baseURL() . $row->judul_seo
     ];
   }
 

@@ -2,8 +2,6 @@
 
 namespace App\Models\Fendy\Berita;
 
-use Exception;
-
 class Tag extends \CodeIgniter\Model
 {
   protected $table = 'tabel_tag';
@@ -14,12 +12,12 @@ class Tag extends \CodeIgniter\Model
   public function getAllData(object $paging = null)
   {
     if ($query = $this->paginate($paging->perPage, '', $paging->page)) {
+      $page = $paging->page;
+      $perPage = $paging->perPage;
       $totalRecords = (int) $this->countAll();
-      $totalPages = (int) ceil($totalRecords / $paging->perPage);
+      $totalPages = (int) ceil($totalRecords / $perPage);
 
-      if ($paging->page > $totalPages) {
-        throw new Exception('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
-      }
+      if ($paging->page > $totalPages) throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
 
       foreach ($query as $row) {
         $data[] = $this->data($row);
@@ -29,8 +27,8 @@ class Tag extends \CodeIgniter\Model
         'success' => true,
         'response' => [
           'data' => $data,
-          'page' => (int) $paging->page,
-          'perPage' => (int) $paging->perPage,
+          'page' => $page,
+          'perPage' => $perPage,
           'totalPages' => $totalPages,
           'totalRecords' => $totalRecords
         ]
@@ -97,10 +95,10 @@ class Tag extends \CodeIgniter\Model
   private function data($row)
   {
     return [
-      'id' => $row->tag_id,
-      'name' => $row->tag_nama,
-      'seo' => $row->tag_seo,
-      'count' => $row->tag_hitung
+      'tag_id' => $row->tag_id,
+      'tag_name' => $row->tag_nama,
+      'tag_seo' => $row->tag_seo,
+      'tag_count' => $row->tag_hitung
     ];
   }
 }

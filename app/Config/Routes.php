@@ -68,6 +68,9 @@ $routes->group('/', function ($routes) {
     $routes->get('tags/(:num)', 'Fendy\Admin\Berita\Tag::show/$1');
     $routes->get('news', 'Fendy\Admin\Berita\News');
     $routes->get('news/(:num)', 'Fendy\Admin\Berita\News::show/$1');
+    $routes->get('comments', 'Fendy\Admin\Berita\comment');
+    $routes->get('comments/(:num)', 'Fendy\Admin\Berita\comment::show/$1');
+    $routes->post('messages', 'Fendy\Admin\Message::create');
 
     $routes->group('wilayah', function ($routes) {
       $routes->get('provinsi', 'Fendy\Admin\Wilayah\Provinsi');

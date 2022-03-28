@@ -2,8 +2,6 @@
 
 namespace App\Models\Fendy\Berita;
 
-use Exception;
-
 class News extends \CodeIgniter\Model
 {
   protected $table = 'tabel_berita';
@@ -29,12 +27,12 @@ class News extends \CodeIgniter\Model
   public function getAllData(object $paging = null)
   {
     if ($query = $this->sql()->orderBy('berita_tanggal', 'DESC')->paginate($paging->perPage, '', $paging->page)) {
+      $page = $paging->page;
+      $perPage = $paging->perPage;
       $totalRecords = (int) $this->countAll();
-      $totalPages = (int) ceil($totalRecords / $paging->perPage);
+      $totalPages = (int) ceil($totalRecords / $perPage);
 
-      if ($paging->page > $totalPages) {
-        throw new Exception('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
-      }
+      if ($paging->page > $totalPages) throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
 
       foreach ($query as $row) {
         $data[] = $this->data($row);
@@ -44,8 +42,8 @@ class News extends \CodeIgniter\Model
         'success' => true,
         'response' => [
           'data' => $data,
-          'page' => (int) $paging->page,
-          'perPage' => (int) $paging->perPage,
+          'page' => $page,
+          'perPage' => $perPage,
           'totalPages' => $totalPages,
           'totalRecords' => $totalRecords
         ]
