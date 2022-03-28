@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n{\r\n  \"username\": \"\",\r\n  \"password\": \"\"\r\n}\r\n",
+							"raw": "\r\n{\r\n  \"username\": \"fendypurnomo\",\r\n  \"password\": \"Fendy.123\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -197,7 +197,37 @@
 					"response": []
 				},
 				{
-					"name": "Activate",
+					"name": "Activation - Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n  \"email\": \"\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.ci4.local/auth/activation",
+							"protocol": "https",
+							"host": [
+								"api",
+								"ci4",
+								"local"
+							],
+							"path": [
+								"auth",
+								"activation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activation - Confirm",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -706,13 +736,56 @@
 									"name": "News - Create",
 									"request": {
 										"auth": {
-											"type": "bearer"
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											]
 										},
 										"method": "POST",
 										"header": [],
 										"body": {
-											"mode": "raw",
-											"raw": "\r\n{\r\n  \"\": \"\"\r\n}\r\n",
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "category",
+													"value": "",
+													"type": "default"
+												},
+												{
+													"key": "user",
+													"value": "",
+													"type": "default"
+												},
+												{
+													"key": "title",
+													"value": "",
+													"type": "default"
+												},
+												{
+													"key": "content",
+													"value": "",
+													"type": "default"
+												},
+												{
+													"key": "img",
+													"type": "file",
+													"src": []
+												},
+												{
+													"key": "headline",
+													"value": "",
+													"type": "default"
+												},
+												{
+													"key": "tag",
+													"value": "",
+													"type": "default"
+												}
+											],
 											"options": {
 												"raw": {
 													"language": "json"
@@ -764,6 +837,80 @@
 												"fendy",
 												"news",
 												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "News - Categories - Get All",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.ci4.local/news?/news?page=1&perPage=10&category=",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"news"
+											],
+											"query": [
+												{
+													"key": "/news?page",
+													"value": "1"
+												},
+												{
+													"key": "perPage",
+													"value": "10"
+												},
+												{
+													"key": "category",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "News - Tags - Get All",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.ci4.local/news?/news?page=1&perPage=10&tag=",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"news"
+											],
+											"query": [
+												{
+													"key": "/news?page",
+													"value": "1"
+												},
+												{
+													"key": "perPage",
+													"value": "10"
+												},
+												{
+													"key": "tag",
+													"value": ""
+												}
 											]
 										}
 									},
@@ -834,7 +981,7 @@
 									"response": []
 								},
 								{
-									"name": "Messages - Get Single Copy",
+									"name": "Messages - Create",
 									"request": {
 										"auth": {
 											"type": "bearer"
@@ -958,6 +1105,44 @@
 											"path": [
 												"fendy",
 												"comments"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Comments - News - Get All",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.ci4.local/fendy/comments?page=1&perPage=10&newsID=",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"fendy",
+												"comments"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "perPage",
+													"value": "10"
+												},
+												{
+													"key": "newsID",
+													"value": ""
+												}
 											]
 										}
 									},
@@ -1433,14 +1618,9 @@
 										}
 									},
 									"response": []
-								}
-							]
-						},
-						{
-							"name": "Messages",
-							"item": [
+								},
 								{
-									"name": "Messages - Get All",
+									"name": "News - Categories - Get All",
 									"request": {
 										"auth": {
 											"type": "noauth"
@@ -1448,7 +1628,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://api.ci4.local/blog/messages?page=1&perPage=10",
+											"raw": "https://api.ci4.local/blog/news?page=1&perPage=10&category=",
 											"protocol": "https",
 											"host": [
 												"api",
@@ -1457,7 +1637,7 @@
 											],
 											"path": [
 												"blog",
-												"messages"
+												"news"
 											],
 											"query": [
 												{
@@ -1467,6 +1647,10 @@
 												{
 													"key": "perPage",
 													"value": "10"
+												},
+												{
+													"key": "category",
+													"value": ""
 												}
 											]
 										}
@@ -1474,7 +1658,7 @@
 									"response": []
 								},
 								{
-									"name": "Messages - Get Single",
+									"name": "News - Tags - Get All",
 									"request": {
 										"auth": {
 											"type": "noauth"
@@ -1482,7 +1666,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://api.ci4.local/blog/messages/1",
+											"raw": "https://api.ci4.local/blog/news?page=1&perPage=10&tag=",
 											"protocol": "https",
 											"host": [
 												"api",
@@ -1491,8 +1675,80 @@
 											],
 											"path": [
 												"blog",
-												"messages",
-												"1"
+												"news"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "perPage",
+													"value": "10"
+												},
+												{
+													"key": "tag",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Messages",
+							"item": [
+								{
+									"name": "Messages - Create",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "name",
+													"value": "",
+													"type": "default"
+												},
+												{
+													"key": "subject",
+													"value": "",
+													"type": "default"
+												},
+												{
+													"key": "email",
+													"value": "",
+													"type": "default"
+												},
+												{
+													"key": "content",
+													"value": "",
+													"type": "default"
+												}
+											],
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://api.ci4.local/blog/messages",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"blog",
+												"messages"
 											]
 										}
 									},
@@ -1557,6 +1813,44 @@
 												"blog",
 												"comments",
 												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Comments - News - Get All",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.ci4.local/blog/comments?page=1&perPage=10&newsID=",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"blog",
+												"comments"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "perPage",
+													"value": "10"
+												},
+												{
+													"key": "newsID",
+													"value": ""
+												}
 											]
 										}
 									},
