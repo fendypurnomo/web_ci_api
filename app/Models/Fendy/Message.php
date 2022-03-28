@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Models\Fendy\Berita;
+namespace App\Models\Fendy;
 
-use Exception;
-
-class Categories extends \CodeIgniter\Model
+class Message extends \CodeIgniter\Model
 {
-  protected $table = 'ref_kategori';
-  protected $primaryKey = 'kategori_id';
+  protected $table = 'tabel_pesan';
+  protected $primaryKey = 'pesan_id';
   protected $returnType = 'object';
-  protected $allowedFields = ['kategori_nama', 'kategori_seo', 'kategori_aktif'];
+  protected $allowedFields = ['pesan_nama', 'pesan_email', 'pesan_subjek', 'pesan_isi'];
+  protected $useTimestamps = true;
+  protected $createdField = 'pesan_tanggal';
 
   public function getAllData(object $paging = null)
   {
     if ($query = $this->paginate($paging->perPage, '', $paging->page)) {
+      $page = $paging->page;
+      $perPage = $paging->perPage;
       $totalRecords = (int) $this->countAll();
-      $totalPages = (int) ceil($totalRecords / $paging->perPage);
+      $totalPages = (int) ceil($totalRecords / $perPage);
 
-      if ($paging->page > $totalPages) {
-        throw new Exception('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
-      }
+      if ($page > $totalPages) throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
 
       foreach ($query as $row) {
         $data[] = $this->data($row);
@@ -29,8 +29,8 @@ class Categories extends \CodeIgniter\Model
         'success' => true,
         'response' => [
           'data' => $data,
-          'page' => (int) $paging->page,
-          'perPage' => (int) $paging->perPage,
+          'page' => $page,
+          'perPage' => $perPage,
           'totalPages' => $totalPages,
           'totalRecords' => $totalRecords
         ]
@@ -42,16 +42,17 @@ class Categories extends \CodeIgniter\Model
   public function createData($post)
   {
     $data = [
-      'kategori_nama' => $post->name,
-      'kategori_seo' => $post->seo,
-      'kategori_aktive' => $post->active
+      'pesan_nama' => $post->name,
+      'pesan_email' => $post->email,
+      'pesan_subjek' => $post->subject,
+      'pesan_isi' => $post->content
     ];
 
     if ($this->insert($data)) {
       return [
         'success' => true,
-        'status' => 201,
-        'message' => 'Data kategori berhasil disimpan'
+        'status' => 200,
+        'message' => 'Message created successfully'
       ];
     }
     return false;
@@ -68,16 +69,17 @@ class Categories extends \CodeIgniter\Model
   public function updateData($id, $put)
   {
     $data = [
-      'kategori_nama' => $put->name,
-      'kategori_seo' => $put->seo,
-      'kategori_aktive' => $put->active
+      'pesan_nama' => $put->name,
+      'pesan_email' => $put->email,
+      'pesan_subjek' => $put->subject,
+      'pesan_isi' => $put->content
     ];
 
     if ($this->update($id, $data)) {
       return [
         'success' => true,
         'status' => 200,
-        'messages' => 'Data kategori berhasil diperbarui'
+        'message' => 'Data pesan berhasil diperbarui'
       ];
     }
     return false;
@@ -90,7 +92,7 @@ class Categories extends \CodeIgniter\Model
       return [
         'success' => true,
         'status' => 200,
-        'messages' => 'Data kategori berhasil dihapus'
+        'messages' => 'Data pesan berhasil dihapus'
       ];
     }
     return false;
@@ -99,10 +101,12 @@ class Categories extends \CodeIgniter\Model
   private function data($row)
   {
     return [
-      'id' => $row->kategori_id,
-      'name' => $row->kategori_nama,
-      'seo' => $row->kategori_seo,
-      'active' => $row->kategori_aktif
+      'id' => $row->pesan_id,
+      'name' => $row->pesan_nama,
+      'email' => $row->pesan_email,
+      'subject' => $row->pesan_subjek,
+      'message' => $row->pesan_isi,
+      'date' => $row->pesan_tanggal
     ];
   }
 }

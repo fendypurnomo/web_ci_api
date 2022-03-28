@@ -4,7 +4,7 @@ namespace App\Models\Fendy\Berita;
 
 use Exception;
 
-class Comments extends \CodeIgniter\Model
+class Comment extends \CodeIgniter\Model
 {
   protected $DBGroup = 'blog';
   protected $table = 'komentar';

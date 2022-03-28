@@ -12,15 +12,13 @@ class AuthFilter implements \CodeIgniter\Filters\FilterInterface
 
   public function before(RequestInterface $request, $arguments = null)
   {
-    helper('token');
-
     try {
+      helper('token');
       $decode = decodeToken(getToken());
-
       checkUserToken($decode->data->id);
-
       return $request;
-    } catch (Exception $e) {
+    }
+    catch (Exception $e) {
       return \Config\Services::response()->setJSON([
         'status' => 401,
         'error' => 'Unauthorized',

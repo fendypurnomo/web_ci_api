@@ -46,11 +46,11 @@ $routes->group('/', function ($routes) {
     $routes->add('accounts', 'Fendy\Admin\Akun\User');
 
     // Berita Routes
-    $routes->resource('categories', ['controller' => 'Fendy\Admin\Berita\Categories']);
-    $routes->resource('tags', ['controller' => 'Fendy\Admin\Berita\Tags']);
+    $routes->resource('categories', ['controller' => 'Fendy\Admin\Berita\Category']);
+    $routes->resource('tags', ['controller' => 'Fendy\Admin\Berita\Tag']);
     $routes->resource('news', ['controller' => 'Fendy\Admin\Berita\News']);
-    $routes->resource('comments', ['controller' => 'Fendy\Admin\Berita\Comments']);
-    $routes->resource('messages', ['controller' => 'Fendy\Admin\Messages']);
+    $routes->resource('comments', ['controller' => 'Fendy\Admin\Berita\Comment']);
+    $routes->resource('messages', ['controller' => 'Fendy\Admin\Message']);
 
     // Wilayah Routes
     $routes->group('wilayah', function ($routes) {
@@ -62,10 +62,10 @@ $routes->group('/', function ($routes) {
   });
 
   $routes->group('blog', function ($routes) {
-    $routes->get('categories', 'Fendy\Admin\Berita\Categories');
-    $routes->get('categories/(:num)', 'Fendy\Admin\Berita\Categories::show/$1');
-    $routes->get('tags', 'Fendy\Admin\Berita\Tags');
-    $routes->get('tags/(:num)', 'Fendy\Admin\Berita\Tags::show/$1');
+    $routes->get('categories', 'Fendy\Admin\Berita\Category');
+    $routes->get('categories/(:num)', 'Fendy\Admin\Berita\Category::show/$1');
+    $routes->get('tags', 'Fendy\Admin\Berita\Tag');
+    $routes->get('tags/(:num)', 'Fendy\Admin\Berita\Tag::show/$1');
     $routes->get('news', 'Fendy\Admin\Berita\News');
     $routes->get('news/(:num)', 'Fendy\Admin\Berita\News::show/$1');
 

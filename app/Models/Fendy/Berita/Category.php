@@ -4,12 +4,12 @@ namespace App\Models\Fendy\Berita;
 
 use Exception;
 
-class Tags extends \CodeIgniter\Model
+class Category extends \CodeIgniter\Model
 {
-  protected $table = 'tabel_tag';
-  protected $primaryKey = 'tag_id';
+  protected $table = 'ref_kategori';
+  protected $primaryKey = 'kategori_id';
   protected $returnType = 'object';
-  protected $allowedFields = ['tag_nama', 'tag_seo', 'tag_hitung'];
+  protected $allowedFields = ['kategori_nama', 'kategori_seo', 'kategori_aktif'];
 
   public function getAllData(object $paging = null)
   {
@@ -42,15 +42,16 @@ class Tags extends \CodeIgniter\Model
   public function createData($post)
   {
     $data = [
-      'tag_nama' => $post->name,
-      'tag_seo' => $post->seo
+      'kategori_nama' => $post->name,
+      'kategori_seo' => $post->seo,
+      'kategori_aktive' => $post->active
     ];
 
     if ($this->insert($data)) {
       return [
         'success' => true,
         'status' => 201,
-        'messages' => 'Data tag berhasil disimpan'
+        'message' => 'Data kategori berhasil disimpan'
       ];
     }
     return false;
@@ -67,15 +68,16 @@ class Tags extends \CodeIgniter\Model
   public function updateData($id, $put)
   {
     $data = [
-      'tag_nama' => $put->name,
-      'tag_seo' => $put->seo
+      'kategori_nama' => $put->name,
+      'kategori_seo' => $put->seo,
+      'kategori_aktive' => $put->active
     ];
 
     if ($this->update($id, $data)) {
       return [
         'success' => true,
         'status' => 200,
-        'messages' => 'Data pesan berhasil diperbarui'
+        'messages' => 'Data kategori berhasil diperbarui'
       ];
     }
     return false;
@@ -88,7 +90,7 @@ class Tags extends \CodeIgniter\Model
       return [
         'success' => true,
         'status' => 200,
-        'messages' => 'Data tag berhasil dihapus'
+        'messages' => 'Data kategori berhasil dihapus'
       ];
     }
     return false;
@@ -97,10 +99,10 @@ class Tags extends \CodeIgniter\Model
   private function data($row)
   {
     return [
-      'id' => $row->tag_id,
-      'name' => $row->tag_nama,
-      'seo' => $row->tag_seo,
-      'count' => $row->tag_hitung
+      'id' => $row->kategori_id,
+      'name' => $row->kategori_nama,
+      'seo' => $row->kategori_seo,
+      'active' => $row->kategori_aktif
     ];
   }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Validation\Admin;
 
-class Categories
+class Category
 {
   public $createCategory = [
     'name' => [

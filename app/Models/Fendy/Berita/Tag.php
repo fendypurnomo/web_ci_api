@@ -1,23 +1,25 @@
 <?php
 
-namespace App\Models\Fendy\Wilayah;
+namespace App\Models\Fendy\Berita;
 
-class Provinsi extends \CodeIgniter\Model
+use Exception;
+
+class Tag extends \CodeIgniter\Model
 {
-  protected $table = 'tabel_wilayah_provinsi';
-  protected $primaryKey = 'wilayah_provinsi_id';
+  protected $table = 'tabel_tag';
+  protected $primaryKey = 'tag_id';
   protected $returnType = 'object';
-  protected $allowedFields = ['wilayah_provinsi_nama'];
+  protected $allowedFields = ['tag_nama', 'tag_seo', 'tag_hitung'];
 
   public function getAllData(object $paging = null)
   {
     if ($query = $this->paginate($paging->perPage, '', $paging->page)) {
-      $page = $paging->page;
-      $perPage = $paging->perPage;
       $totalRecords = (int) $this->countAll();
-      $totalPages = (int) ceil($totalRecords / $perPage);
+      $totalPages = (int) ceil($totalRecords / $paging->perPage);
 
-      if ($page > $totalPages) throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
+      if ($paging->page > $totalPages) {
+        throw new Exception('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
+      }
 
       foreach ($query as $row) {
         $data[] = $this->data($row);
@@ -27,8 +29,8 @@ class Provinsi extends \CodeIgniter\Model
         'success' => true,
         'response' => [
           'data' => $data,
-          'page' => $page,
-          'perPage' => $perPage,
+          'page' => (int) $paging->page,
+          'perPage' => (int) $paging->perPage,
           'totalPages' => $totalPages,
           'totalRecords' => $totalRecords
         ]
@@ -40,15 +42,15 @@ class Provinsi extends \CodeIgniter\Model
   public function createData($post)
   {
     $data = [
-      'wilayah_provinsi_id' => $post->kode_provinsi,
-      'wilayah_provinsi_nama' => $post->nama_provinsi
+      'tag_nama' => $post->name,
+      'tag_seo' => $post->seo
     ];
 
     if ($this->insert($data)) {
       return [
         'success' => true,
-        'status' => 200,
-        'messages' => 'Data Wilayah Provinsi berhasil disimpan'
+        'status' => 201,
+        'messages' => 'Data tag berhasil disimpan'
       ];
     }
     return false;
@@ -64,13 +66,16 @@ class Provinsi extends \CodeIgniter\Model
 
   public function updateData($id, $put)
   {
-    $data = ['wilayah_provinsi_nama' => $put->nama_provinsi];
+    $data = [
+      'tag_nama' => $put->name,
+      'tag_seo' => $put->seo
+    ];
 
     if ($this->update($id, $data)) {
       return [
         'success' => true,
         'status' => 200,
-        'messages' => 'Data Wilayah Provinsi berhasil diperbarui'
+        'messages' => 'Data pesan berhasil diperbarui'
       ];
     }
     return false;
@@ -83,7 +88,7 @@ class Provinsi extends \CodeIgniter\Model
       return [
         'success' => true,
         'status' => 200,
-        'messages' => 'Data Wilayah Provinsi berhasil dihapus'
+        'messages' => 'Data tag berhasil dihapus'
       ];
     }
     return false;
@@ -92,8 +97,10 @@ class Provinsi extends \CodeIgniter\Model
   private function data($row)
   {
     return [
-      'kode_provinsi' => $row->wilayah_provinsi_id,
-      'nama_provinsi' => $row->wilayah_provinsi_nama
+      'id' => $row->tag_id,
+      'name' => $row->tag_nama,
+      'seo' => $row->tag_seo,
+      'count' => $row->tag_hitung
     ];
   }
 }

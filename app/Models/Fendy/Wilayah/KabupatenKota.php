@@ -2,8 +2,6 @@
 
 namespace App\Models\Fendy\Wilayah;
 
-use Exception;
-
 class KabupatenKota extends \CodeIgniter\Model
 {
   protected $table = 'tabel_wilayah_kabupaten';
@@ -11,15 +9,15 @@ class KabupatenKota extends \CodeIgniter\Model
   protected $returnType = 'object';
   protected $allowedFields = ['wilayah_kabupaten_nama'];
 
-  public function getAllData($paging = null)
+  public function getAllData(object $paging = null)
   {
     if ($query = $this->paginate($paging->perPage, '', $paging->page)) {
-      $totalRecords = $this->countAll();
-      $totalPages = ceil($totalRecords / $paging->perPage);
+      $page = $paging->page;
+      $perPage = $paging->perPage;
+      $totalRecords = (int) $this->countAll();
+      $totalPages = (int) ceil($totalRecords / $perPage);
 
-      if ($paging->page > $totalPages) {
-        throw new Exception('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
-      }
+      if ($page > $totalPages) throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
 
       foreach ($query as $row) {
         $data[] = $this->data($row);
@@ -29,8 +27,8 @@ class KabupatenKota extends \CodeIgniter\Model
         'success' => true,
         'response' => [
           'data' => $data,
-          'page' => (int) $paging->page,
-          'perPage' => (int) $paging->perPage,
+          'page' => $page,
+          'perPage' => $perPage,
           'totalPages' => $totalPages,
           'totalRecords' => $totalRecords
         ]

@@ -2,7 +2,7 @@
 
 namespace App\Validation\Admin;
 
-class Tags
+class Tag
 {	
   public $createTag = [
     'name' => [

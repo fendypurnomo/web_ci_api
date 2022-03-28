@@ -13,7 +13,7 @@ trait MessagesTrait
     'messages' => 'Terjadi kesalahan. Permintaan Anda tidak dapat kami proses!'
   ];
 
-  protected $requestCantProcessed = 'Teradi kesalahan. Permintaan Anda gagal kami proses!';
+  protected $requestCantProcessed = 'Terjadi kesalahan. Permintaan Anda gagal kami proses!';
 
   /* Table Messages */
   protected $tableRecordEmpty = [

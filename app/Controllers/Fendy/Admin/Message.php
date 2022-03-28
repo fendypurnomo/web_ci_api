@@ -1,24 +1,22 @@
 <?php
 
-namespace App\Controllers\Fendy\Admin\Berita;
+namespace App\Controllers\Fendy\Admin;
 
 use Exception;
 
-class Tags extends \App\Controllers\Fendy\BaseAdminController
+class Message extends \App\Controllers\Fendy\BaseAdminController
 {
-  protected $modelName = 'App\Models\Fendy\Berita\Tags';
+  protected $modelName = 'App\Models\Fendy\Message';
   protected $rules;
 
   public function __construct()
   {
     parent::__construct();
-    $this->rules = new \App\Validation\Admin\Tags;
+    $this->rules = new \App\Validation\Admin\Message;
   }
 
-  /**
-   * Get all data tags
-   */
-  function index()
+  // Get all messages
+  public function index()
   {
     try {
       if ($get = $this->model->getAllData(getRequestQueryParamPagination()))
@@ -32,15 +30,14 @@ class Tags extends \App\Controllers\Fendy\BaseAdminController
     }
   }
 
-  /**
-   * Create single data tag
-   */
-  function create()
+  // Create single message
+  public function create()
   {
-    if ($this->validate($this->rules->createTag)) {
+    if ($this->validate($this->rules->createMessage)) {
       if ($add = $this->model->createData(getRequest())) {
         return $this->respondCreated($add);
       }
+      return $this->fail($this->requestCantProcessed);
     }
     return $this->respond([
       'success' => false,
@@ -49,10 +46,8 @@ class Tags extends \App\Controllers\Fendy\BaseAdminController
     ]);
   }
 
-  /**
-   * Get single data tag
-   */
-  function show($id = null)
+  // Get single message
+  public function show($id = null)
   {
     if ($get = $this->model->showData($id)) {
       return $this->respond($get);
@@ -60,21 +55,17 @@ class Tags extends \App\Controllers\Fendy\BaseAdminController
     return $this->respond($this->tableRecordNotFound);
   }
 
-  /**
-   * Get single data tag
-   */
-  function edit($id = null)
+  // Get single message
+  public function edit($id = null)
   {
     return $this->show($id);
   }
 
-  /**
-   * Update single data tag
-   */
-  function update($id = null)
+  // Update single message
+  public function update($id = null)
   {
-    if ($this->validate($this->rules->createTag)) {
-      if ($put = $this->model->update($id, getRequest())) {
+    if ($this->validate($this->rules->createMessage)) {
+      if ($put = $this->model->updateData($id, getRequest())) {
         return $this->respondUpdated($put);
       }
       return $this->fail($this->requestCantProcessed);
@@ -86,10 +77,8 @@ class Tags extends \App\Controllers\Fendy\BaseAdminController
     ]);
   }
 
-  /**
-   * Delete single data tag
-   */
-  function delete($id = null)
+  // Delete single message
+  public function delete($id = null)
   {
     if ($del = $this->model->deleteData($id)) {
       return $this->respondDeleted($del);

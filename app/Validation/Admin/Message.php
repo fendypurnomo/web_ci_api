@@ -2,7 +2,7 @@
 
 namespace App\Validation\Admin;
 
-class Messages
+class Message
 {
   public $createMessage = [
     'name' => [

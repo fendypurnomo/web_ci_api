@@ -4,20 +4,21 @@ namespace App\Controllers\Fendy\Admin\Berita;
 
 use Exception;
 
-class Comments extends \App\Controllers\Fendy\BaseAdminController
+class Category extends \App\Controllers\Fendy\BaseAdminController
 {
-  protected $modelName = 'App\Models\Fendy\Berita\Comments';
+  protected $modelName = 'App\Models\Fendy\Berita\Category';
   protected $rules;
 
   public function __construct()
   {
     parent::__construct();
+    $this->rules = new \App\Validation\Admin\Category;
   }
 
   /**
-   * Get all data comments
+   * Get all data categories
    */
-  public function index()
+  function index()
   {
     try {
       if ($get = $this->model->getAllData(getRequestQueryParamPagination()))
@@ -32,26 +33,26 @@ class Comments extends \App\Controllers\Fendy\BaseAdminController
   }
 
   /**
-   * Create single data comment
+   * Create single data category
    */
-  public function create()
+  function create()
   {
-    if ($this->validate($this->rules->createComment)) {
+    if ($this->validate($this->rules->createCategory)) {
       if ($add = $this->model->createData(getRequest())) {
         return $this->respondCreated($add);
       }
     }
     return $this->respond([
-      'sucess' => false,
+      'success' => false,
       'error' => 'badRequest',
       'messages' => $this->validator->getErrors()
     ]);
   }
 
   /**
-   * Get single data comment
+   * Get single data category
    */
-  public function show($id = null)
+  function show($id = null)
   {
     if ($get = $this->model->showData($id)) {
       return $this->respond($get);
@@ -60,20 +61,20 @@ class Comments extends \App\Controllers\Fendy\BaseAdminController
   }
 
   /**
-   * Get single data comment
+   * Get single data category
    */
-  public function edit($id = null)
+  function edit($id = null)
   {
     return $this->show($id);
   }
 
   /**
-   * Update single data comment
+   * Update single data category
    */
-  public function update($id = null)
+  function update($id = null)
   {
-    if ($this->validate($this->rules->createComment)) {
-      if ($put = $this->model->updateData($id, getRequest())) {
+    if ($this->validate($this->rules->createCategory)) {
+      if ($put = $this->model->update($id, getRequest())) {
         return $this->respondUpdated($put);
       }
     }
@@ -85,9 +86,9 @@ class Comments extends \App\Controllers\Fendy\BaseAdminController
   }
 
   /**
-   * Delete single data comment
+   * Delete single data category
    */
-  public function delete($id = null)
+  function delete($id = null)
   {
     if ($del = $this->model->deleteData($id)) {
       return $this->respondDeleted($del);

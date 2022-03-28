@@ -1,14 +1,11 @@
 <?php
 
-use Config\Services;
-
 function getRequest(): object
 {
   $input = request()->getJSON(true);
 
   if (empty($input)) {
     $input = request()->getPost();
-
     if (empty($input)) {
       $input = request()->getRawInput();
     }
@@ -31,13 +28,14 @@ function getRequestQueryParamPagination()
   $page = request()->getGet('page');
   $perPage = request()->getGet('perPage');
 
-  if (!isset($page) || isset($page) && empty($page) || $page === null) { $page = (int) 1; }
-  if (!isset($perPage) || isset($perPage) && empty($perPage) || $perPage === null) { $perPage = (int) 10; }
+  if (!isset($page) || isset($page) && empty($page) || $page === null) {$page = (int) 1;}
+  if (!isset($perPage) || isset($perPage) && empty($perPage) || $perPage === null) {$perPage = (int) 10;}
   if ($perPage > 100) throw new Exception('Jumlah data per halaman yang Anda masukkan melebihi batas maksimal!');
 
   return (object) ['page' => (int) $page, 'perPage' => (int) $perPage];
 }
 
-function request() {
-  return Services::request();
+function request()
+{
+  return \Config\Services::request();
 }
