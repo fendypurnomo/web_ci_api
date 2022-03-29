@@ -9,7 +9,6 @@ class Signup extends \App\Controllers\Fendy\BaseAuthController
   public function __construct()
   {
     parent::__construct();
-
     $this->rules = new \App\Validation\Auth\Signup;
   }
 

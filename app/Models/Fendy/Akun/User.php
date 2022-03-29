@@ -43,6 +43,33 @@ class User extends \CodeIgniter\Model
     return $array;
   }
 
+  public function updatePersonalInformation($put, $user) {
+    $data = [
+      'pengguna_nama' => $put->username,
+      'pengguna_nama_depan' => $put->firstname,
+      'pengguna_nama_belakang' => $put->lastname,
+      'pengguna_jenis_kelamin' => $put->gender
+    ];
+
+    if ($user->pengguna_nama != $put->username) {
+      if (! $this->checkUsernameAvailability($put->username)) throw new \RuntimeException('Nama pengguna tidak tersedia!');
+      $data = array_merge($data, ['pengguna_nama' => $put->username]);
+    }
+    $this->update($user->pengguna_id, $data);
+  }
+
+  public function updatePassword($put, $user) {
+    $rules = new \App\Validation\Admin\User;
+
+    if (! password_verify($put->currentPassword, $user->pengguna_sandi)) {
+      throw new \RuntimeException($rules->currentPasswordWrong);
+    }
+    if ($put->currentPassword === $put->newPassword) {
+      throw new \RuntimeException($rules->newPasswordEqualToCurrentPassword);
+    }
+    $this->update($user->pengguna_id, ['pengguna_sandi' => $put->newPassword]);
+  }
+
   public function checkUsernameAvailability($username)
   {
     if ($this->where('pengguna_nama', $username)->first()) {

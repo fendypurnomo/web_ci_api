@@ -22,7 +22,7 @@ function createToken(array $data, int $ttl = 3600): string
 
 function getToken(): string
 {
-  $authorization = \Config\Services::request()->getServer('REDIRECT_HTTP_AUTHORIZATION');
+  $authorization = \Config\Services::request()->getServer('HTTP_AUTHORIZATION');
 
   if (is_null($authorization)) throw new Exception('Permintaan Anda tidak dapat kami proses. Anda tidak memiliki akses token yang valid!');
   return explode(' ', $authorization)[1];

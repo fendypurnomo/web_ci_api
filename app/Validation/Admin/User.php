@@ -17,18 +17,18 @@ class User
       'rules' => 'required|alpha|min_length[2]|max_length[20]',
       'errors' => [
         'alpha' => 'Masukkan nama depan Anda hanya karakter huruf!',
-        'required' => 'Maaf, masukkan nama depan Anda!',
-        'min_length' => 'Maaf, masukkan nama depan Anda minimal 2 karakter!',
-        'max_length' => 'Maaf, masukkan nama depan Anda maksimal 20 karakter!'
+        'required' => 'Masukkan nama depan Anda!',
+        'min_length' => 'Masukkan nama depan Anda minimal 2 karakter!',
+        'max_length' => 'Masukkan nama depan Anda maksimal 20 karakter!'
       ]
     ],
     'lastname' => [
       'rules' => 'required|alpha|min_length[2]|max_length[20]',
       'errors' => [
         'alpha' => 'Masukkan nama belakang Anda hanya karakter huruf!',
-        'required' => 'Maaf, masukkan nama belakang Anda!',
-        'min_length' => 'Maaf, masukkan nama belakang Anda minimal 2 karakter!',
-        'max_length' => 'Maaf, masukkan nama belakang Anda maksimal 20 karakter!'
+        'required' => 'Masukkan nama belakang Anda!',
+        'min_length' => 'Masukkan nama belakang Anda minimal 2 karakter!',
+        'max_length' => 'Masukkan nama belakang Anda maksimal 20 karakter!'
       ]
     ],
     'gender' => [
@@ -42,11 +42,11 @@ class User
     ]
   ];
 
-  public $changePassword = [
-    'oldPassword' => [
+  public $updatePassword = [
+    'currentPassword' => [
       'rules' => 'required',
       'errors' => [
-        'required' => 'Masukkan kata sandi lama Anda!'
+        'required' => 'Masukkan kata sandi Anda saat ini!'
       ]
     ],
     'newPassword' => [
@@ -61,34 +61,11 @@ class User
       'rules' => 'required|matches[newPassword]',
       'errors' => [
         'required' => 'Masukkan konfirmasi kata sandi baru Anda!',
-        'matches' => 'Konfirmasi kata sandi baru tidak cocok!'
+        'matches' => 'Konfirmasi kata sandi baru Anda tidak cocok!'
       ]
     ]
   ];
 
-  public $uploadPhotoProfile = [
-    'imgFile' => [
-      'rules' => 'uploaded[imgFile]|max_size[imgFile,1024]|ext_in[imgFile,png,jpg,jpeg,gif]|is_image[imgFile]',
-      'errors' => [
-        'max_size' => 'Ukuran berkas foto maksimal 1MB!',
-        'ext_in' => 'Ektensi berkas foto harus png, jpg/jpeg atau gif!'
-      ]
-    ]
-  ];
-
-  public $accountNewEqualOldPassword = [
-    'success' => false,
-    'error' => 'newPasswordSameOldPassword',
-    'messages' => [
-      'newPassword' => 'Kata sandi baru tidak boleh sama dengan kata sandi lama Anda!'
-    ]
-  ];
-
-  public $accountOldPasswordInvalid = [
-    'success' => false,
-    'error' => 'oldPasswordNotValid',
-    'messages' => [
-      'oldPassword' => 'Kata sandi lama yang Anda masukkan tidak cocok dengan kata sandi Anda saat ini!'
-    ]
-  ];
+  public $newPasswordEqualToCurrentPassword = 'Kata sandi baru tidak boleh sama dengan kata sandi Anda saat ini!';
+  public $currentPasswordWrong = 'Kata sandi saat ini yang Anda masukkan tidak cocok dengan kata sandi Anda saat ini!';
 }

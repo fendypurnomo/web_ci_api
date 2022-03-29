@@ -9,7 +9,6 @@ class Signin extends \App\Controllers\Fendy\BaseAuthController
   public function __construct()
   {
     parent::__construct();
-
     $this->rules = new \App\Validation\Auth\Signin;
   }
 
@@ -30,8 +29,8 @@ class Signin extends \App\Controllers\Fendy\BaseAuthController
           if ($row->pengguna_blokir == 0) {
             if (password_verify($post->password, $row->pengguna_sandi)) {
 
-              $model = new \App\Controllers\Fendy\Admin\Akun\Photoprofile($row->pengguna_id);
-              $photo = $model->getCurrentPhotoProfile();
+              $model = new \App\Controllers\Fendy\Admin\Akun\Userphoto();
+              $photo = $model->getCurrentPhotoProfile($row->pengguna_id, 'string');
 
               $accessToken = createToken([
                 'id' => $row->pengguna_id,
@@ -48,7 +47,7 @@ class Signin extends \App\Controllers\Fendy\BaseAuthController
                     'firstname' => $row->pengguna_nama_depan,
                     'lastname' => $row->pengguna_nama_belakang,
                     'email' => $row->pengguna_email,
-                    'photoProfile' => getenv('app.imgURL') . 'profiles/' . $photo
+                    'photoProfile' => $photo
                   ]
                 ]
               ]);

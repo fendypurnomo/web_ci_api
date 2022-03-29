@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class BaseController
@@ -40,7 +43,7 @@ class BaseController extends \CodeIgniter\Controller
    * @param ResponseInterface $response
    * @param LoggerInterface   $logger
   */
-  public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
+  public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
   {
     // Do Not Edit This Line
     parent::initController($request, $response, $logger);

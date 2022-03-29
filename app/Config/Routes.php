@@ -43,7 +43,14 @@ $routes->group('/', function ($routes) {
   /* Fendy Web API Routes */
   $routes->group('fendy', function ($routes) {
     // Akun Routes
-    $routes->add('accounts', 'Fendy\Admin\Akun\User');
+    $routes->group('accounts', function ($routes) {
+      $routes->get('/', 'Fendy\Admin\Akun\User');
+      $routes->put('updatePersonalInformation', 'Fendy\Admin\Akun\User::updatePersonalInformation');
+      $routes->put('updatePassword', 'Fendy\Admin\Akun\User::updatePassword');
+      $routes->get('getCurrentPhotoProfile/(:num)', 'Fendy\Admin\Akun\Userphoto::getCurrentPhotoProfile/$1');
+      $routes->get('getAllPhotoProfile/(:num)', 'Fendy\Admin\Akun\Userphoto::getAllPhotoProfile/$1');
+      $routes->post('uploadPhotoProfile', 'Fendy\Admin\Akun\Userphoto::uploadPhotoProfile');
+    });
 
     // Berita Routes
     $routes->resource('categories', ['controller' => 'Fendy\Admin\Berita\Category']);
