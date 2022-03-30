@@ -4,7 +4,7 @@ namespace App\Models\Fendy\Blog;
 
 class News extends \CodeIgniter\Model
 {
-  protected $table = 'tabel_berita';
+  protected $table = 'tabel_berita AS a';
   protected $primaryKey = 'berita_id';
   protected $returnType = 'object';
 
@@ -26,30 +26,68 @@ class News extends \CodeIgniter\Model
 
   public function getAllData(object $paging = null)
   {
-    if ($query = $this->sql()->orderBy('berita_tanggal', 'DESC')->paginate($paging->perPage, '', $paging->page)) {
-      $page = $paging->page;
-      $perPage = $paging->perPage;
-      $totalRecords = (int) $this->countAll();
-      $totalPages = (int) ceil($totalRecords / $perPage);
+    $query = $this->queryGetData()->orderBy('a.berita_tanggal', 'DESC')->paginate($paging->perPage, '', $paging->page);
 
-      if ($paging->page > $totalPages) throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
-
-      foreach ($query as $row) {
-        $data[] = $this->data($row);
-      }
-
-      return [
-        'success' => true,
-        'response' => [
-          'data' => $data,
-          'page' => $page,
-          'perPage' => $perPage,
-          'totalPages' => $totalPages,
-          'totalRecords' => $totalRecords
-        ]
-      ];
+    if (! $query) {
+      throw new \RuntimeException('Permintaan data gagal diproses!');
     }
-    return false;
+
+    $page = $paging->page;
+    $perPage = $paging->perPage;
+    $totalRecords = $this->countAll();
+    $totalPages = ceil($totalRecords / $perPage);
+
+    if ($page > $totalPages) {
+      throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
+    }
+
+    foreach ($query as $row) {
+      $data[] = $this->data($row);
+    }
+
+    return [
+      'success' => true,
+      'response' => [
+        'data' => $data,
+        'page' => $page,
+        'perPage' => $perPage,
+        'totalPages' => $totalPages,
+        'totalRecords' => $totalRecords
+      ]
+    ];
+  }
+
+  public function getDataByCategory($category, $paging)
+  {
+    $query = $this->queryGetData()->where('b.kategori_seo', $category)->findAll($paging->perPage, $paging->page);
+
+    if (! $query) {
+      throw new \RuntimeException('Permintaan data gagal diproses!');
+    }
+
+    $page = $paging->page;
+    $perPage = $paging->perPage;
+    $totalRecords = $this->countAllResults();
+    $totalPages = ceil($totalRecords / $perPage);
+
+    if ($page > $totalPages) {
+      throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
+    }
+
+    foreach ($query as $row) {
+      $data[] = $this->data($row);
+    }
+
+    return [
+      'success' => true,
+      'response' => [
+        'data' => $data,
+        'page' => $page,
+        'perPage' => $perPage,
+        'totalPages' => $totalPages,
+        'totalRecords' => $totalRecords
+      ]
+    ];
   }
 
   public function createData($post, $img)
@@ -75,24 +113,35 @@ class News extends \CodeIgniter\Model
         'berita_tag' => $tag
       ];
 
-      if ($this->insert($data)) {
-        return [
-          'success' => true,
-          'status' => 201,
-          'message' => 'Data berita berhasil disimpan'
-        ];
+      $query = $this->insert($data);
+
+      if (! $query) {
+        throw new \RuntimeException('Data gagal disimpan');
       }
-      return false;
+
+      return [
+        'success' => true,
+        'status' => 201,
+        'message' => 'Data berita berhasil disimpan'
+      ];
     }
     throw new \RuntimeException($img->getErrorString() . '(' . $img->getError() . ')');
   }
 
   public function showData($id)
   {
-    if ($row = $this->sql()->find($id)) {
-      return ['data' => $this->data($row)];
+    $query = $this->sql()->find($id);
+
+    if (! $query) {
+      throw new \RuntimeException('Permintaan data gagal diproses!');
     }
-    return false;
+
+    return [
+      'success' => true,
+      'response' =>[
+        'data' => $this->data($query)
+      ]
+    ];
   }
 
   public function updateData($id, $put)
@@ -111,48 +160,58 @@ class News extends \CodeIgniter\Model
       'berita_tag' => $put->tag
     ];
 
-    if ($this->update($id, $data)) {
-      return [
-        'success' => true,
-        'status' => 200,
-        'message' => 'Data berita berhasil diperbarui'
-      ];
+    $query = $this->update($id, $data);
+
+    if (! $query) {
+      throw new \RuntimeException('Data gagal disimpan');
     }
-    return false;
+
+    return [
+      'success' => true,
+      'status' => 200,
+      'message' => 'Data berita berhasil diperbarui'
+    ];
   }
 
   public function deleteData($id)
   {
-    if ($this->find($id)) {
-      $this->delete($id);
-      return [
-        'success' => true,
-        'status' => 200,
-        'messages' => 'Data berita berhasil dihapus'
-      ];
+    $query = $this->delete($id);
+
+    if (! $query) {
+      throw new \RuntimeException('Data gagal dihapus!');
     }
-    return false;
+
+    return [
+      'success' => true,
+      'status' => 200,
+      'messages' => 'Data berita berhasil dihapus'
+    ];
   }
 
   private function data($row)
   {
     return [
       'news_id' => $row->berita_id,
+      'news_category_id' => $row->kategori_id,
       'news_title' => $row->berita_judul,
       'news_seo' => $row->berita_seo,
       'news_img' => $this->imgUrl() . $row->berita_gambar,
       'news_tag' => $row->berita_tag,
       'news_date' => $row->berita_tanggal,
-      'news_editor' => $row->pengguna_nama_depan . ' ' . $row->pengguna_nama_belakang,
-      'news_category' => $row->kategori_nama,
+      'news_read' => $row->berita_dibaca,
+      'news_editor' => $row->editor,
+      'category_name' => $row->kategori_nama,
       'news_content' => $row->berita_isi
     ];
   }
 
-  private function sql()
+  private function queryGetData()
   {
-    $this->join('ref_kategori', 'tabel_berita.kategori_id = ref_kategori.kategori_id', 'left');
-    $this->join('tabel_pengguna', 'tabel_berita.pengguna_id = tabel_pengguna.pengguna_id', 'left');
+    $this->select('a.berita_id, a.kategori_id, a.berita_judul, a.berita_seo, a.berita_isi, a.berita_tanggal, a.berita_gambar, a.berita_tag, a.berita_headline, a.berita_dibaca');
+    $this->select('b.kategori_nama');
+    $this->select('CONCAT_WS(\' \', c.pengguna_nama_depan, c.pengguna_nama_belakang ) AS editor');
+    $this->join('ref_kategori AS b', 'a.kategori_id = b.kategori_id', 'left');
+    $this->join('tabel_pengguna AS c', 'a.pengguna_id = c.pengguna_id', 'left');
     return $this;
   }
 

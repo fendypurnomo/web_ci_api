@@ -18,24 +18,21 @@ class News extends \App\Controllers\Fendy\BaseAdminController
   /**
    * Get all data news
    */
-  function index()
+  public function index()
   {
     try {
       $query = $this->model->getAllData(getRequestQueryParamPagination());
       return $this->respond($query);
     }
     catch (Exception $e) {
-      return $this->respond([
-        'success' => false,
-        'messages' => $e->getMessage()
-      ]);
+      return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
     }
   }
 
   /**
    * Create data news
    */
-  function create()
+  public function create()
   {
     try {
       if ($this->validate($this->rules->createNews)) {
@@ -57,7 +54,7 @@ class News extends \App\Controllers\Fendy\BaseAdminController
   /**
    * Get single data news
    */
-  function show($id = null)
+  public function show($id = null)
   {
     try {
       $query = $this->model->showData($id);
@@ -71,7 +68,7 @@ class News extends \App\Controllers\Fendy\BaseAdminController
   /**
    * Get single data news
    */
-  function edit($id = null)
+  public function edit($id = null)
   {
     return $this->show($id);
   }
@@ -79,7 +76,7 @@ class News extends \App\Controllers\Fendy\BaseAdminController
   /**
    * Update data news
    */
-  function update($id = null)
+  public function update($id = null)
   {
     try {
       if ($this->validate($this->rules->createNews)) {
@@ -100,11 +97,22 @@ class News extends \App\Controllers\Fendy\BaseAdminController
   /**
    * Delete single data news
    */
-  function delete($id = null)
+  public function delete($id = null)
   {
     try {
       $query = $this->model->deleteData($id);
       return $this->respondDeleted($query);
+    }
+    catch (Exception $e) {
+      return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
+    }
+  }
+
+  public function getDataByCategory(string $category = null)
+  {
+    try {
+      $query = $this->model->getDataByCategory($category, getRequestQueryParamPagination());
+      return $this->respond($query);
     }
     catch (Exception $e) {
       return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
