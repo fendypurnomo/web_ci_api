@@ -12,17 +12,20 @@ function sendmail(array $data)
   $email->initialize([
     'protocol' => 'smtp',
     'mailPath' => '/usr/sbin/sendmail',
-    'SMTPHost' => 'smtp.googlemail.com',       // or smtp.gmail.com
+    'SMTPHost' => 'smtp.googlemail.com', // or smtp.gmail.com
     'SMTPUser' => 'masfendypurnomo@gmail.com',
     'SMTPPass' => 'Fendy@Google.234',
-    'SMTPCrypto' => 'ssl',                     // or tls
-    'SMTPPort' => 456,                         // or 587
+    'SMTPCrypto' => 'ssl', // or tls
+    'SMTPPort' => 456, // or 587
     'SMTPTimeout' => 60,
     'wordWrap' => true,
     'mailType' => 'html',
     'charset' => 'UTF-8'
   ]);
 
-  if ($email->send()) return true;
+  if ($email->send()) {
+    return true;
+  }
+
   return $email->printDebugger(['headers']);
 }

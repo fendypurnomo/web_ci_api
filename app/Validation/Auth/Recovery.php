@@ -45,21 +45,7 @@ class Recovery
     ]
   ];
 
-  public $checkOTPCodeInvalid	= [
-    'success' => false,
-    'error' => 'checkOTPCodeInvalid',
-    'messages' => 'Kode OTP yang Anda masukkan tidak valid!'
-  ];
-
-  public $checkOTPCodeFailed = [
-    'success' => false,
-    'error' => 'checkOTPCodeFailed',
-    'messages' => 'Terjadi kesalahan. Permintaan Anda tidak dapat diproses!'
-  ];
-
-  public $createNewPasswordFailed = [
-    'success' => false,
-    'error' => 'createNewPasswordFailed',
-    'messages' => 'Terjadi kesalahan. Permintaan Anda tidak dapat diproses!'
-  ];
+  public $checkOTPCodeInvalid	= 'Kode OTP yang Anda masukkan tidak valid!';
+  public $createNewPasswordFailed = 'Terjadi kesalahan. Data Anda tidak dapat kami temukan, permintaan Anda tidak dapat diproses!';
+  public $errorTokenInvalid = 'Terjadi kesalahan. Token Anda tidak valid, permintaan Anda tidak dapat diproses!';
 }

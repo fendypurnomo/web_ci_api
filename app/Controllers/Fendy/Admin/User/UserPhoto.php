@@ -34,10 +34,7 @@ class UserPhoto extends \App\Controllers\BaseController {
       return \Config\Services::response()->setJSON($data);
     }
     catch (Exception $e) {
-      return \Config\Services::response()->setJSON([
-        'success' => false,
-        'messages' => $e->getMessage()
-      ]);
+      return \Config\Services::response()->setJSON(['success' => false, 'messages' => $e->getMessage()]);
     }
   }
 
@@ -70,10 +67,7 @@ class UserPhoto extends \App\Controllers\BaseController {
       ]);
     }
     catch (Exception $e) {
-      return \Config\Services::response()->setJSON([
-        'success' => false,
-        'messages' => $e->getMessage()
-      ]);
+      return \Config\Services::response()->setJSON(['success' => false, 'messages' => $e->getMessage()]);
     }
   }
 }

@@ -29,7 +29,7 @@ class Comment extends \App\Controllers\Fendy\BaseAdminController
   }
 
   /**
-   * Create single data comment
+   * Create data comment
    */
   public function create()
   {
@@ -72,7 +72,7 @@ class Comment extends \App\Controllers\Fendy\BaseAdminController
   }
 
   /**
-   * Update single data comment
+   * Update data comment
    */
   public function update($id = null)
   {

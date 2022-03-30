@@ -15,12 +15,6 @@ class Signup extends \App\Controllers\Fendy\BaseAuthController
   // Index user signup
   public function index()
   {
-    return $this->signup();
-  }
-
-  // Create user signup
-  private function signup()
-  {
     if ($this->validate($this->rules->signup)) {
       $post = getRequest();
       $username = username($post->firstname . $post->lastname);

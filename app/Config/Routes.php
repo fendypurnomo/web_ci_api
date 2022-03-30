@@ -38,8 +38,17 @@ $routes->group('/', function ($routes) {
   $routes->group('auth', function ($routes) {
     $routes->post('signin', 'Fendy\Auth\Signin');
     $routes->post('signup', 'Fendy\Auth\Signup');
-    $routes->post('recovery', 'Fendy\Auth\Recovery');
-    $routes->add('activation', 'Fendy\Auth\Activation');
+
+    $routes->group('recovery', function ($routes) {
+      $routes->post('checkEmailAddress', 'Fendy\Auth\Recovery::checkEmailAddress');
+      $routes->post('checkOTPCode', 'Fendy\Auth\Recovery::checkOTPCode');
+      $routes->post('createNewPassword', 'Fendy\Auth\Recovery::createNewPassword');
+    });
+
+    $routes->group('activation', function ($routes) {
+      $routes->get('confirmActivation', 'Fendy\Auth\Activation::confirmActivation');
+      $routes->post('requestActivation', 'Fendy\Auth\Activation::requestActivation');
+    });
   });
 
   /* Fendy Web API Routes */

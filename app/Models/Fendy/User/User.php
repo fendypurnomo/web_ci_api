@@ -52,9 +52,12 @@ class User extends \CodeIgniter\Model
     ];
 
     if ($user->pengguna_nama != $put->username) {
-      if (! $this->checkUsernameAvailability($put->username)) throw new \RuntimeException('Nama pengguna tidak tersedia!');
+      if (! $this->checkUsernameAvailability($put->username)) {
+        throw new \RuntimeException('Nama pengguna yang Anda masukkan telah terpakai!');
+      }
       $data = array_merge($data, ['pengguna_nama' => $put->username]);
     }
+
     $this->update($user->pengguna_id, $data);
   }
 
@@ -67,14 +70,18 @@ class User extends \CodeIgniter\Model
     if ($put->currentPassword === $put->newPassword) {
       throw new \RuntimeException($rules->newPasswordEqualToCurrentPassword);
     }
+
     $this->update($user->pengguna_id, ['pengguna_sandi' => $put->newPassword]);
   }
 
   public function checkUsernameAvailability($username)
   {
-    if ($this->where('pengguna_nama', $username)->first()) {
+    $query = $this->where('pengguna_nama', $username)->first();
+
+    if ($query) {
       return false;
     }
+
     return true;
   }
 }

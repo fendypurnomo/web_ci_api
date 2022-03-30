@@ -30,7 +30,7 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
   }
 
   /**
-   * Create single data category
+   * Create data category
    */
   public function create()
   {
@@ -73,7 +73,7 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
   }
 
   /**
-   * Update single data category
+   * Update data category
    */
   public function update($id = null)
   {

@@ -15,12 +15,6 @@ class Signin extends \App\Controllers\Fendy\BaseAuthController
   // Index user signin
   public function index()
   {
-    return $this->signin();
-  }
-
-  // Authentication user signin
-  private function signin()
-  {
     if ($this->validate($this->rules->signin)) {
       $post = getRequest();
 
@@ -29,7 +23,7 @@ class Signin extends \App\Controllers\Fendy\BaseAuthController
           if ($row->pengguna_blokir == 0) {
             if (password_verify($post->password, $row->pengguna_sandi)) {
 
-              $model = new \App\Controllers\Fendy\Admin\Akun\Userphoto();
+              $model = new \App\Controllers\Fendy\Admin\User\Userphoto();
               $photo = $model->getCurrentPhotoProfile($row->pengguna_id, 'string');
 
               $accessToken = createToken([

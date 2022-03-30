@@ -24,7 +24,10 @@ function getToken(): string
 {
   $authorization = \Config\Services::request()->getServer('HTTP_AUTHORIZATION');
 
-  if (is_null($authorization)) throw new Exception('Permintaan Anda tidak dapat kami proses. Anda tidak memiliki akses token yang valid!');
+  if (is_null($authorization)) {
+    throw new \RuntimeException('Permintaan Anda tidak dapat kami proses. Anda tidak memiliki akses token yang valid!');
+  }
+
   return explode(' ', $authorization)[1];
 }
 
@@ -35,10 +38,13 @@ function decodeToken(string $token): object
 
 function checkIDUserToken(int $id)
 {
-  $model = new App\Models\Fendy\Akun\User();
+  $model = new App\Models\Fendy\User\User();
   $query = $model->find($id);
 
-  if (!$query) throw new Exception('Maaf, kami tidak dapat menemukan akun Anda!');
+  if (!$query) {
+    throw new \RuntimeException('Maaf, kami tidak dapat menemukan akun Anda!');
+  }
+
   return $query;
 }
 

@@ -49,15 +49,11 @@ class User extends \App\Controllers\Fendy\BaseAdminController
       ]);
     }
     catch (Exception $e) {
-      return $this->respond([
-        'success' => false,
-        'error' => 'badRequest',
-        'messages' => $e->getMessage()
-      ]);
+      return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
     }
   }
 
-  // Change password
+  // Update password
   public function updatePassword()
   {
     try {
@@ -78,11 +74,7 @@ class User extends \App\Controllers\Fendy\BaseAdminController
       ]);
     }
     catch (Exception $e) {
-      return $this->respond([
-        'success' => false,
-        'error' => 'badRequest',
-        'messages' => $e->getMessage()
-      ]);
+      return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
     }
   }
 

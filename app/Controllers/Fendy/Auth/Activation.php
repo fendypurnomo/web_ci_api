@@ -14,25 +14,12 @@ class Activation extends \App\Controllers\Fendy\BaseAuthController
     $this->rules = new \App\Validation\Auth\Activation;
   }
 
-  // Index activate account user
-  public function index()
-  {
-    $method = $this->request->getMethod(true);
-
-    if ($method === 'GET') {
-      return $this->confirmActivation();
-    } elseif ($method === 'POST') {
-      return $this->requestActivation();
-    } else {
-      return $this->respond($this->requestNotFound);
-    }
-  }
-
-  // Activate account user
-  private function confirmActivation()
+  // Confirm activation
+  public function confirmActivation()
   {
     try {
-      $decode = decodeToken(getRequestQueryParam('code'));
+      $token = getRequestQueryParam('code');
+      $decode = decodeToken($token);
 
       if ($row = $this->model->find($decode->data->id)) {
         if ($row->pengguna_aktivasi != 1) {
@@ -49,13 +36,14 @@ class Activation extends \App\Controllers\Fendy\BaseAuthController
       }
 
       return $this->respond($this->requestNotFound);
-    } catch (Exception $e) {
-      return $this->fail($e->getMessage());
+    }
+    catch (Exception $e) {
+      return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
     }
   }
 
-  // Request activate account user
-  private function requestActivation()
+  // Request activation
+  public function requestActivation()
   {
     if ($this->validate($this->rules->activation)) {
       $post = getRequest();

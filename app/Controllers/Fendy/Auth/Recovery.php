@@ -14,28 +14,8 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
     $this->rules = new \App\Validation\Auth\Recovery;
   }
 
-  // Index recovery account
-  public function index()
-  {
-    try {
-      $req = getRequestQueryParam('req');
-
-      if ($req === 'checkEmailAddress') {
-        return $this->checkEmailAddress();
-      } elseif ($req === 'checkOTPCode') {
-        return $this->checkOTPCode();
-      } elseif ($req === 'createNewPassword') {
-        return $this->createNewPassword();
-      } else {
-        return $this->respond($this->requestNotFound);
-      }
-    } catch (Exception $e) {
-      return $this->fail($e->getMessage());
-    }
-  }
-
   // Check user email address
-  private function checkEmailAddress()
+  public function checkEmailAddress()
   {
     if ($this->validate($this->rules->checkEmailAddress)) {
       $row = $this->model->where('pengguna_email', getRequest()->email)->first();
@@ -58,7 +38,7 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
       return $this->respond([
         'success' => true,
         'status' => 200,
-        'isEmailVerified' => 'EMAIL_VERIFIED',
+        'isEmailVerified' => true,
         'accessToken' => $accessToken,
         'messages' => 'Permintaan setel ulang kata sandi berhasil. Buka pesan baru email Anda dan masukkan kode OTP yang telah Kami kirim'
       ]);
@@ -72,15 +52,17 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
   }
 
   // Check user OTP Code validation
-  private function checkOTPCode()
+  public function checkOTPCode()
   {
     try {
       if ($this->validate($this->rules->checkOTPCode)) {
-        $decode = decodeToken(getRequestQueryParam('token'));
+        $post = getRequest();
+        $token = getRequestQueryParam('token');
+        $decode = decodeToken($token);
+        $data = $decode->data;
+        $isEmailVerified = $data->isEmailVerified;
 
-        if ($decode->data->isEmailVerified) {
-          $post = getRequest();
-
+        if ($isEmailVerified) {
           if ($this->model->where(['pengguna_email' => $decode->data->email, 'pengguna_kode_otp' => $post->otp])->first()) {
             $accessToken = createToken([
               'id' => $decode->data->id,
@@ -99,10 +81,10 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
             ]);
           }
 
-          return $this->respond($this->rules->checkOTPCodeInvalid);
+          throw new \RuntimeException($this->rules->checkOTPCodeInvalid);
         }
 
-        return $this->respond($this->rules->checkOTPCodeFailed);
+        throw new \RuntimeException($this->rules->errorTokenInvalid);
       }
 
       return $this->respond([
@@ -110,22 +92,27 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
         'error' => 'badRequest',
         'messages' => $this->validator->getErrors()
       ]);
-    } catch (Exception $e) {
-      return $this->fail($e->getMessage());
+    }
+    catch (Exception $e) {
+      return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
     }
   }
 
   // Reset password user
-  private function createNewPassword()
+  public function createNewPassword()
   {
     try {
       if ($this->validate($this->rules->createNewPassword)) {
-        $decode = decodeToken(getRequestQueryParam('token'));
+        $post = getRequest();
+        $token = getRequestQueryParam('token');
+        $decode = decodeToken($token);
         $data = $decode->data;
+        $isEmailVerified = $data->isEmailVerified;
+        $isOTPVerified = $data->isOTPVerified;
 
-        if ($data->isEmailVerified && $data->isOTPVerified) {
+        if ($isEmailVerified && $isOTPVerified) {
           if ($row = $this->model->where(['pengguna_email' => $data->email, 'pengguna_kode_otp' => $data->otp])->first()) {
-            $this->model->update($row->pengguna_id, ['pengguna_sandi' => getRequest()->newPassword, 'pengguna_kode_otp' => null]);
+            $this->model->update($row->pengguna_id, ['pengguna_sandi' => $post->newPassword, 'pengguna_kode_otp' => null]);
 
             return $this->respondUpdated([
               'success' => true,
@@ -134,10 +121,10 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
             ]);
           }
 
-          return $this->respond($this->rules->createNewPasswordFailed);
+          throw new \RuntimeException($this->rules->createNewPasswordFailed);
         }
 
-        return $this->respond($this->rules->createNewPasswordFailed);
+        throw new \RuntimeException($this->rules->errorTokenInvalid);
       }
 
       return $this->respond([
@@ -145,8 +132,9 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
         'error' => 'badRequest',
         'messages' => $this->validator->getErrors()
       ]);
-    } catch (Exception $e) {
-      return $this->fail($e->getMessage());
+    }
+    catch (Exception $e) {
+      return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
     }
   }
 }

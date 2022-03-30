@@ -30,7 +30,7 @@ class Tag extends \App\Controllers\Fendy\BaseAdminController
   }
 
   /**
-   * Create single data tag
+   * Create data tag
    */
   public function create()
   {
@@ -73,7 +73,7 @@ class Tag extends \App\Controllers\Fendy\BaseAdminController
   }
 
   /**
-   * Update single data tag
+   * Update data tag
    */
   public function update($id = null)
   {

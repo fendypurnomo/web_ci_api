@@ -15,7 +15,6 @@ class BaseAuthController extends \CodeIgniter\RESTful\BaseResource
   public function __construct()
   {
     helper(['request', 'sendmail', 'stringreplace', 'text', 'token']);
-
-    $this->model = new \App\Models\Fendy\Akun\User;
+    $this->model = new \App\Models\Fendy\User\User;
   }
 }
