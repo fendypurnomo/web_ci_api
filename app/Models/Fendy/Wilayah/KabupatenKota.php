@@ -59,7 +59,12 @@ class KabupatenKota extends \CodeIgniter\Model
   public function showData($id)
   {
     if ($row = $this->find($id)) {
-      return ['data' => $this->data($row)];
+      return [
+        'success' => true,
+        'response' => [
+          'data' => $this->data($row)
+        ]
+      ];
     }
     return false;
   }

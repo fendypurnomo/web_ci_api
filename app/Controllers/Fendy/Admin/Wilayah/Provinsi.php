@@ -23,7 +23,8 @@ class Provinsi extends \App\Controllers\Fendy\BaseAdminController
     try {
       if ($get = $this->model->getAllData(getRequestQueryParamPagination()))
       return $this->respond($get);
-    } catch (Exception $e) {
+    }
+    catch (Exception $e) {
       return $this->respond([
         'success' => false,
         'messages' => $e->getMessage()
