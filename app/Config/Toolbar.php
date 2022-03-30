@@ -14,7 +14,6 @@ use CodeIgniter\Debug\Toolbar\Collectors\Views;
  * --------------------------------------------------------------------------
  * Debug Toolbar
  * --------------------------------------------------------------------------
- *
  * The Debug Toolbar provides a way to see information about the performance
  * and state of your application during that page display. By default it will
  * NOT be displayed under production environments, and will only display if

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models\Fendy\Akun;
+namespace App\Models\Fendy\User;
 
-class Userphoto extends \CodeIgniter\Model
+class UserPhoto extends \CodeIgniter\Model
 {
   protected $table = 'tabel_foto_profil';
   protected $primaryKey = 'foto_id';

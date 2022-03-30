@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Controllers\Fendy\Admin\Berita;
+namespace App\Controllers\Fendy\Admin\Blog;
 
 use Exception;
 
-class Category extends \App\Controllers\Fendy\BaseAdminController
+class Tag extends \App\Controllers\Fendy\BaseAdminController
 {
-  protected $modelName = 'App\Models\Fendy\Berita\Category';
+  protected $modelName = 'App\Models\Fendy\Blog\Tag';
   protected $rules;
 
   public function __construct()
   {
     parent::__construct();
-    $this->rules = new \App\Validation\Admin\Category;
+    $this->rules = new \App\Validation\Admin\Blog\Tag;
   }
 
   /**
-   * Get all data categories
+   * Get all data tags
    */
-  function index()
+  public function index()
   {
     try {
       if ($get = $this->model->getAllData(getRequestQueryParamPagination()))
@@ -33,11 +33,11 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
   }
 
   /**
-   * Create single data category
+   * Create single data tag
    */
-  function create()
+  public function create()
   {
-    if ($this->validate($this->rules->createCategory)) {
+    if ($this->validate($this->rules->createTag)) {
       if ($add = $this->model->createData(getRequest())) {
         return $this->respondCreated($add);
       }
@@ -50,9 +50,9 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
   }
 
   /**
-   * Get single data category
+   * Get single data tag
    */
-  function show($id = null)
+  public function show($id = null)
   {
     if ($get = $this->model->showData($id)) {
       return $this->respond($get);
@@ -61,22 +61,23 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
   }
 
   /**
-   * Get single data category
+   * Get single data tag
    */
-  function edit($id = null)
+  public function edit($id = null)
   {
     return $this->show($id);
   }
 
   /**
-   * Update single data category
+   * Update single data tag
    */
-  function update($id = null)
+  public function update($id = null)
   {
-    if ($this->validate($this->rules->createCategory)) {
+    if ($this->validate($this->rules->createTag)) {
       if ($put = $this->model->update($id, getRequest())) {
         return $this->respondUpdated($put);
       }
+      return $this->fail($this->requestCantProcessed);
     }
     return $this->respond([
       'success' => false,
@@ -86,9 +87,9 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
   }
 
   /**
-   * Delete single data category
+   * Delete single data tag
    */
-  function delete($id = null)
+  public function delete($id = null)
   {
     if ($del = $this->model->deleteData($id)) {
       return $this->respondDeleted($del);

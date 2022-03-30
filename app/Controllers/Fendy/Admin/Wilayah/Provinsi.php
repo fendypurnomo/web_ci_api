@@ -12,7 +12,7 @@ class Provinsi extends \App\Controllers\Fendy\BaseAdminController
   public function __construct()
   {
     parent::__construct();
-    $this->rules = new \App\Validation\Admin\Wilayah;
+    $this->rules = new \App\Validation\Admin\Wilayah\Provinsi;
   }
 
   /**
@@ -36,7 +36,7 @@ class Provinsi extends \App\Controllers\Fendy\BaseAdminController
    */
   public function create()
   {
-    if ($this->validate($this->rules->provinsi)) {
+    if ($this->validate($this->rules->tambahProvinsi)) {
       if ($add = $this->model->createData(getRequest())) {
         return $this->respondCreated($add);
       }
@@ -72,7 +72,7 @@ class Provinsi extends \App\Controllers\Fendy\BaseAdminController
    */
   public function update($id = null)
   {
-    if ($this->validate($this->rules->provinsi)) {
+    if ($this->validate($this->rules->tambahProvinsi)) {
       if ($put = $this->model->updateData($id, getRequest())) {
         return $this->respondUpdated($put);
       }

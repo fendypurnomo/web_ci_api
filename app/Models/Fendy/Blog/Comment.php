@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Fendy\Berita;
+namespace App\Models\Fendy\Blog;
 
 class Comment extends \CodeIgniter\Model
 {

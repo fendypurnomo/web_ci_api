@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Validation\Admin;
+namespace App\Validation\Admin\User;
 
 class Userphoto
 {
-  public $uploadPhoto = [
+  public $uploadPhotoProfile = [
     'img' => [
       'rules' => 'uploaded[img]|max_size[img,1024]|ext_in[img,png,jpg,jpeg,gif]|is_image[img]',
       'errors' => [

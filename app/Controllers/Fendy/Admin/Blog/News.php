@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Controllers\Fendy\Admin\Berita;
+namespace App\Controllers\Fendy\Admin\Blog;
 
 use Exception;
 
 class News extends \App\Controllers\Fendy\BaseAdminController
 {
-  protected $modelName = 'App\Models\Fendy\Berita\News';
+  protected $modelName = 'App\Models\Fendy\Blog\News';
   protected $rules;
 
   public function __construct()
   {
     parent::__construct();
-    $this->rules = new \App\Validation\Admin\News;
+    $this->rules = new \App\Validation\Admin\Blog\News;
   }
 
 	/**

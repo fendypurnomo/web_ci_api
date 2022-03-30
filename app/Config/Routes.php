@@ -7,7 +7,9 @@ $routes = Services::routes();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
-if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {require SYSTEMPATH . 'Config/Routes.php';}
+if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
+  require SYSTEMPATH . 'Config/Routes.php';
+}
 
 /*
 |--------------------------------------------------------------------
@@ -44,39 +46,39 @@ $routes->group('/', function ($routes) {
   $routes->group('fendy', function ($routes) {
     // Akun Routes
     $routes->group('accounts', function ($routes) {
-      $routes->get('/', 'Fendy\Admin\Akun\User');
-      $routes->put('updatePersonalInformation', 'Fendy\Admin\Akun\User::updatePersonalInformation');
-      $routes->put('updatePassword', 'Fendy\Admin\Akun\User::updatePassword');
-      $routes->get('getCurrentPhotoProfile/(:num)', 'Fendy\Admin\Akun\Userphoto::getCurrentPhotoProfile/$1');
-      $routes->get('getAllPhotoProfile/(:num)', 'Fendy\Admin\Akun\Userphoto::getAllPhotoProfile/$1');
-      $routes->post('uploadPhotoProfile', 'Fendy\Admin\Akun\Userphoto::uploadPhotoProfile');
+      $routes->get('/', 'Fendy\Admin\User\User');
+      $routes->put('updatePersonalInformation', 'Fendy\Admin\User\User::updatePersonalInformation');
+      $routes->put('updatePassword', 'Fendy\Admin\User\User::updatePassword');
+      $routes->get('getCurrentPhotoProfile/(:num)', 'Fendy\Admin\User\UserPhoto::getCurrentPhotoProfile/$1');
+      $routes->get('getAllPhotoProfile/(:num)', 'Fendy\Admin\User\UserPhoto::getAllPhotoProfile/$1');
+      $routes->post('uploadPhotoProfile', 'Fendy\Admin\User\UserPhoto::uploadPhotoProfile');
     });
 
     // Berita Routes
-    $routes->resource('categories', ['controller' => 'Fendy\Admin\Berita\Category']);
-    $routes->resource('tags', ['controller' => 'Fendy\Admin\Berita\Tag']);
-    $routes->resource('news', ['controller' => 'Fendy\Admin\Berita\News']);
-    $routes->resource('comments', ['controller' => 'Fendy\Admin\Berita\Comment']);
+    $routes->resource('categories', ['controller' => 'Fendy\Admin\Blog\Category']);
+    $routes->resource('tags', ['controller' => 'Fendy\Admin\Blog\Tag']);
+    $routes->resource('news', ['controller' => 'Fendy\Admin\Blog\News']);
+    $routes->resource('comments', ['controller' => 'Fendy\Admin\Blog\Comment']);
     $routes->resource('messages', ['controller' => 'Fendy\Admin\Message']);
 
     // Wilayah Routes
     $routes->group('wilayah', function ($routes) {
       $routes->resource('provinsi', ['controller' => 'Fendy\Admin\Wilayah\Provinsi']);
-      $routes->resource('kabupatenKota', ['controller' => 'Fendy\Admin\Wilayah\Kabupatenkota']);
+      $routes->resource('kabupatenKota', ['controller' => 'Fendy\Admin\Wilayah\KabupatenKota']);
       $routes->resource('kecamatan', ['controller' => 'Fendy\Admin\Wilayah\Kecamatan']);
-      $routes->resource('kelurahanDesa', ['controller' => 'Fendy\Admin\Wilayah\Kelurahandesa']);
+      $routes->resource('kelurahanDesa', ['controller' => 'Fendy\Admin\Wilayah\KelurahanDesa']);
     });
   });
 
   $routes->group('blog', function ($routes) {
-    $routes->get('categories', 'Fendy\Admin\Berita\Category');
-    $routes->get('categories/(:num)', 'Fendy\Admin\Berita\Category::show/$1');
-    $routes->get('tags', 'Fendy\Admin\Berita\Tag');
-    $routes->get('tags/(:num)', 'Fendy\Admin\Berita\Tag::show/$1');
-    $routes->get('news', 'Fendy\Admin\Berita\News');
-    $routes->get('news/(:num)', 'Fendy\Admin\Berita\News::show/$1');
-    $routes->get('comments', 'Fendy\Admin\Berita\comment');
-    $routes->get('comments/(:num)', 'Fendy\Admin\Berita\comment::show/$1');
+    $routes->get('categories', 'Fendy\Admin\Blog\Category');
+    $routes->get('categories/(:num)', 'Fendy\Admin\Blog\Category::show/$1');
+    $routes->get('tags', 'Fendy\Admin\Blog\Tag');
+    $routes->get('tags/(:num)', 'Fendy\Admin\Blog\Tag::show/$1');
+    $routes->get('news', 'Fendy\Admin\Blog\News');
+    $routes->get('news/(:num)', 'Fendy\Admin\Blog\News::show/$1');
+    $routes->get('comments', 'Fendy\Admin\Blog\comment');
+    $routes->get('comments/(:num)', 'Fendy\Admin\Blog\comment::show/$1');
     $routes->post('messages', 'Fendy\Admin\Message::create');
 
     $routes->group('wilayah', function ($routes) {
@@ -126,4 +128,6 @@ $routes->group('/', function ($routes) {
 | You will have access to the $routes object within that file without
 | needing to reload it.
 */
-if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';}
+if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
+  require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+}

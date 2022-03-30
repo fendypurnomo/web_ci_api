@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Fendy\Akun;
+namespace App\Models\Fendy\User;
 
 class User extends \CodeIgniter\Model
 {
@@ -59,7 +59,7 @@ class User extends \CodeIgniter\Model
   }
 
   public function updatePassword($put, $user) {
-    $rules = new \App\Validation\Admin\User;
+    $rules = new \App\Validation\Admin\User\User;
 
     if (! password_verify($put->currentPassword, $user->pengguna_sandi)) {
       throw new \RuntimeException($rules->currentPasswordWrong);

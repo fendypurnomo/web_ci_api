@@ -4,7 +4,7 @@ namespace App\Controllers\Fendy\Admin\Wilayah;
 
 use Exception;
 
-class Kelurahandesa extends \App\Controllers\Fendy\BaseAdminController
+class KelurahanDesa extends \App\Controllers\Fendy\BaseAdminController
 {
   protected $modelName = 'App\Models\Fendy\Wilayah\KelurahanDesa';
   protected $rules;
@@ -12,7 +12,7 @@ class Kelurahandesa extends \App\Controllers\Fendy\BaseAdminController
   public function __construct()
   {
     parent::__construct();
-    $this->rules = new \App\Validation\Admin\Wilayah;
+    $this->rules = new \App\Validation\Admin\Wilayah\KelurahanDesa;
   }
 
   /**
@@ -36,7 +36,7 @@ class Kelurahandesa extends \App\Controllers\Fendy\BaseAdminController
    */
   public function create()
   {
-    if ($this->validate($this->rules->kelurahanDesa)) {
+    if ($this->validate($this->rules->tambahKelurahanDesa)) {
       if ($add = $this->model->insert(getRequest())) {
         return $this->respondCreated($add);
       }
@@ -72,7 +72,7 @@ class Kelurahandesa extends \App\Controllers\Fendy\BaseAdminController
    */
   public function update($id = null)
   {
-    if ($this->validate($this->rules->kelurahanDesa)) {
+    if ($this->validate($this->rules->tambahKelurahanDesa)) {
       if ($put = $this->model->updateData($id, getRequest())) {
         return $this->respondUpdated($put);
       }

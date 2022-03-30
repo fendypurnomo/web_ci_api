@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Controllers\Fendy\Admin\Akun;
+namespace App\Controllers\Fendy\Admin\User;
 
 use Exception;
 
-class Userphoto extends \App\Controllers\BaseController {
+class UserPhoto extends \App\Controllers\BaseController {
   protected $model;
   protected $rules;
 
   public function __construct()
   {
-    $this->model = new \App\Models\Fendy\Akun\Userphoto;
-    $this->rules = new \App\Validation\Admin\Userphoto;
+    $this->model = new \App\Models\Fendy\User\UserPhoto;
+    $this->rules = new \App\Validation\Admin\User\UserPhoto;
   }
 
   // Get current photo profile
@@ -45,7 +45,7 @@ class Userphoto extends \App\Controllers\BaseController {
   public function uploadPhotoProfile()
   {
     try {
-      if ($this->validate($this->rules->uploadPhoto)) {
+      if ($this->validate($this->rules->uploadPhotoProfile)) {
         $request = \Config\Services::request();
         $img = $request->getFile('img');
   

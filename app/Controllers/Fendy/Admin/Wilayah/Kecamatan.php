@@ -12,7 +12,7 @@ class Kecamatan extends \App\Controllers\Fendy\BaseAdminController
   public function __construct()
   {
     parent::__construct();
-    $this->rules = new \App\Validation\Admin\Wilayah;
+    $this->rules = new \App\Validation\Admin\Wilayah\Kecamatan;
   }
 
   /**
@@ -36,7 +36,7 @@ class Kecamatan extends \App\Controllers\Fendy\BaseAdminController
    */
   public function create()
   {
-    if ($this->validate($this->rules->kecamatan)) {
+    if ($this->validate($this->rules->tambahKecamatan)) {
       if ($add = $this->model->createData(getRequest())) {
         return $this->respondCreated($add);
       }
@@ -72,7 +72,7 @@ class Kecamatan extends \App\Controllers\Fendy\BaseAdminController
    */
   public function update($id = null)
   {
-    if ($this->validate($this->rules->kecamatan)) {
+    if ($this->validate($this->rules->tambahKecamatan)) {
       if ($put = $this->model->updateData($id, getRequest())) {
         return $this->respondUpdated($put);
       }

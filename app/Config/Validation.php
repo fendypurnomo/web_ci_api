@@ -12,7 +12,6 @@ class Validation
   //--------------------------------------------------------------------
   // Setup
   //--------------------------------------------------------------------
-
   /**
    * Stores the classes that contain the
    * rules that are available.
@@ -37,8 +36,4 @@ class Validation
     'list' => 'CodeIgniter\Validation\Views\list',
     'single' => 'CodeIgniter\Validation\Views\single'
   ];
-
-  //--------------------------------------------------------------------
-  // Rules
-  //--------------------------------------------------------------------
 }

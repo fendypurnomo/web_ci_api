@@ -14,8 +14,19 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n  \"username\": \"fendypurnomo\",\r\n  \"password\": \"Fendy.123\"\r\n}\r\n",
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "fendypurnomo",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "Fendy.123",
+									"type": "default"
+								}
+							],
 							"options": {
 								"raw": {
 									"language": "json"
@@ -265,7 +276,14 @@
 							"name": "Accounts",
 							"request": {
 								"auth": {
-									"type": "bearer"
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
 								},
 								"method": "GET",
 								"header": [],
@@ -286,24 +304,29 @@
 							"response": []
 						},
 						{
-							"name": "Update Personal Information",
+							"name": "Get Current Photo Profile",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
 								"auth": {
-									"type": "bearer"
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
 								},
-								"method": "PUT",
+								"method": "GET",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "\r\n{\r\n  \"firstname\": \"\",\r\n  \"lastname\": \"\",\r\n  \"gender\": \"\"\r\n}\r\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": ""
 								},
 								"url": {
-									"raw": "https://api.ci4.local/fendy/accounts?req=updatePersonalInformation",
+									"raw": "https://api.ci4.local/fendy/accounts/getCurrentPhotoProfile/1",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -312,13 +335,117 @@
 									],
 									"path": [
 										"fendy",
-										"accounts"
+										"accounts",
+										"getCurrentPhotoProfile",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Photo Profile",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://api.ci4.local/fendy/accounts/getAllPhotoProfile/1?page=1",
+									"protocol": "https",
+									"host": [
+										"api",
+										"ci4",
+										"local"
+									],
+									"path": [
+										"fendy",
+										"accounts",
+										"getAllPhotoProfile",
+										"1"
 									],
 									"query": [
 										{
-											"key": "req",
-											"value": "updatePersonalInformation"
+											"key": "page",
+											"value": "1"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Personal Information",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "firstname",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "lastname",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "gender",
+											"value": "",
+											"type": "default"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.ci4.local/fendy/accounts/updatePersonalInformation",
+									"protocol": "https",
+									"host": [
+										"api",
+										"ci4",
+										"local"
+									],
+									"path": [
+										"fendy",
+										"accounts",
+										"updatePersonalInformation"
 									]
 								}
 							},
@@ -328,13 +455,36 @@
 							"name": "Update Password",
 							"request": {
 								"auth": {
-									"type": "bearer"
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
 								},
 								"method": "PUT",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "\r\n{\r\n  \"oldPassword\": \"\",\r\n  \"newPassword\": \"\",\r\n  \"confirmNewPassword\": \"\"\r\n}\r\n",
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "currentPassword",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "newPassword",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "confirmNewPassword",
+											"value": "",
+											"type": "default"
+										}
+									],
 									"options": {
 										"raw": {
 											"language": "json"
@@ -342,7 +492,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://api.ci4.local/fendy/accounts?req=changePassword",
+									"raw": "https://api.ci4.local/fendy/accounts/updatePassword",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -351,13 +501,8 @@
 									],
 									"path": [
 										"fendy",
-										"accounts"
-									],
-									"query": [
-										{
-											"key": "req",
-											"value": "changePassword"
-										}
+										"accounts",
+										"updatePassword"
 									]
 								}
 							},
@@ -367,7 +512,14 @@
 							"name": "Upload Photo Profile",
 							"request": {
 								"auth": {
-									"type": "bearer"
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
 								},
 								"method": "POST",
 								"header": [],
@@ -375,14 +527,14 @@
 									"mode": "formdata",
 									"formdata": [
 										{
-											"key": "imgFile",
+											"key": "img",
 											"type": "file",
 											"src": []
 										}
 									]
 								},
 								"url": {
-									"raw": "https://api.ci4.local/fendy/accounts?req=uploadPhotoProfile",
+									"raw": "https://api.ci4.local/fendy/accounts/uploadPhotoProfile",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -391,13 +543,8 @@
 									],
 									"path": [
 										"fendy",
-										"accounts"
-									],
-									"query": [
-										{
-											"key": "req",
-											"value": "uploadPhotoProfile"
-										}
+										"accounts",
+										"uploadPhotoProfile"
 									]
 								}
 							},
@@ -536,6 +683,31 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "Categories - Delete",
+									"request": {
+										"auth": {
+											"type": "bearer"
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://api.ci4.local/fendy/categories/1",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"fendy",
+												"categories",
+												"1"
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						},
@@ -651,6 +823,31 @@
 												}
 											}
 										},
+										"url": {
+											"raw": "https://api.ci4.local/fendy/tags/1",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"fendy",
+												"tags",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Tags - Delete",
+									"request": {
+										"auth": {
+											"type": "bearer"
+										},
+										"method": "DELETE",
+										"header": [],
 										"url": {
 											"raw": "https://api.ci4.local/fendy/tags/1",
 											"protocol": "https",
@@ -817,8 +1014,44 @@
 										"method": "PUT",
 										"header": [],
 										"body": {
-											"mode": "raw",
-											"raw": "\r\n{\r\n  \"\": \"\"\r\n}\r\n",
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "category",
+													"value": "",
+													"type": "default"
+												},
+												{
+													"key": "user",
+													"value": "",
+													"type": "default"
+												},
+												{
+													"key": "title",
+													"value": "",
+													"type": "default"
+												},
+												{
+													"key": "content",
+													"value": "",
+													"type": "default"
+												},
+												{
+													"key": "img",
+													"type": "file",
+													"src": []
+												},
+												{
+													"key": "headline",
+													"value": "",
+													"type": "default"
+												},
+												{
+													"key": "tag",
+													"value": "",
+													"type": "default"
+												}
+											],
 											"options": {
 												"raw": {
 													"language": "json"
@@ -851,7 +1084,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://api.ci4.local/news?/news?page=1&perPage=10&category=",
+											"raw": "https://api.ci4.local/fendy/news?page=1&perPage=10&category=",
 											"protocol": "https",
 											"host": [
 												"api",
@@ -859,11 +1092,12 @@
 												"local"
 											],
 											"path": [
+												"fendy",
 												"news"
 											],
 											"query": [
 												{
-													"key": "/news?page",
+													"key": "page",
 													"value": "1"
 												},
 												{
@@ -888,7 +1122,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://api.ci4.local/news?/news?page=1&perPage=10&tag=",
+											"raw": "https://api.ci4.local/fendy/news?page=1&perPage=10&tag=",
 											"protocol": "https",
 											"host": [
 												"api",
@@ -896,11 +1130,12 @@
 												"local"
 											],
 											"path": [
+												"fendy",
 												"news"
 											],
 											"query": [
 												{
-													"key": "/news?page",
+													"key": "page",
 													"value": "1"
 												},
 												{
@@ -1008,6 +1243,31 @@
 											"path": [
 												"fendy",
 												"messages"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Messages - Delete",
+									"request": {
+										"auth": {
+											"type": "bearer"
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://api.ci4.local/fendy/messages/1",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"fendy",
+												"messages",
+												"1"
 											]
 										}
 									},

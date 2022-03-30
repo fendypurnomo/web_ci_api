@@ -4,7 +4,7 @@ namespace App\Controllers\Fendy\Admin\Wilayah;
 
 use Exception;
 
-class Kabupatenkota extends \App\Controllers\Fendy\BaseAdminController
+class KabupatenKota extends \App\Controllers\Fendy\BaseAdminController
 {
   protected $modelName = 'App\Models\Fendy\Wilayah\KabupatenKota';
   protected $rules;
@@ -12,7 +12,7 @@ class Kabupatenkota extends \App\Controllers\Fendy\BaseAdminController
   public function __construct()
   {
     parent::__construct();
-    $this->rules = new \App\Validation\Admin\Wilayah;
+    $this->rules = new \App\Validation\Admin\Wilayah\KabupatenKota;
   }
 
   /**
@@ -36,7 +36,7 @@ class Kabupatenkota extends \App\Controllers\Fendy\BaseAdminController
    */
   public function create()
   {
-    if ($this->validate($this->rules->kabupatenKota)) {
+    if ($this->validate($this->rules->tambahKabupatenKota)) {
       if ($add = $this->model->createData(getRequest())) {
         return $this->respondCreated($add);
       }
@@ -72,7 +72,7 @@ class Kabupatenkota extends \App\Controllers\Fendy\BaseAdminController
    */
   public function update($id = null)
   {
-    if ($this->validate($this->rules->kabupatenKota)) {
+    if ($this->validate($this->rules->tambahKabupatenKota)) {
       if ($put = $this->model->updateData($id, getRequest())) {
         return $this->respondUpdated($put);
       }

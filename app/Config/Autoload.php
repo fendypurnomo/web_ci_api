@@ -37,7 +37,7 @@ class Autoload extends \CodeIgniter\Config\AutoloadConfig
    * @var array<string, string>
   */
   public $psr4 = [
-    APP_NAMESPACE => APPPATH,                     // For custom app namespace
+    APP_NAMESPACE => APPPATH, // For custom app namespace
     'Config' => APPPATH . 'Config',
     'Firebase' => APPPATH . 'ThirdParty/Firebase'
   ];

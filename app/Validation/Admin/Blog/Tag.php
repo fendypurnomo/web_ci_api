@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Validation\Admin;
+namespace App\Validation\Admin\Blog;
 
 class Tag
 {	

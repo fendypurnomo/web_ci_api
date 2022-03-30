@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Controllers\Fendy\Admin\Akun;
+namespace App\Controllers\Fendy\Admin\User;
 
 use Exception;
 
 class User extends \App\Controllers\Fendy\BaseAdminController
 {
-  protected $modelName = 'App\Models\Fendy\Akun\User';
+  protected $modelName = 'App\Models\Fendy\User\User';
   protected $rules;
 
   public function __construct()
   {
     parent::__construct();
-    $this->rules = new \App\Validation\Admin\User;
+    $this->rules = new \App\Validation\Admin\User\User;
   }
 
   // Index user account
