@@ -137,15 +137,15 @@ class News extends \CodeIgniter\Model
   private function data($row)
   {
     return [
-      'id' => $row->berita_id,
-      'title' => $row->berita_judul,
-      'seo' => $row->berita_seo,
-      'img' => $this->imgUrl() . $row->berita_gambar,
-      'tag' => $row->berita_tag,
-      'date' => $row->berita_tanggal,
-      'editor' => $row->pengguna_nama_depan . ' ' . $row->pengguna_nama_belakang,
-      'category' => $row->kategori_nama,
-      'content' => $row->berita_isi
+      'news_id' => $row->berita_id,
+      'news_title' => $row->berita_judul,
+      'news_seo' => $row->berita_seo,
+      'news_img' => $this->imgUrl() . $row->berita_gambar,
+      'news_tag' => $row->berita_tag,
+      'news_date' => $row->berita_tanggal,
+      'news_editor' => $row->pengguna_nama_depan . ' ' . $row->pengguna_nama_belakang,
+      'news_category' => $row->kategori_nama,
+      'news_content' => $row->berita_isi
     ];
   }
 
