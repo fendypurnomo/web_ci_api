@@ -32,13 +32,13 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
       $accessToken = createToken([
         'id' => $row->pengguna_id,
         'email' => $row->pengguna_email,
-        'isEmailVerified' => true
+        'step' => 2
       ], 300);
 
       return $this->respond([
         'success' => true,
         'status' => 200,
-        'isEmailVerified' => true,
+        'isEmailVerified' => 'EMAIL_VERIFIED',
         'accessToken' => $accessToken,
         'messages' => 'Permintaan setel ulang kata sandi berhasil. Buka pesan baru email Anda dan masukkan kode OTP yang telah Kami kirim'
       ]);
@@ -60,31 +60,31 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
         $token = getRequestQueryParam('token');
         $decode = decodeToken($token);
         $data = $decode->data;
-        $isEmailVerified = $data->isEmailVerified;
 
-        if ($isEmailVerified) {
-          if ($this->model->where(['pengguna_email' => $decode->data->email, 'pengguna_kode_otp' => $post->otp])->first()) {
-            $accessToken = createToken([
-              'id' => $decode->data->id,
-              'email' => $decode->data->email,
-              'otp' => $post->otp,
-              'isEmailVerified' => true,
-              'isOTPVerified' => true
-            ], 300);
+        if ($data->step !== 2) {
+          throw new \RuntimeException($this->rules->errorTokenInvalid);
+        }
 
-            return $this->respond([
-              'success' => true,
-              'status' => 200,
-              'isOTPVerified' => 'OTP_CODE_VERIFIED',
-              'accessToken' => $accessToken,
-              'messages' => 'Verifikasi Kode OTP berhasil'
-            ]);
-          }
+        $query = $this->model->where(['pengguna_email' => $decode->data->email, 'pengguna_kode_otp' => $post->otp])->first();
 
+        if (! $query) {
           throw new \RuntimeException($this->rules->checkOTPCodeInvalid);
         }
 
-        throw new \RuntimeException($this->rules->errorTokenInvalid);
+        $accessToken = createToken([
+          'id' => $decode->data->id,
+          'email' => $decode->data->email,
+          'otp' => $post->otp,
+          'step' => 3
+        ], 300);
+
+        return $this->respond([
+          'success' => true,
+          'status' => 200,
+          'isOTPVerified' => 'OTP_CODE_VERIFIED',
+          'accessToken' => $accessToken,
+          'messages' => 'Verifikasi Kode OTP berhasil'
+        ]);
       }
 
       return $this->respond([
@@ -107,24 +107,24 @@ class Recovery extends \App\Controllers\Fendy\BaseAuthController
         $token = getRequestQueryParam('token');
         $decode = decodeToken($token);
         $data = $decode->data;
-        $isEmailVerified = $data->isEmailVerified;
-        $isOTPVerified = $data->isOTPVerified;
 
-        if ($isEmailVerified && $isOTPVerified) {
-          if ($row = $this->model->where(['pengguna_email' => $data->email, 'pengguna_kode_otp' => $data->otp])->first()) {
-            $this->model->update($row->pengguna_id, ['pengguna_sandi' => $post->newPassword, 'pengguna_kode_otp' => null]);
+        if ($data->step !== 3) {
+          throw new \RuntimeException($this->rules->errorTokenInvalid);
+        }
 
-            return $this->respondUpdated([
-              'success' => true,
-              'status' => 200,
-              'messages' => 'Kata sandi berhasil di setel ulang'
-            ]);
-          }
+        $query = $this->model->where(['pengguna_email' => $data->email, 'pengguna_kode_otp' => $data->otp])->first();
 
+        if (! $query) {
           throw new \RuntimeException($this->rules->createNewPasswordFailed);
         }
 
-        throw new \RuntimeException($this->rules->errorTokenInvalid);
+        $this->model->update($query->pengguna_id, ['pengguna_sandi' => $post->newPassword, 'pengguna_kode_otp' => null]);
+
+        return $this->respondUpdated([
+          'success' => true,
+          'status' => 200,
+          'messages' => 'Kata sandi berhasil di setel ulang'
+        ]);
       }
 
       return $this->respond([
