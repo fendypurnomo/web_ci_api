@@ -11,30 +11,35 @@ class Category extends \CodeIgniter\Model
 
   public function getAllData(object $paging = null)
   {
-    if ($query = $this->paginate($paging->perPage, '', $paging->page)) {
-      $page = $paging->page;
-      $perPage = $paging->perPage;
-      $totalRecords = (int) $this->countAll();
-      $totalPages = (int) ceil($totalRecords / $perPage);
+    $query = $this->paginate($paging->perPage, '', $paging->page);
 
-      if ($paging->page > $totalPages) throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
-
-      foreach ($query as $row) {
-        $data[] = $this->data($row);
-      }
-
-      return [
-        'success' => true,
-        'response' => [
-          'data' => $data,
-          'page' => $page,
-          'perPage' => $perPage,
-          'totalPages' => $totalPages,
-          'totalRecords' => $totalRecords
-        ]
-      ];
+    if (! $query) {
+      throw new \RuntimeException('Permintaan data gagal diproses!');
     }
-    return false;
+
+    $page = $paging->page;
+    $perPage = $paging->perPage;
+    $totalRecords = (int) $this->countAll();
+    $totalPages = (int) ceil($totalRecords / $perPage);
+
+    if ($page > $totalPages) {
+      throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
+    }
+
+    foreach ($query as $row) {
+      $data[] = $this->data($row);
+    }
+
+    return [
+      'success' => true,
+      'response' => [
+        'data' => $data,
+        'page' => $page,
+        'perPage' => $perPage,
+        'totalPages' => $totalPages,
+        'totalRecords' => $totalRecords
+      ]
+    ];
   }
 
   public function createData($post)
@@ -45,27 +50,33 @@ class Category extends \CodeIgniter\Model
       'kategori_aktive' => $post->active
     ];
 
-    if ($this->insert($data)) {
-      return [
-        'success' => true,
-        'status' => 201,
-        'message' => 'Data kategori berhasil disimpan'
-      ];
+    $query = $this->insert($data);
+
+    if (! $query) {
+      throw new \RuntimeException('Data gagal disimpan!');
     }
-    return false;
+
+    return [
+      'success' => true,
+      'status' => 201,
+      'message' => 'Data kategori berhasil disimpan'
+    ];
   }
 
   public function showData($id)
   {
-    if ($row = $this->find($id)) {
-      return [
-        'success' => true,
-        'response' => [
-          'data' => $this->data($row)
-        ]
-      ];
+    $query = $this->find($id);
+
+    if (! $query) {
+      throw new \RuntimeException('Permintaan data gagal diproses!');
     }
-    return false;
+
+    return [
+      'success' => true,
+      'response' => [
+        'data' => $this->data($query)
+      ]
+    ];
   }
 
   public function updateData($id, $put)
@@ -76,27 +87,32 @@ class Category extends \CodeIgniter\Model
       'kategori_aktive' => $put->active
     ];
 
-    if ($this->update($id, $data)) {
-      return [
-        'success' => true,
-        'status' => 200,
-        'messages' => 'Data kategori berhasil diperbarui'
-      ];
+    $query = $this->update($id, $data);
+
+    if (! $query) {
+      throw new \RuntimeException('Data gagal disimpan!');
     }
-    return false;
+
+    return [
+      'success' => true,
+      'status' => 200,
+      'messages' => 'Data kategori berhasil diperbarui'
+    ];
   }
 
   public function deleteData($id)
   {
-    if ($this->find($id)) {
-      $this->delete($id);
-      return [
-        'success' => true,
-        'status' => 200,
-        'messages' => 'Data kategori berhasil dihapus'
-      ];
+    $query = $this->delete($id);
+
+    if (! $query) {
+      throw new \RuntimeException('Data gagal dihapus!');
     }
-    return false;
+
+    return [
+      'success' => true,
+      'status' => 200,
+      'messages' => 'Data kategori berhasil dihapus'
+    ];
   }
 
   private function data($row)

@@ -21,14 +21,11 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
   public function index()
   {
     try {
-      if ($get = $this->model->getAllData(getRequestQueryParamPagination()))
-      return $this->respond($get);
+      $query = $this->model->getAllData(getRequestQueryParamPagination());
+      return $this->respond($query);
     }
     catch (Exception $e) {
-      return $this->respond([
-        'success' => false,
-        'messages' => $e->getMessage()
-      ]);
+      return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
     }
   }
 
@@ -37,16 +34,20 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
    */
   public function create()
   {
-    if ($this->validate($this->rules->createCategory)) {
-      if ($add = $this->model->createData(getRequest())) {
-        return $this->respondCreated($add);
+    try {
+      if ($this->validate($this->rules->createCategory)) {
+        $query = $this->model->createData(getRequest());
+        return $this->respondCreated($query);
       }
+      return $this->respond([
+        'success' => false,
+        'error' => 'badRequest',
+        'messages' => $this->validator->getErrors()
+      ]);
     }
-    return $this->respond([
-      'success' => false,
-      'error' => 'badRequest',
-      'messages' => $this->validator->getErrors()
-    ]);
+    catch (Exception $e) {
+      return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
+    }
   }
 
   /**
@@ -54,10 +55,13 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
    */
   public function show($id = null)
   {
-    if ($get = $this->model->showData($id)) {
-      return $this->respond($get);
+    try {
+      $query = $this->model->showData($id);
+      return $this->respond($query);
     }
-    return $this->respond($this->tableRecordNotFound);
+    catch (Exception $e) {
+      return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
+    }
   }
 
   /**
@@ -73,16 +77,20 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
    */
   public function update($id = null)
   {
-    if ($this->validate($this->rules->createCategory)) {
-      if ($put = $this->model->update($id, getRequest())) {
-        return $this->respondUpdated($put);
+    try {
+      if ($this->validate($this->rules->createCategory)) {
+        $query = $this->model->updateData($id, getRequest());
+        return $this->respondUpdated($query);
       }
+      return $this->respond([
+        'success' => false,
+        'error' => 'badRequest',
+        'messages' => $this->validator->getErrors()
+      ]);
     }
-    return $this->respond([
-      'success' => false,
-      'error' => 'badRequest',
-      'messages' => $this->validator->getErrors()
-    ]);
+    catch (Exception $e) {
+      return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
+    }
   }
 
   /**
@@ -90,9 +98,12 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
    */
   public function delete($id = null)
   {
-    if ($del = $this->model->deleteData($id)) {
-      return $this->respondDeleted($del);
+    try {
+      $query = $this->model->deleteData($id);
+      return $this->respondDeleted($query);
     }
-    return $this->respond($this->tableRecordNotFound);
+    catch (Exception $e) {
+      return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
+    }
   }
 }
