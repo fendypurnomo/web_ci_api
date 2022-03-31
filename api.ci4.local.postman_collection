@@ -55,8 +55,39 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n  \"firstname\": \"\",\r\n  \"lastname\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\",\r\n  \"confirmPassword\": \"\",\r\n  \"gender\": \"\"\r\n}\r\n",
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstname",
+									"value": "",
+									"type": "default"
+								},
+								{
+									"key": "lastname",
+									"value": "",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "default"
+								},
+								{
+									"key": "confirmPassword",
+									"value": "",
+									"type": "default"
+								},
+								{
+									"key": "gender",
+									"value": "",
+									"type": "default"
+								}
+							],
 							"options": {
 								"raw": {
 									"language": "json"
@@ -85,8 +116,14 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n  \"email\": \"\"\r\n}\r\n",
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "",
+									"type": "default"
+								}
+							],
 							"options": {
 								"raw": {
 									"language": "json"
@@ -94,7 +131,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.ci4.local/auth/recovery?step=1&req=checkEmailAddress",
+							"raw": "https://api.ci4.local/auth/recovery/checkEmailAddress",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -103,17 +140,8 @@
 							],
 							"path": [
 								"auth",
-								"recovery"
-							],
-							"query": [
-								{
-									"key": "step",
-									"value": "1"
-								},
-								{
-									"key": "req",
-									"value": "checkEmailAddress"
-								}
+								"recovery",
+								"checkEmailAddress"
 							]
 						}
 					},
@@ -125,8 +153,14 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n  \"otp\": \"\"\r\n}\r\n",
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "otp",
+									"value": "",
+									"type": "default"
+								}
+							],
 							"options": {
 								"raw": {
 									"language": "json"
@@ -134,7 +168,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.ci4.local/auth/recovery?step=2&req=checkOTPCode&token=",
+							"raw": "https://api.ci4.local/auth/recovery/checkOTPCode?token=",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -143,17 +177,10 @@
 							],
 							"path": [
 								"auth",
-								"recovery"
+								"recovery",
+								"checkOTPCode"
 							],
 							"query": [
-								{
-									"key": "step",
-									"value": "2"
-								},
-								{
-									"key": "req",
-									"value": "checkOTPCode"
-								},
 								{
 									"key": "token",
 									"value": ""
@@ -169,8 +196,19 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n  \"newPassword\": \"\",\r\n  \"confirmNewPassword\": \"\"\r\n}\r\n",
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "newPassword",
+									"value": "",
+									"type": "default"
+								},
+								{
+									"key": "confirmNewPassword",
+									"value": "",
+									"type": "default"
+								}
+							],
 							"options": {
 								"raw": {
 									"language": "json"
@@ -178,7 +216,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.ci4.local/auth/recovery?step=3&req=createNewPassword&token=",
+							"raw": "https://api.ci4.local/auth/recovery/createNewPassword?token=",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -187,17 +225,10 @@
 							],
 							"path": [
 								"auth",
-								"recovery"
+								"recovery",
+								"createNewPassword"
 							],
 							"query": [
-								{
-									"key": "step",
-									"value": "3"
-								},
-								{
-									"key": "req",
-									"value": "createNewPassword"
-								},
 								{
 									"key": "token",
 									"value": ""
@@ -208,13 +239,19 @@
 					"response": []
 				},
 				{
-					"name": "Activation - Request",
+					"name": "Activation - Request Activation",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "\r\n{\r\n  \"email\": \"\"\r\n}\r\n",
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "",
+									"type": "default"
+								}
+							],
 							"options": {
 								"raw": {
 									"language": "json"
@@ -222,7 +259,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.ci4.local/auth/activation",
+							"raw": "https://api.ci4.local/auth/activation/requestActivation",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -231,19 +268,20 @@
 							],
 							"path": [
 								"auth",
-								"activation"
+								"activation",
+								"requestActivation"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Activation - Confirm",
+					"name": "Activation - Confirm Activation",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.ci4.local/auth/activation?code=",
+							"raw": "https://api.ci4.local/auth/activation/confirmActivation?code=",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -252,7 +290,8 @@
 							],
 							"path": [
 								"auth",
-								"activation"
+								"activation",
+								"confirmActivation"
 							],
 							"query": [
 								{
@@ -270,7 +309,7 @@
 			"name": "Admin",
 			"item": [
 				{
-					"name": "Accounts",
+					"name": "User",
 					"item": [
 						{
 							"name": "Accounts",
@@ -1888,7 +1927,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://api.ci4.local/blog/news?page=1&perPage=10&category=",
+											"raw": "https://api.ci4.local/blog/news/category/teknologi?page=0&perPage=10",
 											"protocol": "https",
 											"host": [
 												"api",
@@ -1897,20 +1936,18 @@
 											],
 											"path": [
 												"blog",
-												"news"
+												"news",
+												"category",
+												"teknologi"
 											],
 											"query": [
 												{
 													"key": "page",
-													"value": "1"
+													"value": "0"
 												},
 												{
 													"key": "perPage",
 													"value": "10"
-												},
-												{
-													"key": "category",
-													"value": ""
 												}
 											]
 										}
