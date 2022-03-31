@@ -1927,7 +1927,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://api.ci4.local/blog/news/category/teknologi?page=0&perPage=10",
+											"raw": "https://api.ci4.local/blog/news/category/teknologi?page=1&perPage=10",
 											"protocol": "https",
 											"host": [
 												"api",
@@ -1943,7 +1943,7 @@
 											"query": [
 												{
 													"key": "page",
-													"value": "0"
+													"value": "1"
 												},
 												{
 													"key": "perPage",
