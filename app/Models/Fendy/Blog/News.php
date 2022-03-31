@@ -24,44 +24,52 @@ class News extends \CodeIgniter\Model
   protected $createdField = 'berita_tanggal';
   protected $updatedField = 'berita_tanggal';
 
-  public function getAllData(object $paging)
+  public function getAllData($param, object $paging)
   {
-    $sql = $this->sqlSelect()->orderBy('tabel_berita.berita_tanggal', 'DESC');
+    $sql = $this->sql();
+
+    if (isset($param['category']) && ! isset($param['headline'])) {
+      $sql = $this->where('ref_kategori.kategori_seo', $param['category']);
+    }
+    elseif (! isset($param['category']) && isset($param['headline'])) {
+      $sql = $this->where('tabel_berita.berita_headline', $param['headline']);
+    }
+    elseif ( isset($param['category']) && isset($param['headline'])) {
+      $sql = $this->where('tabel_berita.berita_headline', $param['headline'])
+                  ->where('ref_kategori.kategori_seo', $param['category']);
+    }
+
+    $sql = $this->orderBy('tabel_berita.berita_tanggal', 'DESC');
+    $totalRecords = $this->countAllResults(false);
 
     $page = $paging->page;
     $perPage = $paging->perPage;
-    $totalRecords = $this->countAll(false);
     $totalPages = ceil($totalRecords / $perPage);
 
     $query = $sql->paginate($perPage, '', $page);
 
-    return $this->returnResult([
-      'query' => $query,
-      'page' => $page,
-      'perPage' => $perPage,
-      'totalRecords' => $totalRecords,
-      'totalPages' => $totalPages
-    ]);
-  }
+    if (! $query) {
+      throw new \RuntimeException('Permintaan data tidak dapat ditemukan!');
+    }
 
-  public function getDataByCategory(string $category, object $paging)
-  {
-    $sql = $this->sqlSelect()->where('ref_kategori.kategori_seo', $category)->orderBy('tabel_berita.berita_tanggal', 'DESC');
+    if ($page > $totalPages) {
+      throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
+    }
 
-    $page = $paging->page;
-    $perPage = $paging->perPage;
-    $totalRecords = $sql->countAllResults(false);
-    $totalPages = ceil($totalRecords / $perPage);
-    
-    $query = $sql->paginate($perPage, '', $page);
+    foreach ($query as $row) {
+      $data[] = $this->dataRow($row);
+    }
 
-    return $this->returnResult([
-      'query' => $query,
-      'page' => $page,
-      'perPage' => $perPage,
-      'totalRecords' => $totalRecords,
-      'totalPages' => $totalPages
-    ]);
+    return [
+      'success' => true,
+      'response' => [
+        'data' => $data,
+        'page' => $page,
+        'perPage' => $perPage,
+        'totalPages' => $totalPages,
+        'totalRecords' => $totalRecords
+      ]
+    ];
   }
 
   public function createData($post, $img)
@@ -104,10 +112,10 @@ class News extends \CodeIgniter\Model
 
   public function showData($id)
   {
-    $query = $this->find($id);
+    $query = $this->sql()->find($id);
 
     if (! $query) {
-      throw new \RuntimeException('Permintaan data gagal diproses!');
+      throw new \RuntimeException('Permintaan data tidak dapat ditemukan!');
     }
 
     return [
@@ -158,7 +166,24 @@ class News extends \CodeIgniter\Model
     ];
   }
 
-  private function sqlSelect()
+  private function dataRow($row)
+  {
+    return [
+      'news_id' => $row->berita_id,
+      'news_category_id' => $row->kategori_id,
+      'news_read' => $row->berita_dibaca,
+      'news_date' => $row->berita_tanggal,
+      'news_editor' => $row->editor,
+      'category_name' => $row->kategori_nama,
+      'news_tag' => $row->berita_tag,
+      'news_title' => $row->berita_judul,
+      'news_seo' => $row->berita_seo,
+      'news_img' => getenv('app.imgUrl') . 'news/' . $row->berita_gambar,
+      'news_content' => $row->berita_isi
+    ];
+  }
+
+  private function sql()
   {
     $this->select('tabel_berita.berita_id,
                    tabel_berita.kategori_id,
@@ -176,48 +201,5 @@ class News extends \CodeIgniter\Model
          ->join('ref_kategori', 'tabel_berita.kategori_id = ref_kategori.kategori_id', 'LEFT')
          ->join('tabel_pengguna', 'tabel_berita.pengguna_id = tabel_pengguna.pengguna_id', 'LEFT');
     return $this;
-  }
-
-  private function dataRow($row)
-  {
-    return [
-      'news_id' => $row->berita_id,
-      'news_category_id' => $row->kategori_id,
-      'news_date' => $row->berita_tanggal,
-      'news_read' => $row->berita_dibaca,
-      'news_editor' => $row->editor,
-      'category_name' => $row->kategori_nama,
-      'news_tag' => $row->berita_tag,
-      'news_title' => $row->berita_judul,
-      'news_seo' => $row->berita_seo,
-      'news_img' => getenv('app.imgUrl') . 'news/' . $row->berita_gambar,
-      'news_content' => $row->berita_isi
-    ];
-  }
-
-  private function returnResult(array $return)
-  {
-    if (! $return['query']) {
-      throw new \RuntimeException('Permintaan data gagal diproses!');
-    }
-
-    if ($return['page'] > $return['totalPages']) {
-      throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
-    }
-
-    foreach ($return['query'] as $row) {
-      $data[] = $this->dataRow($row);
-    }
-
-    return [
-      'success' => true,
-      'response' => [
-        'data' => $data,
-        'page' => $return['page'],
-        'perPage' => $return['perPage'],
-        'totalPages' => $return['totalPages'],
-        'totalRecords' => $return['totalRecords']
-      ]
-    ];
   }
 }

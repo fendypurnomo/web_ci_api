@@ -86,7 +86,6 @@ $routes->group('/', function ($routes) {
     $routes->get('tags/(:num)', 'Fendy\Admin\Blog\Tag::show/$1');
     $routes->get('news', 'Fendy\Admin\Blog\News');
     $routes->get('news/(:num)', 'Fendy\Admin\Blog\News::show/$1');
-    $routes->get('news/category/(:any)', 'Fendy\Admin\Blog\News::getDataByCategory/$1');
     $routes->get('comments', 'Fendy\Admin\Blog\comment');
     $routes->get('comments/(:num)', 'Fendy\Admin\Blog\comment::show/$1');
     $routes->post('messages', 'Fendy\Admin\Message::create');

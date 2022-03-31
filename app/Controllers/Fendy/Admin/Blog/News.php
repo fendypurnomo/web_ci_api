@@ -21,7 +21,8 @@ class News extends \App\Controllers\Fendy\BaseAdminController
   public function index()
   {
     try {
-      $query = $this->model->getAllData(getRequestQueryParamPagination());
+      $param = $this->request->getGet();
+      $query = $this->model->getAllData($param, getRequestQueryParamPagination());
       return $this->respond($query);
     }
     catch (Exception $e) {
@@ -102,17 +103,6 @@ class News extends \App\Controllers\Fendy\BaseAdminController
     try {
       $query = $this->model->deleteData($id);
       return $this->respondDeleted($query);
-    }
-    catch (Exception $e) {
-      return $this->respond(['success' => false, 'messages' => $e->getMessage()]);
-    }
-  }
-
-  public function getDataByCategory(string $category = null)
-  {
-    try {
-      $query = $this->model->getDataByCategory($category, getRequestQueryParamPagination());
-      return $this->respond($query);
     }
     catch (Exception $e) {
       return $this->respond(['success' => false, 'messages' => $e->getMessage()]);

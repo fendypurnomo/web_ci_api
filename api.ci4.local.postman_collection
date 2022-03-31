@@ -1919,7 +1919,7 @@
 									"response": []
 								},
 								{
-									"name": "News - Categories - Get All",
+									"name": "News - Headline - Get All",
 									"request": {
 										"auth": {
 											"type": "noauth"
@@ -1927,7 +1927,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://api.ci4.local/blog/news/category/teknologi?page=1&perPage=10",
+											"raw": "https://api.ci4.local/blog/news?headline=1",
 											"protocol": "https",
 											"host": [
 												"api",
@@ -1936,18 +1936,42 @@
 											],
 											"path": [
 												"blog",
-												"news",
-												"category",
-												"teknologi"
+												"news"
 											],
 											"query": [
 												{
-													"key": "page",
+													"key": "headline",
 													"value": "1"
-												},
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "News - Category - Get All",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.ci4.local/blog/news?category=olah-raga",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"blog",
+												"news"
+											],
+											"query": [
 												{
-													"key": "perPage",
-													"value": "10"
+													"key": "category",
+													"value": "olah-raga"
 												}
 											]
 										}
@@ -1963,7 +1987,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://api.ci4.local/blog/news?page=1&perPage=10&tag=",
+											"raw": "https://api.ci4.local/blog/news?tag=gaya-hidup",
 											"protocol": "https",
 											"host": [
 												"api",
@@ -1976,16 +2000,38 @@
 											],
 											"query": [
 												{
-													"key": "page",
-													"value": "1"
-												},
-												{
-													"key": "perPage",
-													"value": "10"
-												},
-												{
 													"key": "tag",
-													"value": ""
+													"value": "gaya-hidup"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "News - Popular - Get All",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.ci4.local/blog/news?popular=true",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ci4",
+												"local"
+											],
+											"path": [
+												"blog",
+												"news"
+											],
+											"query": [
+												{
+													"key": "popular",
+													"value": "true"
 												}
 											]
 										}
