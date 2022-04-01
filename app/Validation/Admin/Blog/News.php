@@ -4,6 +4,11 @@ namespace App\Validation\Admin\Blog;
 
 class News
 {
+    /*
+    |--------------------------------------------------
+    | Create news data validation rules
+    |--------------------------------------------------
+    */
     public $createNews = [
         'category' => [
             'rules' => 'required',
@@ -11,7 +16,7 @@ class News
                 'required' => 'Masukkan kategori berita!'
             ]
         ],
-        'user' => [
+        'editor' => [
             'rules' => 'required',
             'errors' => [
                 'required' => 'Masukkan nama Editor berita!'
