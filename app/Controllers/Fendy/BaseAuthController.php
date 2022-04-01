@@ -7,14 +7,14 @@ use CodeIgniter\API\ResponseTrait;
 
 class BaseAuthController extends \CodeIgniter\RESTful\BaseResource
 {
-  use ResponseTrait;
-  use MessagesTrait;
+    use ResponseTrait;
+    use MessagesTrait;
 
-  protected $model;
+    protected $model;
 
-  public function __construct()
-  {
-    helper(['request', 'sendmail', 'stringreplace', 'text', 'token']);
-    $this->model = new \App\Models\Fendy\User\User;
-  }
+    public function __construct()
+    {
+        helper(['request', 'sendmail', 'stringreplace', 'text', 'token']);
+        $this->model = new \App\Models\Fendy\User\User;
+    }
 }

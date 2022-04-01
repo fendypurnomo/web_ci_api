@@ -10,7 +10,7 @@
 | classes should use.
 |
 | NOTE: changing this will require manually modifying the
-| existing namespaces of App\* namespaced-classes.
+|       existing namespaces of App\* namespaced-classes.
 */
 defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'App');
 
@@ -54,13 +54,13 @@ defined('DECADE') || define('DECADE', 315360000);
 | The three main conventions used for determining exit status codes
 | are as follows:
 |
-| 	Standard C/C++ Library (stdlibc):
-| 		http://www.gnu.org/software/libc/manual/html_node/Exit-Status.html
-| 		(This link also contains other GNU-specific conventions)
-| 	BSD sysexits.h:
-| 		http://www.gsp.com/cgi-bin/man.cgi?section=3&topic=sysexits
-| 	Bash scripting:
-| 		http://tldp.org/LDP/abs/html/exitcodes.html
+|     Standard C/C++ Library (stdlibc):
+|         http://www.gnu.org/software/libc/manual/html_node/Exit-Status.html
+|         (This link also contains other GNU-specific conventions)
+|     BSD sysexits.h:
+|         http://www.gsp.com/cgi-bin/man.cgi?section=3&topic=sysexits
+|     Bash scripting:
+|         http://tldp.org/LDP/abs/html/exitcodes.html
 */
 defined('EXIT_SUCCESS')        || define('EXIT_SUCCESS', 0); // no errors
 defined('EXIT_ERROR')          || define('EXIT_ERROR', 1); // generic error

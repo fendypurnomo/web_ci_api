@@ -6,10 +6,10 @@ use App\Validation\MessagesTrait;
 
 class BaseAdminController extends \CodeIgniter\RESTful\ResourceController
 {
-  use MessagesTrait;
+    use MessagesTrait;
 
-  public function __construct()
-  {
-    helper(['request', 'token']);
-  }
+    public function __construct()
+    {
+        helper(['request', 'token']);
+    }
 }
