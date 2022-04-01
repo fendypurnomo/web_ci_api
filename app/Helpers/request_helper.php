@@ -31,11 +31,9 @@ function getRequestQueryParamPagination()
     if (!isset($page) || isset($page) && empty($page) || $page === null) {
         $page = (int) 1;
     }
-
     if (!isset($perPage) || isset($perPage) && empty($perPage) || $perPage === null) {
         $perPage = (int) 10;
     }
-
     if ($perPage > 100) {
         throw new \RuntimeException('Jumlah data per halaman yang Anda masukkan melebihi batas maksimal!');
     }

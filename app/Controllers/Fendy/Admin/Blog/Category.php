@@ -16,12 +16,15 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Get all data categories
+     * --------------------------------------------------
+     * Get categories data
+     * --------------------------------------------------
      */
     public function index()
     {
         try {
-            $query = $this->model->getAllData(getRequestQueryParamPagination());
+            $param = $this->request->getGet();
+            $query = $this->model->getAllData((object) $param, getRequestQueryParamPagination());
             return $this->respond($query);
         }
         catch (Exception $e) {
@@ -30,7 +33,9 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Create data category
+     * --------------------------------------------------
+     * Create category data
+     * --------------------------------------------------
      */
     public function create()
     {
@@ -51,7 +56,9 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Get single data category
+     * --------------------------------------------------
+     * Get single category data
+     * --------------------------------------------------
      */
     public function show($id = null)
     {
@@ -65,15 +72,9 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Get single data category
-     */
-    public function edit($id = null)
-    {
-        return $this->show($id);
-    }
-
-    /**
-     * Update data category
+     * --------------------------------------------------
+     * Update category data
+     * --------------------------------------------------
      */
     public function update($id = null)
     {
@@ -94,7 +95,9 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Delete single data category
+     * --------------------------------------------------
+     * Delete category data
+     * --------------------------------------------------
      */
     public function delete($id = null)
     {
