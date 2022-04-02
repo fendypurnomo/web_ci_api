@@ -17,31 +17,25 @@ class News extends \CodeIgniter\Model
      *  Get data
      * --------------------------------------------------
     */
-    public function getData($param, object $paging)
+    public function getData(object $param, object $paging)
     {
         $sql = $this->sql('All');
 
-        if ((isset($param['category']) && trim($param['category']) != null) && (isset($param['headline']) && trim($param['headline']) == null || ! isset($param['headline']))) {
-            $sql = $this->where('ref_kategori.kategori_seo', $param['category']);
-        }
-        if ((isset($param['headline']) && trim($param['headline']) == 'true' || trim($param['headline']) == 1) && (isset($param['category']) && trim($param['category']) == null || ! isset($param['category']))) {
+        if (isset($param->headline) && trim($param->headline) == 'true' || trim($param->headline) == 1) {
             $sql = $this->where('tabel_berita.berita_headline', 1);
         }
-        if ((isset($param['category']) && trim($param['category']) != null) && (isset($param['headline']) && trim($param['headline']) == 'true' || trim($param['headline']) == 1)) {
-            $array = ['tabel_berita.berita_headline' => 1, 'ref_kategori.kategori_seo' => $param['category']];
-            $sql = $this->where($array);
+        if (isset($param->category) && trim($param->category) != null) {
+            $sql = $this->where('ref_kategori.kategori_seo', $param->category);
         }
-        if (isset($param['popular']) && trim($param['popular']) == 'true' || trim($param['popular']) == 1) {
+        if (isset($param->popular) && trim($param->popular) == 'true' || trim($param->popular) == 1) {
             $sql = $this->orderBy('tabel_berita.berita_dibaca', 'DESC');
         }
 
         $sql = $this->orderBy('tabel_berita.berita_tanggal', 'DESC');
-        $totalRecords = $this->countAllResults(false);
-
         $page = $paging->page;
         $perPage = $paging->perPage;
+        $totalRecords = $this->countAllResults(false);
         $totalPages = ceil($totalRecords / $perPage);
-
         $query = $sql->paginate($perPage, '', $page);
 
         if (! $query) {
@@ -50,9 +44,8 @@ class News extends \CodeIgniter\Model
         if ($page > $totalPages) {
             throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
         }
-
         foreach ($query as $row) {
-            $data[] = $this->dataRow($row);
+            $data[] = self::rowData($row);
         }
 
         $response = [
@@ -120,15 +113,28 @@ class News extends \CodeIgniter\Model
     */
     public function showData($id)
     {
-        $query = $this->sql('single')->find($id);
+        $query = $this->sql('single')
+                      ->select('tabel_komentar.komentar_nama,tabel_komentar.komentar_isi,tabel_komentar.komentar_tanggal')
+                      ->join('tabel_komentar', 'tabel_berita.berita_id = tabel_komentar.komentar_berita_id', 'LEFT')
+                      ->where('tabel_berita.berita_id', $id)
+                      ->paginate(10, '', 1);
 
         if (! $query) {
             throw new \RuntimeException('Permintaan data tidak dapat ditemukan!');
         }
+        foreach ($query as $row) {
+            $comment[] = [
+                'comment_name' => $row->komentar_nama,
+                'comment_content' => $row->komentar_isi,
+                'comment_date' => $row->komentar_tanggal
+            ];
+        }
+
+        $data = array_merge(self::rowData($query[0]), ['news_comment' => $comment]);
 
         $response = [
             'success' => true,
-            'response' => ['data' => $this->rowData($query)]
+            'response' => ['data' => $data]
         ];
 
         return $response;

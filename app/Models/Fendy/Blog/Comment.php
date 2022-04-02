@@ -4,28 +4,26 @@ namespace App\Models\Fendy\Blog;
 
 class Comment extends \CodeIgniter\Model
 {
-    protected $DBGroup = 'blog';
-    protected $table = 'komentar';
-    protected $primaryKey = 'id_komentar';
+    protected $table = 'tabel_komentar';
+    protected $primaryKey = 'komentar_id';
     protected $returnType = 'object';
-    protected $allowedFields = ['nama_komentar', 'url', 'isi_komentar', 'tgl', 'jam_komentar'];
-    protected $useTimestamps = false;
-    protected $createdField = 'tgl';
+    protected $allowedFields = ['komentar_nama', 'komentar_isi', 'komentar_tanggal'];
+    protected $useTimestamps = true;
+    protected $createdField = 'komentar_tanggal';
 
     /**
      * --------------------------------------------------
      * Get data
      * --------------------------------------------------
      */
-    public function getData(object $paging)
+    public function getData(object $param, object $paging)
     {
-        $sql = $this->sql();
-
+        $sql = $this->orderBy('komentar_tanggal', 'DESC');
         $page = $paging->page;
         $perPage = $paging->perPage;
-        $totalRecords = (int) $this->countAll(false);
+        $totalRecords = (int) $this->countAllResults(false);
         $totalPages = (int) ceil($totalRecords / $perPage);
-        $query = $sql->paginate($paging->perPage, '', $paging->page);
+        $query = $sql->paginate($perPage, '', $page);
 
         if (! $query) {
             throw new \RuntimeException('Permintaan data gagal diproses!');
@@ -34,7 +32,7 @@ class Comment extends \CodeIgniter\Model
             throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
         }
         foreach ($query as $row) {
-            $data[] = $this->data($row);
+            $data[] = self::rowData($row);
         }
 
         $response = [
@@ -59,9 +57,10 @@ class Comment extends \CodeIgniter\Model
     public function createData($post)
     {
         $data = [
-            'nama_komentar' => $post->name,
-            'url' => $post->url,
-            'isi_komentar' => $post->content
+            'berita_id' => $post->news_id,
+            'komentar_nama' => $post->name,
+            'komentar_isi' => $post->content,
+            'komentar_parent' => $post->parent
         ];
 
         $query = $this->insert($data);
@@ -86,7 +85,7 @@ class Comment extends \CodeIgniter\Model
      */
     public function showData($id)
     {
-        $query = $this->sql()->find($id);
+        $query = $this->find($id);
 
         if (! $query) {
             throw new \RuntimeException('Permintaan data gagal diproses!');
@@ -94,9 +93,7 @@ class Comment extends \CodeIgniter\Model
 
         $response = [
             'success' => true,
-            'response' => [
-            'data' => $this->rowData($query)
-            ]
+            'response' => ['data' => self::rowData($query)]
         ];
 
         return $response;
@@ -110,9 +107,9 @@ class Comment extends \CodeIgniter\Model
     public function updateData($id, $put)
     {
         $data = [
-            'nama_komentar' => $put->name,
-            'url' => $put->url,
-            'isi_komentar' => $put->content
+            'komentar_nama' => $put->name,
+            'komentar_isi' => $put->content,
+            'komentar_aktif' => $put->active
         ];
 
         $query = $this->update($id, $data);
@@ -160,27 +157,14 @@ class Comment extends \CodeIgniter\Model
     private function rowData($row)
     {
         $data = [
-            'comment_id' => $row->id_komentar,
-            'comment_name' => $row->nama_komentar,
-            'comment_site' => $row->url,
-            'comment_content' => $row->isi_komentar,
-            'comment_date' => $row->tgl,
-            'news_id' => $row->id_berita,
-            'news_url' => getenv('app.baseURL') . 'news/' . $row->judul_seo
+            'comment_id' => $row->komentar_id,
+            'comment_news_id' => $row->komentar_berita_id,
+            'comment_parent_id' => $row->komentar_parent,
+            'comment_name' => $row->komentar_nama,
+            'comment_content' => $row->komentar_isi,
+            'comment_date' => $row->komentar_tanggal
         ];
 
         return $data;
-    }
-
-    /**
-     * --------------------------------------------------
-     * SQL data
-     * --------------------------------------------------
-     */
-    private function sql()
-    {
-        $sql = $this->join('berita', 'komentar.id_berita = berita.id_berita', 'left');
-
-        return $sql;
     }
 }

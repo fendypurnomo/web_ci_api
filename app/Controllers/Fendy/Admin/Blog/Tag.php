@@ -23,7 +23,8 @@ class Tag extends \App\Controllers\Fendy\BaseAdminController
     public function index()
     {
         try {
-            $query = $this->model->getData(getRequestQueryParamPagination());
+            $param = $this->request->getGet();
+            $query = $this->model->getData((object) $param, getRequestQueryParamPagination());
             return $this->respond($query);
         }
         catch (Exception $e) {
@@ -72,7 +73,7 @@ class Tag extends \App\Controllers\Fendy\BaseAdminController
 
     /**
      * --------------------------------------------------
-     * Update tag data
+     * Update data
      * --------------------------------------------------
      */
     public function update($id = null)
@@ -95,7 +96,7 @@ class Tag extends \App\Controllers\Fendy\BaseAdminController
 
     /**
      * --------------------------------------------------
-     * Delete tag data
+     * Delete data
      * --------------------------------------------------
      */
     public function delete($id = null)

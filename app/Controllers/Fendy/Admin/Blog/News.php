@@ -17,14 +17,14 @@ class News extends \App\Controllers\Fendy\BaseAdminController
 
     /**
      * --------------------------------------------------
-     *  Get data
+     * Get data
      * --------------------------------------------------
-    */
+     */
     public function index()
     {
         try {
             $param = $this->request->getGet();
-            $query = $this->model->getData($param, getRequestQueryParamPagination());
+            $query = $this->model->getData((object) $param, getRequestQueryParamPagination());
             return $this->respond($query);
         }
         catch (Exception $e) {
@@ -34,9 +34,9 @@ class News extends \App\Controllers\Fendy\BaseAdminController
 
     /**
      * --------------------------------------------------
-     *  Create data
+     * Create data
      * --------------------------------------------------
-    */
+     */
     public function create()
     {
         try {
@@ -58,9 +58,9 @@ class News extends \App\Controllers\Fendy\BaseAdminController
 
     /**
      * --------------------------------------------------
-     *  Get single data
+     * Get single data
      * --------------------------------------------------
-    */
+     */
     public function show($id = null)
     {
         try {
@@ -74,9 +74,9 @@ class News extends \App\Controllers\Fendy\BaseAdminController
 
     /**
      * --------------------------------------------------
-     *  Update data
+     * Update data
      * --------------------------------------------------
-    */
+     */
     public function update($id = null)
     {
         try {
@@ -97,9 +97,9 @@ class News extends \App\Controllers\Fendy\BaseAdminController
 
     /**
      * --------------------------------------------------
-     *  Delete data
+     * Delete data
      * --------------------------------------------------
-    */
+     */
     public function delete($id = null)
     {
         try {

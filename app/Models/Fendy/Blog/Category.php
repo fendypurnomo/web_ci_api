@@ -13,12 +13,12 @@ class Category extends \CodeIgniter\Model
      * --------------------------------------------------
      * Get data
      * --------------------------------------------------
-    */
+     */
     public function getData(object $param, object $paging)
     {
         if ((isset($param->search) && trim($param->search) != null) && (isset($param->value) && trim($param->value) != null)) {
             if ($param->search === 'id') {
-                $this->where('kategori_id', $param->value);
+                return self::showData($param->value);
             }
             if ($param->search === 'name') {
                 $this->like('kategori_seo', $param->value, 'both');
@@ -28,8 +28,8 @@ class Category extends \CodeIgniter\Model
 
         $page = $paging->page;
         $perPage = $paging->perPage;
-        $totalRecords = (int) $this->countAllResults(false);
-        $totalPages = (int) ceil($totalRecords / $perPage);
+        $totalRecords = $this->countAllResults(false);
+        $totalPages = ceil($totalRecords / $perPage);
         $query = $this->paginate($perPage, '', $page);
 
         if (! $query) {
@@ -39,7 +39,7 @@ class Category extends \CodeIgniter\Model
             throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
         }
         foreach ($query as $row) {
-            $data[] = $this->rowData($row);
+            $data[] = self::rowData($row);
         }
 
         $response = [
@@ -60,7 +60,7 @@ class Category extends \CodeIgniter\Model
      * --------------------------------------------------
      * Create data
      * --------------------------------------------------
-    */
+     */
     public function createData($post)
     {
         $data = [
@@ -88,7 +88,7 @@ class Category extends \CodeIgniter\Model
      * --------------------------------------------------
      * Show data
      * --------------------------------------------------
-    */
+     */
     public function showData($id)
     {
         $query = $this->find($id);
@@ -99,7 +99,7 @@ class Category extends \CodeIgniter\Model
 
         $response = [
             'success' => true,
-            'response' => ['data' => $this->rowData($query)]
+            'response' => ['data' => self::rowData($query)]
         ];
 
         return $response;
@@ -109,7 +109,7 @@ class Category extends \CodeIgniter\Model
      * --------------------------------------------------
      * Update data
      * --------------------------------------------------
-    */
+     */
     public function updateData($id, $put)
     {
         $data = [
@@ -135,7 +135,7 @@ class Category extends \CodeIgniter\Model
      * --------------------------------------------------
      * Delete data
      * --------------------------------------------------
-    */
+     */
     public function deleteData($id)
     {
         $query = $this->delete($id);
@@ -157,7 +157,7 @@ class Category extends \CodeIgniter\Model
      * --------------------------------------------------
      * Array row data
      * --------------------------------------------------
-    */
+     */
     private function rowData($row)
     {
         $data = [

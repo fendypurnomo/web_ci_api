@@ -22,7 +22,8 @@ class Comment extends \App\Controllers\Fendy\BaseAdminController
     public function index()
     {
         try {
-            $query = $this->model->getAllData(getRequestQueryParamPagination());
+            $param = $this->request->getGet();
+            $query = $this->model->getData((object) $param, getRequestQueryParamPagination());
             return $this->respond($query);
         }
         catch (Exception $e) {

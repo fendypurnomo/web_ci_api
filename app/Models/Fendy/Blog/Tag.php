@@ -14,35 +14,42 @@ class Tag extends \CodeIgniter\Model
      * Get data
      * --------------------------------------------------
      */
-    public function getData(object $paging = null)
+    public function getData(object $param, object $paging)
     {
-        $query = $this->paginate($paging->perPage, '', $paging->page);
+        if ((isset($param->search) && trim($param->search) != null) && (isset($param->value) && trim($param->value) != null)) {
+            if ($param->search === 'id') {
+                return self::showData($param->value);
+            }
+            if ($param->search === 'name') {
+                $this->like('tag_nama', $param->value);
+                $this->orLike('tag_seo', $param->value);
+            }
+        }
+        
+        $page = $paging->page;
+        $perPage = $paging->perPage;
+        $totalRecords = $this->countAllResults(false);
+        $totalPages = ceil($totalRecords / $perPage);
+        $query = $this->paginate($perPage, '', $page);
 
         if (! $query) {
             throw new \RuntimeException('Permintaan data gagal diproses!');
         }
-
-        $page = $paging->page;
-        $perPage = $paging->perPage;
-        $totalRecords = (int) $this->countAll();
-        $totalPages = (int) ceil($totalRecords / $perPage);
-
         if ($page > $totalPages) {
             throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
         }
-
         foreach ($query as $row) {
-            $data[] = $this->rowData($row);
+            $data[] = self::rowData($row);
         }
 
         $response = [
             'success' => true,
             'response' => [
-            'data' => $data,
-            'page' => $page,
-            'perPage' => $perPage,
-            'totalPages' => $totalPages,
-            'totalRecords' => $totalRecords
+                'data' => $data,
+                'page' => $page,
+                'perPage' => $perPage,
+                'totalPages' => $totalPages,
+                'totalRecords' => $totalRecords
             ]
         ];
 
@@ -92,7 +99,7 @@ class Tag extends \CodeIgniter\Model
         $response = [
             'success' => true,
             'response' => [
-            'data' => $this->rowData($query)
+            'data' => self::rowData($query)
             ]
         ];
 
