@@ -4,122 +4,164 @@ namespace App\Models\Fendy\Blog;
 
 class Tag extends \CodeIgniter\Model
 {
-  protected $table = 'tabel_tag';
-  protected $primaryKey = 'tag_id';
-  protected $returnType = 'object';
-  protected $allowedFields = ['tag_nama', 'tag_seo', 'tag_hitung'];
+    protected $table = 'tabel_tag';
+    protected $primaryKey = 'tag_id';
+    protected $returnType = 'object';
+    protected $allowedFields = ['tag_nama', 'tag_seo', 'tag_hitung'];
 
-  public function getAllData(object $paging = null)
-  {
-    $query = $this->paginate($paging->perPage, '', $paging->page);
+    /**
+     * --------------------------------------------------
+     * Get data
+     * --------------------------------------------------
+     */
+    public function getData(object $paging = null)
+    {
+        $query = $this->paginate($paging->perPage, '', $paging->page);
 
-    if (! $query) {
-      throw new \RuntimeException('Permintaan data gagal diproses!');
+        if (! $query) {
+            throw new \RuntimeException('Permintaan data gagal diproses!');
+        }
+
+        $page = $paging->page;
+        $perPage = $paging->perPage;
+        $totalRecords = (int) $this->countAll();
+        $totalPages = (int) ceil($totalRecords / $perPage);
+
+        if ($page > $totalPages) {
+            throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
+        }
+
+        foreach ($query as $row) {
+            $data[] = $this->rowData($row);
+        }
+
+        $response = [
+            'success' => true,
+            'response' => [
+            'data' => $data,
+            'page' => $page,
+            'perPage' => $perPage,
+            'totalPages' => $totalPages,
+            'totalRecords' => $totalRecords
+            ]
+        ];
+
+        return $response;
     }
 
-    $page = $paging->page;
-    $perPage = $paging->perPage;
-    $totalRecords = (int) $this->countAll();
-    $totalPages = (int) ceil($totalRecords / $perPage);
+    /**
+     * --------------------------------------------------
+     * Create data
+     * --------------------------------------------------
+     */
+    public function createData($post)
+    {
+        $data = [
+            'tag_nama' => $post->name,
+            'tag_seo' => $post->seo
+        ];
 
-    if ($page > $totalPages) {
-      throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
+        $query = $this->insert($data);
+
+        if (! $query) {
+            throw new \RuntimeException('Data gagal disimpan!');
+        }
+
+        $response = [
+            'success' => true,
+            'status' => 201,
+            'messages' => 'Data tag berhasil disimpan'
+        ];
+
+        return $response;
     }
 
-    foreach ($query as $row) {
-      $data[] = $this->data($row);
+    /**
+     * --------------------------------------------------
+     * Show data
+     * --------------------------------------------------
+     */
+    public function showData($id)
+    {
+        $query = $this->find($id);
+
+        if (! $query) {
+            throw new \RuntimeException('Permintaan data gagal diproses!');
+        }
+
+        $response = [
+            'success' => true,
+            'response' => [
+            'data' => $this->rowData($query)
+            ]
+        ];
+
+        return $response;
     }
 
-    return [
-      'success' => true,
-      'response' => [
-        'data' => $data,
-        'page' => $page,
-        'perPage' => $perPage,
-        'totalPages' => $totalPages,
-        'totalRecords' => $totalRecords
-      ]
-    ];
-  }
+    /**
+     * --------------------------------------------------
+     * Update data
+     * --------------------------------------------------
+     */
+    public function updateData($id, $put)
+    {
+        $data = [
+            'tag_nama' => $put->name,
+            'tag_seo' => $put->seo
+        ];
 
-  public function createData($post)
-  {
-    $data = [
-      'tag_nama' => $post->name,
-      'tag_seo' => $post->seo
-    ];
+        $query = $this->update($id, $data);
 
-    $query = $this->insert($data);
+        if (! $query) {
+            throw new \RuntimeException('Data gagal disimpan!');
+        }
 
-    if (! $query) {
-      throw new \RuntimeException('Data gagal disimpan!');
+        $response = [
+            'success' => true,
+            'status' => 200,
+            'messages' => 'Data pesan berhasil diperbarui'
+        ];
+
+        return $response;
     }
 
-    return [
-      'success' => true,
-      'status' => 201,
-      'messages' => 'Data tag berhasil disimpan'
-    ];
-  }
+    /**
+     * --------------------------------------------------
+     * Delete data
+     * --------------------------------------------------
+     */
+    public function deleteData($id)
+    {
+        $query = $this->delete($id);
 
-  public function showData($id)
-  {
-    $query = $this->find($id);
+        if (! $query) {
+            throw new \RuntimeException('Data gagal dihapus!');
+        }
 
-    if (! $query) {
-      throw new \RuntimeException('Permintaan data gagal diproses!');
+        $response = [
+            'success' => true,
+            'status' => 200,
+            'messages' => 'Data tag berhasil dihapus'
+        ];
+
+        return $response;
     }
 
-    return [
-      'success' => true,
-      'response' => [
-        'data' => $this->data($query)
-      ]
-    ];
-  }
+    /**
+     * --------------------------------------------------
+     * Array row data
+     * --------------------------------------------------
+     */
+    private function rowData($row)
+    {
+        $data = [
+            'tag_id' => $row->tag_id,
+            'tag_name' => $row->tag_nama,
+            'tag_seo' => $row->tag_seo,
+            'tag_count' => $row->tag_hitung
+        ];
 
-  public function updateData($id, $put)
-  {
-    $data = [
-      'tag_nama' => $put->name,
-      'tag_seo' => $put->seo
-    ];
-
-    $query = $this->update($id, $data);
-
-    if (! $query) {
-      throw new \RuntimeException('Data gagal disimpan!');
+        return $data;
     }
-
-    return [
-      'success' => true,
-      'status' => 200,
-      'messages' => 'Data pesan berhasil diperbarui'
-    ];
-  }
-
-  public function deleteData($id)
-  {
-    $query = $this->delete($id);
-
-    if (! $query) {
-      throw new \RuntimeException('Data gagal dihapus!');
-    }
-
-    return [
-      'success' => true,
-      'status' => 200,
-      'messages' => 'Data tag berhasil dihapus'
-    ];
-  }
-
-  private function data($row)
-  {
-    return [
-      'tag_id' => $row->tag_id,
-      'tag_name' => $row->tag_nama,
-      'tag_seo' => $row->tag_seo,
-      'tag_count' => $row->tag_hitung
-    ];
-  }
 }

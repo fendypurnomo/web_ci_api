@@ -12,12 +12,12 @@ class News extends \CodeIgniter\Model
     protected $createdField = 'berita_tanggal';
     protected $updatedField = 'berita_tanggal';
 
-    /*
-    |--------------------------------------------------
-    | Get news data
-    |--------------------------------------------------
+    /**
+     * --------------------------------------------------
+     *  Get data
+     * --------------------------------------------------
     */
-    public function getAllData($param, object $paging)
+    public function getData($param, object $paging)
     {
         $sql = $this->sql('All');
 
@@ -69,10 +69,10 @@ class News extends \CodeIgniter\Model
         return $response;
     }
 
-    /*
-    |--------------------------------------------------
-    | Create news data
-    |--------------------------------------------------
+    /**
+     * --------------------------------------------------
+     *  Create data
+     * --------------------------------------------------
     */
     public function createData($post, $img)
     {
@@ -113,10 +113,10 @@ class News extends \CodeIgniter\Model
         return $response;
     }
 
-    /*
-    |--------------------------------------------------
-    | Show news data
-    |--------------------------------------------------
+    /**
+     * --------------------------------------------------
+     *  Show data
+     * --------------------------------------------------
     */
     public function showData($id)
     {
@@ -128,16 +128,16 @@ class News extends \CodeIgniter\Model
 
         $response = [
             'success' => true,
-            'response' => ['data' => $this->dataRow($query)]
+            'response' => ['data' => $this->rowData($query)]
         ];
 
         return $response;
     }
 
-    /*
-    |--------------------------------------------------
-    | Update news data
-    |--------------------------------------------------
+    /**
+     * --------------------------------------------------
+     *  Update data
+     * --------------------------------------------------
     */
     public function updateData($id, $put)
     {
@@ -169,10 +169,10 @@ class News extends \CodeIgniter\Model
         return $response;
     }
 
-    /*
-    |--------------------------------------------------
-    | Delete news data
-    |--------------------------------------------------
+    /**
+     * --------------------------------------------------
+     *  Delete data
+     * --------------------------------------------------
     */
     public function deleteData($id)
     {
@@ -190,14 +190,14 @@ class News extends \CodeIgniter\Model
         return $response;
     }
 
-    /*
-    |--------------------------------------------------
-    | Array row news data
-    |--------------------------------------------------
+    /**
+     * --------------------------------------------------
+     *  Array row data
+     * --------------------------------------------------
     */
-    private function dataRow($row)
+    private function rowData($row)
     {
-        $dataRow = [
+        $data = [
             'news_id' => $row->berita_id,
             'news_category_id' => $row->kategori_id,
             'news_read' => $row->berita_dibaca,
@@ -212,13 +212,13 @@ class News extends \CodeIgniter\Model
             'news_content' => $row->berita_isi
         ];
 
-        return $dataRow;
+        return $data;
     }
 
-    /*
-    |--------------------------------------------------
-    | SQL news data
-    |--------------------------------------------------
+    /**
+     * --------------------------------------------------
+     *  SQL data
+     * --------------------------------------------------
     */
     private function sql(string $arg = null)
     {

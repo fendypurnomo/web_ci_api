@@ -17,14 +17,14 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
 
     /**
      * --------------------------------------------------
-     * Get categories data
+     * Get data
      * --------------------------------------------------
      */
     public function index()
     {
         try {
             $param = $this->request->getGet();
-            $query = $this->model->getAllData((object) $param, getRequestQueryParamPagination());
+            $query = $this->model->getData((object) $param, getRequestQueryParamPagination());
             return $this->respond($query);
         }
         catch (Exception $e) {
@@ -34,7 +34,7 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
 
     /**
      * --------------------------------------------------
-     * Create category data
+     * Create data
      * --------------------------------------------------
      */
     public function create()
@@ -57,7 +57,7 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
 
     /**
      * --------------------------------------------------
-     * Get single category data
+     * Get single data
      * --------------------------------------------------
      */
     public function show($id = null)
@@ -73,7 +73,7 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
 
     /**
      * --------------------------------------------------
-     * Update category data
+     * Update data
      * --------------------------------------------------
      */
     public function update($id = null)
@@ -96,7 +96,7 @@ class Category extends \App\Controllers\Fendy\BaseAdminController
 
     /**
      * --------------------------------------------------
-     * Delete category data
+     * Delete data
      * --------------------------------------------------
      */
     public function delete($id = null)

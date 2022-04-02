@@ -15,8 +15,12 @@ class UserPhoto extends \App\Controllers\BaseController
         $this->rules = new \App\Validation\Admin\User\UserPhoto;
     }
 
-    // Get current photo profile
-    public function getCurrentPhotoProfile(int $userID = null, $type = 'array')
+    /**
+     * --------------------------------------------------
+     * Get current photo profile
+     * --------------------------------------------------
+     */
+    public function getCurrentPhotoProfile(int $userID = null, string $type = 'array')
     {
         $photo = $this->model->getCurrentPhotoProfile($userID);
 
@@ -26,7 +30,11 @@ class UserPhoto extends \App\Controllers\BaseController
         return \Config\Services::response()->setJSON(['photo' => $photo]);
     }
 
-    // Get collect photo profile
+    /**
+     * --------------------------------------------------
+     * Get collect photo profile
+     * --------------------------------------------------
+    */
     public function getAllPhotoProfile(int $userID = null)
     {
         try {
@@ -40,32 +48,39 @@ class UserPhoto extends \App\Controllers\BaseController
         }
     }
 
-    // Upload photo profile
+    /**
+     * --------------------------------------------------
+     * Upload photo profile
+     * --------------------------------------------------
+    */
     public function uploadPhotoProfile()
     {
         try {
-            if ($this->validate($this->rules->uploadPhotoProfile)) {
-                $request = \Config\Services::request();
-                $img = $request->getFile('img');
+            if (! $this->validate($this->rules->uploadPhotoProfile)) {
+                return \Config\Services::response()->setJSON([
+                    'success' => false,
+                    'error' => 'badRequest',
+                    'messsages' => $this->validator->getErrors()
+                ]);
+            }
 
-                if ($img->isValid() && !$img->hasMoved()) {
-                    $filepath = '../../../../../../../Pictures/Images/profiles/';
-                    $newName = $img->getRandomName();
-                    $userID = checkUserToken()->pengguna_id;
-                    $img->move($filepath, $newName);
-                    $this->model->uploadPhotoProfile($userID, $newName);
-                    return \Config\Services::response()->setJSON([
-                    'success' => true,
-                    'status' => 200,
-                    'messages' => 'Unggah foto profil berhasil'
-                    ]);
-                }
+            $request = \Config\Services::request();
+            $img = $request->getFile('img');
+
+            if (! $img->isValid() && $img->hasMoved()) {
                 throw new \RuntimeException($img->getErrorString() . '(' . $img->getError() . ')');
             }
+
+            $filepath = '../../../../../../../Pictures/Images/profiles/';
+            $newName = $img->getRandomName();
+            $userID = checkUserToken()->pengguna_id;
+            $img->move($filepath, $newName);
+            $this->model->uploadPhotoProfile($userID, $newName);
+
             return \Config\Services::response()->setJSON([
-                'success' => false,
-                'error' => 'badRequest',
-                'messsages' => $this->validator->getErrors()
+                'success' => true,
+                'status' => 200,
+                'messages' => 'Unggah foto profil berhasil'
             ]);
         }
         catch (Exception $e) {

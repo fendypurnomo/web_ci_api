@@ -15,37 +15,49 @@ class User extends \App\Controllers\Fendy\BaseAdminController
         $this->rules = new \App\Validation\Admin\User\User;
     }
 
-    // Index user account
+    /**
+     * --------------------------------------------------
+     * Get data
+     * --------------------------------------------------
+     */
     public function index()
     {
-        $data = self::data();
+        $data = self::rowData();
 
-        return $this->respond([
+        $response = $this->respond([
             'success' => true,
             'response' => $data
         ]);
+
+        return $response;
     }
 
-    // Update personal information
+    /**
+     * --------------------------------------------------
+     * Update personal information
+     * --------------------------------------------------
+     */
     public function updatePersonalInformation()
     {
         try {
-            if ($this->validate($this->rules->updatePersonalInformation)) {
-                $put = getRequest();
-                $user = checkUserToken();
-                $this->model->updatePersonalInformation($put, $user);
-                $data = self::data();
-                return $this->respondUpdated([
-                    'success' => true,
-                    'status' => 200,
-                    'messages' => 'Informasi akun Anda berhasil diperbaharui.',
-                    'response' => $data
+            if (! $this->validate($this->rules->updatePersonalInformation)) {
+                return $this->respond([
+                    'success' => false,
+                    'error' => 'badRequest',
+                    'messages' => $this->validator->getErrors()
                 ]);
             }
-            return $this->respond([
-                'success' => false,
-                'error' => 'badRequest',
-                'messages' => $this->validator->getErrors()
+
+            $put = getRequest();
+            $user = checkUserToken();
+            $this->model->updatePersonalInformation($put, $user);
+            $data = self::rowData();
+
+            return $this->respondUpdated([
+                'success' => true,
+                'status' => 200,
+                'messages' => 'Informasi akun Anda berhasil diperbaharui.',
+                'response' => $data
             ]);
         }
         catch (Exception $e) {
@@ -53,24 +65,30 @@ class User extends \App\Controllers\Fendy\BaseAdminController
         }
     }
 
-    // Update password
+    /**
+     * --------------------------------------------------
+     * Update password
+     * --------------------------------------------------
+     */
     public function updatePassword()
     {
         try {
-            if ($this->validate($this->rules->updatePassword)) {
-                $put = getRequest();
-                $user = checkUserToken();
-                $this->model->updatePassword($put, $user);
+            if (! $this->validate($this->rules->updatePassword)) {
                 return $this->respond([
-                    'success' => true,
-                    'status' => 200,
-                    'messages' => 'Kata sandi berhasil diperbarui'
+                    'success' => false,
+                    'error' => 'badRequest',
+                    'messages' => $this->validator->getErrors()
                 ]);
             }
+
+            $put = getRequest();
+            $user = checkUserToken();
+            $this->model->updatePassword($put, $user);
+
             return $this->respond([
-                'success' => false,
-                'error' => 'badRequest',
-                'messages' => $this->validator->getErrors()
+                'success' => true,
+                'status' => 200,
+                'messages' => 'Kata sandi berhasil diperbarui'
             ]);
         }
         catch (Exception $e) {
@@ -78,11 +96,16 @@ class User extends \App\Controllers\Fendy\BaseAdminController
         }
     }
 
-    private function data()
+    /**
+     * --------------------------------------------------
+     * Array row data
+     * --------------------------------------------------
+    */
+    private function rowData()
     {
         $user = checkUserToken();
 
-        return (array) [
+        $data = [
             'data' => [
                 'username' => $user->pengguna_nama,
                 'firstname' => $user->pengguna_nama_depan,
@@ -93,5 +116,7 @@ class User extends \App\Controllers\Fendy\BaseAdminController
                 'updatedAt' => $user->pengguna_tgl_diperbaharui
             ]
         ];
+
+        return $data;
     }
 }

@@ -15,16 +15,16 @@ class News extends \App\Controllers\Fendy\BaseAdminController
         $this->rules = new \App\Validation\Admin\Blog\News;
     }
 
-    /*
-    |--------------------------------------------------
-    | Get news data
-    |--------------------------------------------------
+    /**
+     * --------------------------------------------------
+     *  Get data
+     * --------------------------------------------------
     */
     public function index()
     {
         try {
             $param = $this->request->getGet();
-            $query = $this->model->getAllData($param, getRequestQueryParamPagination());
+            $query = $this->model->getData($param, getRequestQueryParamPagination());
             return $this->respond($query);
         }
         catch (Exception $e) {
@@ -32,10 +32,10 @@ class News extends \App\Controllers\Fendy\BaseAdminController
         }
     }
 
-    /*
-    |--------------------------------------------------
-    | Create news data
-    |--------------------------------------------------
+    /**
+     * --------------------------------------------------
+     *  Create data
+     * --------------------------------------------------
     */
     public function create()
     {
@@ -56,10 +56,10 @@ class News extends \App\Controllers\Fendy\BaseAdminController
         }
     }
 
-    /*
-    |--------------------------------------------------
-    | Get single news data
-    |--------------------------------------------------
+    /**
+     * --------------------------------------------------
+     *  Get single data
+     * --------------------------------------------------
     */
     public function show($id = null)
     {
@@ -72,20 +72,10 @@ class News extends \App\Controllers\Fendy\BaseAdminController
         }
     }
 
-    /*
-    |--------------------------------------------------
-    | Get single news data
-    |--------------------------------------------------
-    */
-    public function edit($id = null)
-    {
-        return $this->show($id);
-    }
-
-    /*
-    |--------------------------------------------------
-    | Update news data
-    |--------------------------------------------------
+    /**
+     * --------------------------------------------------
+     *  Update data
+     * --------------------------------------------------
     */
     public function update($id = null)
     {
@@ -105,10 +95,10 @@ class News extends \App\Controllers\Fendy\BaseAdminController
         }
     }
 
-    /*
-    |--------------------------------------------------
-    | Delete news data
-    |--------------------------------------------------
+    /**
+     * --------------------------------------------------
+     *  Delete data
+     * --------------------------------------------------
     */
     public function delete($id = null)
     {

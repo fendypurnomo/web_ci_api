@@ -16,12 +16,14 @@ class Tag extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Get all data tags
+     * --------------------------------------------------
+     * Get data
+     * --------------------------------------------------
      */
     public function index()
     {
         try {
-            $query = $this->model->getAllData(getRequestQueryParamPagination());
+            $query = $this->model->getData(getRequestQueryParamPagination());
             return $this->respond($query);
         }
         catch (Exception $e) {
@@ -30,7 +32,9 @@ class Tag extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Create data tag
+     * --------------------------------------------------
+     * Create data
+     * --------------------------------------------------
      */
     public function create()
     {
@@ -51,7 +55,9 @@ class Tag extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Get single data tag
+     * --------------------------------------------------
+     * Get single data
+     * --------------------------------------------------
      */
     public function show($id = null)
     {
@@ -65,15 +71,9 @@ class Tag extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Get single data tag
-     */
-    public function edit($id = null)
-    {
-        return $this->show($id);
-    }
-
-    /**
-     * Update data tag
+     * --------------------------------------------------
+     * Update tag data
+     * --------------------------------------------------
      */
     public function update($id = null)
     {
@@ -94,7 +94,9 @@ class Tag extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Delete single data tag
+     * --------------------------------------------------
+     * Delete tag data
+     * --------------------------------------------------
      */
     public function delete($id = null)
     {

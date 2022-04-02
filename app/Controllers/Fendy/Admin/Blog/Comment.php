@@ -15,7 +15,9 @@ class Comment extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Get all data comments
+     * --------------------------------------------------
+     * Get data
+     * --------------------------------------------------
      */
     public function index()
     {
@@ -29,7 +31,9 @@ class Comment extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Create data comment
+     * --------------------------------------------------
+     * Create data
+     * --------------------------------------------------
      */
     public function create()
     {
@@ -50,7 +54,9 @@ class Comment extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Get single data comment
+     * --------------------------------------------------
+     * Get single data
+     * --------------------------------------------------
      */
     public function show($id = null)
     {
@@ -64,15 +70,9 @@ class Comment extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Get single data comment
-     */
-    public function edit($id = null)
-    {
-        return $this->show($id);
-    }
-
-    /**
-     * Update data comment
+     * --------------------------------------------------
+     * Update data
+     * --------------------------------------------------
      */
     public function update($id = null)
     {
@@ -93,7 +93,9 @@ class Comment extends \App\Controllers\Fendy\BaseAdminController
     }
 
     /**
-     * Delete single data comment
+     * --------------------------------------------------
+     * Delete data
+     * --------------------------------------------------
      */
     public function delete($id = null)
     {

@@ -14,7 +14,7 @@ class Category extends \CodeIgniter\Model
      * Get data
      * --------------------------------------------------
     */
-    public function getAllData(object $param, object $paging)
+    public function getData(object $param, object $paging)
     {
         if ((isset($param->search) && trim($param->search) != null) && (isset($param->value) && trim($param->value) != null)) {
             if ($param->search === 'id') {
@@ -39,7 +39,7 @@ class Category extends \CodeIgniter\Model
             throw new \RuntimeException('Data halaman yang Anda masukkan melebihi jumlah total halaman!');
         }
         foreach ($query as $row) {
-            $data[] = $this->data($row);
+            $data[] = $this->rowData($row);
         }
 
         $response = [
@@ -99,7 +99,7 @@ class Category extends \CodeIgniter\Model
 
         $response = [
             'success' => true,
-            'response' => ['data' => $this->data($query)]
+            'response' => ['data' => $this->rowData($query)]
         ];
 
         return $response;
@@ -155,17 +155,17 @@ class Category extends \CodeIgniter\Model
 
     /**
      * --------------------------------------------------
-     * Data row
+     * Array row data
      * --------------------------------------------------
     */
-    private function data($row)
+    private function rowData($row)
     {
-        $response = [
+        $data = [
             'category_id' => $row->kategori_id,
             'category_name' => $row->kategori_nama,
             'category_seo' => $row->kategori_seo
         ];
 
-        return $response;
+        return $data;
     }
 }
